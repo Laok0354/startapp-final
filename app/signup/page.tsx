@@ -6,7 +6,7 @@ import Icons from "../../components/Icons";
 import MultiSelectInput from "../../components/MultiSelectInput";
 
 export default function Signup() {
-  const handleSubmit = (formData) => {
+  const handleSubmit = (formData: JSON) => {
     // Log the form data to the console
     console.log(formData);
   };
