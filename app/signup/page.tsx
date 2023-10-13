@@ -6,6 +6,10 @@ import Icons from "../../components/Icons";
 import MultiSelectInput from "../../components/MultiSelectInput";
 
 export default function Signup() {
+  const handleSubmit = (formData) => {
+    // Log the form data to the console
+    console.log(formData);
+  };
   return (
     <main className="bg-gradient-to-br from-primaryv from-30% via-primaryp to-gray-700 flex items-center justify-around">
       <div className="flex flex-col align-middle justify-center">
