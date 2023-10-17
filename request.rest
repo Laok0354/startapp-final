@@ -53,3 +53,12 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "username": "pp",
+    "email": "pp@gmail.com",
+    "password": "pp"
+}

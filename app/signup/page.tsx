@@ -6,10 +6,34 @@ import Icons from "../../components/Icons";
 import MultiSelectInput from "../../components/MultiSelectInput";
 
 export default function Signup() {
-  const handleSubmit = (formData: JSON) => {
+  const handleSubmit = async (formData: JSON) => {
     // Log the form data to the console
     console.log(formData);
+
+    const request = new Request("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  
+    // Send the request.
+    const response = await fetch(request);
+  
+    // Check the status code of the response.
+    if (response.status === 200) {
+      const jsonData = await response.json();
+  
+      // Access the user's form data in the jsonData object.
+      // ...
+    } else {
+      // The request failed.
+      // Handle the error.
+      // ...
+    }
   };
+
   return (
     <main className="bg-gradient-to-br from-primaryv from-30% via-primaryp to-gray-700 flex items-center justify-around">
       <div className="flex flex-col align-middle justify-center">
