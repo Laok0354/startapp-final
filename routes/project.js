@@ -111,11 +111,20 @@ router.put('/modify', authenticateToken, async (req, res) => {
 router.get('/getp', authenticateToken, async (req, res) => {
     try 
     {  
-        //maybe agregar filtro de arriba
-
         const project = await prisma.Project.findUnique({
             where: {
                 id: req.body.projectId
+            }
+        });
+
+        if (!project) {
+            return res.status(404).send(); 
+        }
+
+       await prisma.visitHistory.create({
+            data: {
+                projectId: project.id,
+                userId: req.user.id
             }
         });
 

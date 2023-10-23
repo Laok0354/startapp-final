@@ -50,3 +50,23 @@ model ProjectCollaborators{
   @@index([userId], name: "userIdIndex")
   @@index([projectId], name: "projectIdIndex")
 }
+
+model searchHisory{
+  id Int @id @default(autoincrement())
+  userId Int 
+  searchQuery String
+  createdAt DateTime @default(now())
+
+  @@index([userId], name: "userIdIndex")
+}
+
+model VisitHistory{
+  id Int @id @default(autoincrement())
+  userId Int 
+  projectId Int 
+  createdAt DateTime @default(now())
+
+  @@index([userId], name: "userIdIndex")
+  @@index([projectId], name: "projectIdIndex")
+}
+
