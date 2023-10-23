@@ -4,8 +4,8 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "lisa@gmail.com",
-    "password": "rey"
+    "email": "beade@gmail.com",
+    "password": "1"
 }
 ###
 
@@ -14,8 +14,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "lisa@gmail.com",
-    "password": "rey"
+    "email": "beade@gmail.com",
+    "password": "1"
 }
 ###
 
@@ -85,3 +85,14 @@ Content-Type: application/json
     "projectId": 4
 }
 ###
+
+POST http://localhost:3001/signup
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "username": "pp",
+    "email": "pp@gmail.com",
+    "password": "pp",
+    "selectedOptions": ["opcion1"]
+}

@@ -1,7 +1,7 @@
 const handleSubmit = async (e) => {
   e.preventDefault();
 
-  const request = new Request("/sign_up", {
+  const request = new Request("/signup", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,7 +17,7 @@ const handleSubmit = async (e) => {
     // The request was successful.
     // Parse the response body as JSON.
     const jsonData = await response.json();
-
+    console.log(jsonData)
     // Access the user's form data in the jsonData object.
     // ...
   } else {
