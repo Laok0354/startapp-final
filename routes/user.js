@@ -17,15 +17,20 @@ router.post('/', async (req, res) => {
         await prisma.user.create({
             data: {
                 email: req.body.email,
-                password: hashedPassword
+                password: hashedPassword,
+                userName: req.body.userName
             }
         })
         res.status(201).send();
     } 
     catch (error) 
     {
-       console.log(error)
-       res.status(500).send()
+        if (error.code === 'P2002') 
+        {
+            return res.status(400).json({ error: 'User with the same email or username already exists.' });
+        }
+        console.error('Error creating user:', error);
+        return res.status(500).json({ error: 'Internal server error' });
     }
 })
 
