@@ -5,14 +5,14 @@ import customStyles from './selectCustomStyles';
 interface MultiSelectInputProps {
   name: string;
   options: { value: string; label: string }[];
-  selectedOptions: string[];
-  onSelectedOptionsChange: (selectedOptions: string[]) => void;
+  skills: string[];
+  onSelectedOptionsChange: (skills: string[]) => void;
 }
 
 const MultiSelectInput: React.FC<MultiSelectInputProps> = ({
   name,
   options,
-  selectedOptions,
+  skills,
   onSelectedOptionsChange,
 }) => {
   const handleSelectChange = (selectedValues: { value: string; label: string }[]) => {
@@ -20,7 +20,7 @@ const MultiSelectInput: React.FC<MultiSelectInputProps> = ({
     onSelectedOptionsChange(selectedOptionValues);
   };
 
-  const selectedOptionValues = selectedOptions.map((option) => {
+  const selectedOptionValues = skills.map((option) => {
     return options.find((o) => o.value === option);
   });
 

@@ -84,7 +84,7 @@ const SignUpForm = () => {
     username: "",
     email: "",
     password: "",
-    selectedOptions: [],
+    skills: [],
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -94,7 +94,7 @@ const SignUpForm = () => {
       username: "",
       email: "",
       password: "",
-      selectedOptions: [],
+      skills: [],
     });
     const request = new Request("http://localhost:3000/user", {
       method: "POST",
@@ -152,18 +152,16 @@ const SignUpForm = () => {
             </h6>
           </div>
           <div className="bg-gray-800 rounded-md text-gray-200 text-sm w-80 h-12">
-            <MultiSelectInput
-              name="selectedOptions"
-              options={[
-                { value: "opcion1", label: "Back-End dev" },
-                { value: "opcion2", label: "Front-End dev" },
-                { value: "opcion3", label: "Software dev" },
-              ]}
-              selectedOptions={formData.selectedOptions}
-              onSelectedOptionsChange={(selectedOptions) =>
-                setFormData({ ...formData, selectedOptions })
-              }
-            />
+          <MultiSelectInput
+            name="skills"
+            options={[
+              { value: "opcion1", label: "Back-End dev" },
+              { value: "opcion2", label: "Front-End dev" },
+              { value: "opcion3", label: "Software dev" },
+            ]}
+            skills={formData.skills}
+            onSelectedOptionsChange={(skills) => setFormData({ ...formData, skills })}
+          />
           </div>
         </div>
         <div className="mb-3 mt-3">
@@ -182,9 +180,9 @@ const SignUpForm = () => {
 
 const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState({
-    usernameOrEmail: "",
+    email: "",
     password: "",
-    rememberMe: false,
+    //rememberMe: false,
   });
 
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -194,17 +192,20 @@ const LoginForm: React.FC = () => {
     // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
     console.log("Datos del formulario enviados:", formData);
 
-    // Reiniciar el formulario
-    if (formRef.current) {
-      formRef.current.reset();
-    }
-
-    // También puedes reiniciar el estado de formData si es necesario
-    setFormData({
-      usernameOrEmail: "",
-      password: "",
-      rememberMe: false,
+    const request = new Request("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      mode: "no-cors",
+      body: JSON.stringify(formData),
     });
+    fetch(request)
+      .then((response) => response.json())
+      .then((jsonData) => {
+        console.log(jsonData);
+      })
+      .catch((error) => {});
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -218,10 +219,10 @@ const LoginForm: React.FC = () => {
       <div className="flex mt-2 flex-col justify-center align-middle mx-8">
         {/* Componente Input para el nombre de usuario o correo electrónico */}
         <Input
-          name="usernameOrEmail"
-          title="USERNAME or EMAIL"
-          placeHolder="Enter your Username or Email"
-          value={formData.usernameOrEmail}
+          name="email"
+          title="EMAIL"
+          placeHolder="Enter your email"
+          value={formData.email}
           onChange={handleInputChange}
         />
         {/* Componente PasswordInput */}
