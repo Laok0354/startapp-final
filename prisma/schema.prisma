@@ -12,10 +12,17 @@ model User{
   id Int @id @default(autoincrement())
   email String @unique
   password String
-  userName String? 
+  userName String 
+  skills skill[]
   refreshTokens refreshToken[] 
   projects ProjectCollaborators[]
 } 
+
+model skill{
+  id Int @id @default(autoincrement())
+  name String @unique
+  users User[]
+}
 
 model refreshToken{
   id Int @id @default(autoincrement())
@@ -51,7 +58,7 @@ model ProjectCollaborators{
   @@index([projectId], name: "projectIdIndex")
 }
 
-model searchHisory{
+model searchHistory{
   id Int @id @default(autoincrement())
   userId Int 
   searchQuery String

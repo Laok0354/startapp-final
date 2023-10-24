@@ -1,4 +1,5 @@
 
+
 //create user
 POST http://localhost:3000/user
 Content-Type: application/json 
@@ -6,7 +7,8 @@ Content-Type: application/json
 {
     "email": "menem@gmail.com",
     "password": "rey",
-    "userName" : "menem"
+    "userName" : "menem",
+    "skillId" : [1]
 }
 ###
 
