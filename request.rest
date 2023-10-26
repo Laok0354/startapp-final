@@ -5,10 +5,10 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "menem@gmail.com",
+    "email": "shawty@gmail.com",
     "password": "rey",
-    "userName" : "menem",
-    "skillId" : [1]
+    "userName" : "shawty",
+    "skillIds" : [1, 2]
 }
 ###
 
@@ -17,7 +17,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "lisa@gmail.com",
+    "email": "shawty@gmail.com",
     "password": "rey"
 }
 ###
