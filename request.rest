@@ -54,8 +54,8 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "bruhhh",
-    "description": "testinggg"
+    "name": "dog",
+    "description": "red"
 }
 ###
 
@@ -91,7 +91,7 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:3001/signup
+POST http://localhost:3000/signup
 Authorization: Bearer
 Content-Type: application/json
 
@@ -101,3 +101,19 @@ Content-Type: application/json
     "password": "pp",
     "selectedOptions": ["opcion1"]
 }
+
+###
+
+//search project
+
+GET http://localhost:3000/search/searchProject
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "searchString": "blue dog"
+}
+
+
+###
+
