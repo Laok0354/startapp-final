@@ -8,19 +8,29 @@ datasource db {
   relationMode = "prisma"
 }
 
-model User {
-  id            Int                    @id @default(autoincrement())
-  email         String                 @unique
-  password      String
-  userName      String?
-  refreshTokens refreshToken[]
-  projects      ProjectCollaborators[]
+
+model User{
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+  userName String 
+  skills skill[]
+  refreshTokens refreshToken[] 
+  projects ProjectCollaborators[]
+} 
+
+model skill{
+  id Int @id @default(autoincrement())
+  name String @unique
+  users User[]
 }
 
-model refreshToken {
-  id        Int      @id @default(autoincrement())
-  token     String   @unique @db.VarChar(500)
-  userId    Int
+model refreshToken{
+  id Int @id @default(autoincrement())
+  token String @unique @db.VarChar(500) 
+  userId Int 
+  user User @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
@@ -67,5 +77,27 @@ model searchHisory {
   searchQuery String
   createdAt   DateTime @default(now())
 
-  @@index([userId], map: "userIdIndex")
+  @@index([userId], name: "userIdIndex")
+  @@index([projectId], name: "projectIdIndex")
 }
+
+model searchHistory{
+  id Int @id @default(autoincrement())
+  userId Int 
+  searchQuery String
+  createdAt DateTime @default(now())
+
+  @@index([userId], name: "userIdIndex")
+}
+
+model VisitHistory{
+  id Int @id @default(autoincrement())
+  userId Int 
+  projectId Int 
+  createdAt DateTime @default(now())
+
+  @@index([userId], name: "userIdIndex")
+  @@index([projectId], name: "projectIdIndex")
+}
+
+

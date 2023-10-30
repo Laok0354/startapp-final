@@ -1,11 +1,15 @@
 
+
 //create user
 POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "beade@gmail.com",
-    "password": "1"
+    "email": "shawty@gmail.com",
+    "password": "rey",
+    "userName" : "shawty",
+    "skillIds" : [1, 2]
+
 }
 ###
 
@@ -14,8 +18,9 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "beade@gmail.com",
-    "password": "1"
+    "email": "shawty@gmail.com",
+    "password": "rey"
+
 }
 ###
 
