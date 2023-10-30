@@ -10,7 +10,7 @@ router.use (express.json());
 
 
 router.delete('/logout', async (req, res) => {
-    const refreshTokens = await prisma.refreshToken.deleteMany({
+    const refreshTokens = await prisma.RefreshToken.deleteMany({
         where: {
             token: req.body.token
         }
@@ -30,7 +30,7 @@ router.post('/token', async (req, res) => {
 
     const userId = user.id;
 
-    const refreshTokens = await prisma.refreshToken.findMany({
+    const refreshTokens = await prisma.RefreshToken.findMany({
         where: {
             userId: userId
         }
@@ -51,7 +51,7 @@ router.post('/token', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.User.findUnique({
         where: {
             email: req.body.email
         }
@@ -66,7 +66,7 @@ router.post('/login', async (req, res) => {
             const accessToken = generateAccessToken(user);
             const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET)
             
-            await prisma.refreshToken.create({
+            await prisma.RefreshToken.create({
                 data: {
                     token: refreshToken,
                     userId: user.id
@@ -98,7 +98,7 @@ router.post('/login', async (req, res) => {
 
 function generateAccessToken(user){
     if (user.email){
-        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
+        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '60s'})
     }
     return null 
 }
