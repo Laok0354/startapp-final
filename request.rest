@@ -9,6 +9,7 @@ Content-Type: application/json
     "password": "rey",
     "userName" : "shawty",
     "skillIds" : [1, 2]
+
 }
 ###
 
@@ -19,6 +20,7 @@ Content-Type: application/json
 {
     "email": "shawty@gmail.com",
     "password": "rey"
+
 }
 ###
 
@@ -88,3 +90,14 @@ Content-Type: application/json
     "projectId": 4
 }
 ###
+
+POST http://localhost:3001/signup
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "username": "pp",
+    "email": "pp@gmail.com",
+    "password": "pp",
+    "selectedOptions": ["opcion1"]
+}
