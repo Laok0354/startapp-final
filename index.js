@@ -2,9 +2,11 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const cors = require('cors');
 const PORT = 3000;
 
 app.use (cookieParser());
+app.use(cors());
 
 const user = require('./routes/user');
 const auth = require('./routes/auth');

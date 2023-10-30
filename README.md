@@ -3,7 +3,7 @@
 2. copiar el .env
 
 3. npx prisma generate
-   npx prisma db push para syncear con la base de datos
+   npx prisma db pull para syncear con la base de datos
 
 4. npm run dev para correr la base de datos
    npm run dev2 para correr el front (en otra terminal 

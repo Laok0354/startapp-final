@@ -81,35 +81,34 @@ const PasswordInput = ({
 
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    userName: "",
     email: "",
     password: "",
-    skills: [],
+    skillIds: [],
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Datos del formulario enviados:", formData);
     setFormData({
-      username: "",
+      userName: "",
       email: "",
       password: "",
-      skills: [],
+      skillIds: [],
     });
-    const request = new Request("http://localhost:3000/user", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "no-cors",
-      body: JSON.stringify(formData),
-    });
-    fetch(request)
-      .then((response) => response.json())
-      .then((jsonData) => {
-        console.log(jsonData);
-      })
-      .catch((error) => {});
+    try {
+      const response = await fetch("http://localhost:3000/user", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(formData),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleInputChange = (e: React.FormEvent) => {
@@ -125,10 +124,10 @@ const SignUpForm = () => {
       >
         {/* Componente Input para el username */}
         <Input
-          name="username"
+          name="userName"
           title="USERNAME"
           placeHolder="Enter your Username"
-          value={formData.username}
+          value={formData.userName}
           onChange={handleInputChange}
         />
         {/* Componente Input para el email */}
@@ -152,16 +151,18 @@ const SignUpForm = () => {
             </h6>
           </div>
           <div className="bg-gray-800 rounded-md text-gray-200 text-sm w-80 h-12">
-          <MultiSelectInput
-            name="skills"
-            options={[
-              { value: "opcion1", label: "Back-End dev" },
-              { value: "opcion2", label: "Front-End dev" },
-              { value: "opcion3", label: "Software dev" },
-            ]}
-            skills={formData.skills}
-            onSelectedOptionsChange={(skills) => setFormData({ ...formData, skills })}
-          />
+            <MultiSelectInput
+              name="skillIds"
+              options={[
+                { value: 1, label: "Back-End dev" },
+                { value: 2, label: "Front-End dev" },
+                { value: 3, label: "Software dev" },
+              ]}
+              skillIds={formData.skillIds}
+              onSelectedOptionsChange={(skillIds) =>
+                setFormData({ ...formData, skillIds })
+              }
+            />
           </div>
         </div>
         <div className="mb-3 mt-3">
