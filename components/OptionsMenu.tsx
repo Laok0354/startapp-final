@@ -21,7 +21,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({ options, onSelectOption, hand
             className={`relative cursor-pointer p-2 flex flex-row`}
         >
             {selectedOption === option && (
-                <div className="bg-purple-500 w-1 rounded-lg mr-2 h-[20%]"></div>   
+                <div className="bg-purple-500 w-1 rounded-lg mr-2"></div>   
             )}
             <li
                 className={`w-full p-1 ${selectedOption === option ? 'bg-[#54545f] text-white rounded' : ''}`}

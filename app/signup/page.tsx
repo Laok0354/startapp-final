@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import {SignUpForm} from "../../components/Form";
-import Icons from "../../components/Icons";
-import MultiSelectInput from "../../components/MultiSelectInput";
+import { SignUpForm } from "../../components/Forms";
+import Icons from "../../components/sign-up/Icons";
+import MultiSelectInput from "../../components/sign-up/MultiSelectInput";
 
 export default function Signup() {
   return (
@@ -32,7 +32,7 @@ export default function Signup() {
           </div>
           <div className="flex justify-center items-center">
             {/* Componente Input */}
-            <SignUpForm/>
+            <SignUpForm />
           </div>
         </section>
       </article>
