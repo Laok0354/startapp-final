@@ -87,7 +87,7 @@ const SignUpForm = () => {
     skillIds: [],
   });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Datos del formulario enviados:", formData);
     setFormData({
@@ -100,15 +100,19 @@ const SignUpForm = () => {
       const response = await fetch("http://localhost:3000/user", {
         method: "POST",
         headers: {
-          'Accept': 'application/json',
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
         mode: "cors",
         body: JSON.stringify(formData),
       });
-    } catch (error) {
-      console.log(error);
-    }
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error);
+      }
+    } catch (error) {}
   };
 
   const handleInputChange = (e: React.FormEvent) => {
@@ -188,25 +192,31 @@ const LoginForm: React.FC = () => {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes realizar acciones con los datos del formulario, como enviarlos a un servidor.
     console.log("Datos del formulario enviados:", formData);
 
-    const request = new Request("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      mode: "no-cors",
-      body: JSON.stringify(formData),
-    });
-    fetch(request)
-      .then((response) => response.json())
-      .then((jsonData) => {
-        console.log(jsonData);
-      })
-      .catch((error) => {});
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert(data.Success);
+        const accessToken = data.accessToken
+        const refreshToken = data.refreshToken 
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {}
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
