@@ -2,29 +2,33 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import MultiSelectInput from "./MultiSelectInput";
-import Icons from "./Icons";
+import MultiSelectInput from "./sign-up/MultiSelectInput";
+import Icons from "./sign-up/Icons";
+import OptionsMenu from "./OptionsMenu";
+import MembersIndicator from "./MemberIndicator";
 
 const Input = ({
   title,
   placeHolder,
   name,
   value,
+  className,
+  titleClassName,
   onChange,
 }: {
   title: string;
   placeHolder: string;
   name: string;
   value: string;
+  className: string;
+  titleClassName: string;
   onChange: (e: React.FormEvent) => void;
 }) => {
   return (
     <div className="my-2">
-      <h6 className="text-xs font-semibold tracking-widest font-bebas mb-1">
-        {title}
-      </h6>
+      <h6 className={titleClassName}>{title}</h6>
       <input
-        className="flex justify-center w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2"
+        className={`flex justify-center w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 ${className}`}
         type="text"
         name={name}
         value={value}
@@ -128,10 +132,12 @@ const SignUpForm = () => {
       >
         {/* Componente Input para el username */}
         <Input
-          name="userName"
+          name="username"
           title="USERNAME"
           placeHolder="Enter your Username"
           value={formData.userName}
+          className=""
+          titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
         {/* Componente Input para el email */}
@@ -140,6 +146,8 @@ const SignUpForm = () => {
           title="EMAIL"
           placeHolder="Enter your email"
           value={formData.email}
+          className=""
+          titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
         {/* Componente PasswordInput */}
@@ -156,6 +164,7 @@ const SignUpForm = () => {
           </div>
           <div className="bg-gray-800 rounded-md text-gray-200 text-sm w-80 h-12">
             <MultiSelectInput
+              isMulti={true}
               name="skillIds"
               options={[
                 { value: 1, label: "Back-End dev" },
@@ -183,7 +192,7 @@ const SignUpForm = () => {
   );
 };
 
-const LoginForm: React.FC = () => {
+const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -234,6 +243,8 @@ const LoginForm: React.FC = () => {
           title="EMAIL"
           placeHolder="Enter your email"
           value={formData.email}
+          className=""
+          titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
         {/* Componente PasswordInput */}
@@ -248,7 +259,7 @@ const LoginForm: React.FC = () => {
           <input
             type="checkbox"
             name="rememberMe"
-            checked={formData.rememberMe}
+            //checked={formData.rememberMe}
             onChange={handleInputChange}
             className="mr-1"
           />
@@ -274,4 +285,90 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export { SignUpForm, LoginForm };
+const ProjectForm = ({
+  handleCreateProject,
+}: {
+  handleCreateProject: () => void;
+}) => {
+  const options = ["Template 1", "Template 2", "Template 3"];
+  const [selectedTemplate, setSelectedTemplate] = useState("");
+  const [selectedOption, setSelectedOption] = useState<string>(options[0]);
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
+  const [projectMembers, setProjectMembers] = useState("");
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleCreateProject();
+
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+    setSelectedOption(options[0]);
+    setSelectedTemplate("");
+    setProjectName("");
+    setProjectDescription("");
+    setProjectMembers("");
+  };
+
+  return (
+    <section>
+      <form
+        onSubmit={handleSubmit}
+        ref={formRef}
+        className="divide-y divide-[#B5B2B2] absolute"
+      >
+        <section className="grid grid-cols-3 auto-rows-auto divide-x divide-[#B5B2B2]">
+          <div className="col-span-1">
+            <OptionsMenu
+              options={options}
+              onSelectOption={setSelectedTemplate}
+              handleOptionClick={handleOptionClick}
+              selectedOption={selectedOption}
+            />
+          </div>
+          <div className="p-4">
+            <div>
+              <h1 className="text-2xl">
+                {selectedOption !== "" ? `New ${selectedOption}` : ""}
+              </h1>
+            </div>
+            <div className="my-2">
+              <Input
+                name="projectName"
+                title="Project Name"
+                placeHolder="Enter your Project Name"
+                value={projectName}
+                className="h-8 w-128"
+                titleClassName="text-xs font-raleway font-light tracking-wide"
+                onChange={(e) => setProjectName(e.target.value)}
+              />
+              <Input
+                name="projectDescription"
+                title="Description"
+                placeHolder="Enter a brief description"
+                value={projectDescription}
+                className="h-8 w-128 mb-52"
+                titleClassName="text-xs font-raleway font-light tracking-wide"
+                onChange={(e) => setProjectDescription(e.target.value)}
+              />
+            </div>
+          </div>
+        </section>
+        <div>
+          <button className="bg-green-500 text-white w-full p-2" type="submit">
+            Crear Proyecto
+          </button>
+        </div>
+      </form>
+      <MembersIndicator/>
+    </section>
+  );
+};
+
+export { SignUpForm, LoginForm, ProjectForm };
