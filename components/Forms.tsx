@@ -45,7 +45,7 @@ const PasswordInput = ({
   value,
   onChange,
 }: {
-  name: string | undefined;
+  name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
@@ -113,7 +113,9 @@ const SignUpForm = () => {
 
       const data = await response.json();
 
-      if (!response.ok) {
+      if (response.ok) {
+        window.location.href = "/projects";
+      } else {
         alert(data.error);
       }
     } catch (error) {}
@@ -220,8 +222,9 @@ const LoginForm = () => {
 
       if (response.ok) {
         alert(data.Success);
-        const accessToken = data.accessToken
-        const refreshToken = data.refreshToken 
+        const accessToken = data.accessToken;
+        const refreshToken = data.refreshToken;
+        window.location.href = '/projects';
       } else {
         alert(data.error);
       }
@@ -366,7 +369,7 @@ const ProjectForm = ({
           </button>
         </div>
       </form>
-      <MembersIndicator/>
+      <MembersIndicator />
     </section>
   );
 };
