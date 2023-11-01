@@ -18,6 +18,8 @@
 # misc
 .DS_Store
 *.pem
+.nyc
+.env
 
 # debug
 npm-debug.log*
@@ -33,3 +35,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+node_modules
+build
+npm-debug.log
+.nyc
+.env
+.DS_Store
