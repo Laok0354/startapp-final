@@ -1,0 +1,8 @@
+//request user searchHistory
+GET http://localhost:3000/userData/searchHistory
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "userId" : "2"
+}
