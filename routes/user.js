@@ -13,6 +13,13 @@ router.use(express.json());
 
 router.post('/', async (req, res) => {
     try {
+
+        //check if required fields are empty
+
+        if (!req.body.email || !req.body.password || !req.body.userName || !req.body.skillIds) {
+            return res.status(400).json({ error: 'One or more required fields are empty' });
+        }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
         let skillOk = true;
@@ -43,9 +50,11 @@ router.post('/', async (req, res) => {
         res.status(201).send();
     }
     catch (error) {
+
         if (error.code === 'P2002') {
             return res.status(400).json({ error: 'User with the same email or username already exists.' });
         }
+
         console.error('Error creating user:', error);
         return res.status(500).json({ error: 'Internal server error' });
     }

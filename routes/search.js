@@ -11,7 +11,7 @@ router.use(express.json());
 
 //search projects full text
 
-router.get('/searchProject', async (req, res) => {
+router.get('/searchProject', authenticateToken, async (req, res) => {
     result = await prisma.project.findMany({
         where: {
             OR: [
@@ -29,6 +29,19 @@ router.get('/searchProject', async (req, res) => {
         }
     })
     
+    //add search to searchhistory
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.user.email
+        }
+    })
+    await prisma.searchHistory.create({
+        data: {
+            searchQuery: req.body.searchString,
+            userId: user.id
+        }
+    })
+
     res.status(200).json(result)
 });
 

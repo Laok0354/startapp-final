@@ -5,9 +5,9 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "shawty@gmail.com",
+    "email": "",
     "password": "rey",
-    "userName" : "shawty",
+    "userName" : "",
     "skillIds" : [1, 2]
 
 }
@@ -65,7 +65,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "projectId": 4
+    "projectId": 2
 }
 ###
 
@@ -111,7 +111,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "searchString": "blue dog"
+    "searchString": "siii"
 }
 
 

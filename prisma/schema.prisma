@@ -8,27 +8,27 @@ datasource db {
   relationMode = "prisma"
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  email String @unique
-  password String
-  userName String 
-  skills Skill[]
-  refreshTokens RefreshToken[] 
-  projects ProjectCollaborators[]
-} 
+model User {
+  id            Int                    @id @default(autoincrement())
+  email         String                 @unique
+  password      String
+  userName      String
+  skills        Skill[]
+  refreshTokens RefreshToken[]
+  projects      ProjectCollaborators[]
+}
 
-model Skill{
-  id Int @id @default(autoincrement())
-  name String @unique
+model Skill {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
   users User[]
 }
 
-model RefreshToken{
-  id Int @id @default(autoincrement())
-  token String @unique @db.VarChar(500) 
-  userId Int 
-  user User @relation(fields: [userId], references: [id])
+model RefreshToken {
+  id     Int    @id @default(autoincrement())
+  token  String @unique @db.VarChar(500)
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
 
   @@index([userId], map: "userIdIndex")
 }
@@ -66,12 +66,20 @@ model VisitHistory {
   @@index([userId], map: "userIdIndex")
 }
 
-model SearchHistory{
-  id Int @id @default(autoincrement())
-  userId Int 
+model SearchHistory {
+  id          Int      @id @default(autoincrement())
+  userId      Int
   searchQuery String
-  createdAt DateTime @default(now())
+  createdAt   DateTime @default(now())
 
-  @@index([userId], name: "userIdIndex")
+  @@index([userId], map: "userIdIndex")
 }
 
+model SkillToUser {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_SkillToUser_AB_unique")
+  @@index([B], map: "_SkillToUser_B_index")
+  @@map("_SkillToUser")
+}
