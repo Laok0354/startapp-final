@@ -88,7 +88,7 @@ const SignUpForm = () => {
     userName: "",
     email: "",
     password: "",
-    skillIds: [],
+    skillIds: [] as number[],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
