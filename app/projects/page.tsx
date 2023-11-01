@@ -14,7 +14,7 @@ export default function Projects() {
                 <div>
                     <ProjectsScroll/>
                 </div>
-                <div className="">
+                <div className="" id="__next">
                     <SuggestedUsers/>
                     <CreateProject/>
                 </div>
