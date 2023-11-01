@@ -6,6 +6,7 @@ import MultiSelectInput from "./sign-up/MultiSelectInput";
 import Icons from "./sign-up/Icons";
 import OptionsMenu from "./OptionsMenu";
 import MembersIndicator from "./MemberIndicator";
+import { getAccessToken } from './getToken';
 
 const Input = ({
   title,
@@ -224,7 +225,7 @@ const LoginForm = () => {
         alert(data.Success);
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
-        window.location.href = '/projects';
+        window.location.href = "/projects";
       } else {
         alert(data.error);
       }
@@ -305,9 +306,38 @@ const ProjectForm = ({
     setSelectedOption(option);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     handleCreateProject();
+    const accessToken = getAccessToken();
+
+    console.log({
+      name: projectName,
+      description: projectDescription,
+      creatorId: "",
+      accessToken: accessToken
+    });
+    try {
+/*       const response = await fetch("http://localhost:3000/project/create", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify({
+          name: projectName,
+          description: projectDescription,
+          creatorId: "",
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.log(data);
+      } */
+    } catch (error) {}
 
     if (formRef.current) {
       formRef.current.reset();
