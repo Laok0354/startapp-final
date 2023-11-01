@@ -20,6 +20,16 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: 'One or more required fields are empty' });
         }
 
+        const existingUser = await prisma.user.findMany({
+            where: {
+                userName: req.body.userName
+            }
+        });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'User with the same username already exists.' });
+        }
+
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
         let skillOk = true;
@@ -52,6 +62,10 @@ router.post('/', async (req, res) => {
     catch (error) {
 
         if (error.code === 'P2002') {
+            return res.status(400).json({ error: 'User with the same email or username already exists.' });
+        }
+
+        if (error.code === 'P2003') {
             return res.status(400).json({ error: 'User with the same email or username already exists.' });
         }
 
