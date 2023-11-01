@@ -27,7 +27,7 @@ router.post('/token', async (req, res) => {
     if (refreshToken == null) return res.sendStatus(401)
 
     const user = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-
+    
     const userId = user.id;
 
     const refreshTokens = await prisma.RefreshToken.findMany({
@@ -51,6 +51,9 @@ router.post('/token', async (req, res) => {
 
 router.post('/login', async (req, res) => {
 
+    if (!req.body.email || !req.body.password){
+        return res.status(400).json({error: 'One or more required fields are empty'})
+    }
     const user = await prisma.User.findUnique({
         where: {
             email: req.body.email
@@ -76,7 +79,7 @@ router.post('/login', async (req, res) => {
             res.cookie('refreshToken', refreshToken, {httpOnly: true});
             res.cookie('accessToken', accessToken, {httpOnly: true});
 
-            res.send(
+            res.json(
                 {
                     'Success': 'Login Success',
                     accessToken: accessToken, 
@@ -86,13 +89,13 @@ router.post('/login', async (req, res) => {
 
         }
         else{
-            res.send('Not Allowed')
+            res.json({error: 'Not Allowed'})
         }
     } 
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).json()
     }
 })
 
