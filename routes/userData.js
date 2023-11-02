@@ -39,7 +39,7 @@ router.get ('/searchHistory', async (req, res) => {
 router.get ('/visitHistory', async(req, res) => {
 
     try {
-            
+             
         const visitHistory = await prisma.visitHistory.findMany({
             where: {
                 userId: req.body.id

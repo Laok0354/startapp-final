@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
             return res.status(400).json({ error: 'One or more required fields are empty' });
         }
 
-        const existingUser = await prisma.user.findMany({
+        const existingUser = await prisma.user.findUnique({
             where: {
                 userName: req.body.userName
             }

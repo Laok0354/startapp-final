@@ -98,7 +98,7 @@ router.post('/login', async (req, res) => {
 
 function generateAccessToken(user){
     if (user.email){
-        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '60s'})
+        return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '90000s'})
     }
     return null 
 }
