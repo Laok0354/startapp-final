@@ -26,8 +26,17 @@ router.post('/', async (req, res) => {
             }
         });
 
+        const existingUserEmail = await prisma.user.findUnique({
+            where: {
+                email: req.body.email
+            }
+        });
+
         if (existingUser) {
             return res.status(400).json({ error: 'User with the same username already exists.' });
+        }
+        if (existingUserEmail) {
+            return res.status(400).json({ error: 'User with the same email already exists.' });
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -57,20 +66,10 @@ router.post('/', async (req, res) => {
                 }
             }
         })
-        res.status(201).send();
+        res.status(201).send({message: "user created"});
     }
     catch (error) {
-
-        if (error.code === 'P2002') {
-            return res.status(400).json({ error: 'User with the same email or username already exists.' });
-        }
-
-        if (error.code === 'P2003') {
-            return res.status(400).json({ error: 'User with the same email or username already exists.' });
-        }
-
-        console.error('Error creating user:', error);
-        return res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: error })
     }
 })
 

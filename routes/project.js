@@ -30,12 +30,12 @@ router.post('/create',authenticateToken, async (req, res) => {
             }
         });
 
-        res.status(201).send();
+        res.status(201).send(message = "project created");
     } 
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).send({message: "couldnt create project"})
     }
 })
 
@@ -48,19 +48,19 @@ router.post('/join', authenticateToken, async (req, res) => {
                 id: req.body.projectId
             }
         })
-        if (project == null) return res.status(404).send()
+        if (project == null) return res.status(404).send({message: "project not found"})
         await prisma.ProjectCollaborators.create({
             data: {
                 projectId: req.body.projectId,
                 userId: req.user.id
             }
         })
-        res.status(201).send();
+        res.status(201).send({message: " joined project"});
     } 
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).send({message: "couldnt join project"})
     }
 })
 
@@ -98,13 +98,13 @@ router.put('/modify', authenticateToken, async (req, res) => {
             }
         });
 
-        res.status(201).send();
+        res.status(201).send({message: "project updated"});
 
     } 
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).send({message: "couldnt update project"})
     }
 })
 
@@ -118,7 +118,7 @@ router.get('/getp', authenticateToken, async (req, res) => {
         });
 
         if (!project) {
-            return res.status(404).send(); 
+            return res.status(404).send({message: "project not found"});; 
         }
 
        await prisma.visitHistory.create({
@@ -133,7 +133,7 @@ router.get('/getp', authenticateToken, async (req, res) => {
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).send({message: "couldnt get project"})
     }
 })
 
@@ -147,11 +147,11 @@ router.delete('/delete', authenticateToken, async (req, res) => {
         });
 
         if (!project) {
-            return res.status(404).send(); 
+            return res.status(404).send({message: "project not found"}); 
         }
 
         if (project.creatorId != req.user.id) {
-            return res.status(401).send(); 
+            return res.status(401).send({message: "not authorized"}); 
         }
 
         await prisma.ProjectCollaborators.deleteMany({
@@ -166,13 +166,13 @@ router.delete('/delete', authenticateToken, async (req, res) => {
             }
         });
 
-        res.status(200).send();
+        res.status(200).send({message: "project deleted"});
 
     } 
     catch (error) 
     {
        console.log(error)
-       res.status(500).send()
+       res.status(500).send({message: "couldnt delete project"})
     }
 })
 
