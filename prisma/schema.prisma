@@ -35,7 +35,7 @@ model RefreshToken {
 
 model Project {
   id            Int                    @id @default(autoincrement())
-  name          String
+  name          String                 @unique
   description   String
   creatorId     Int
   createdAt     DateTime               @default(now())
@@ -84,14 +84,14 @@ model SkillToUser {
   @@map("_SkillToUser")
 }
 
-model CollaborationRequest{
+model CollaborationRequest {
   id        Int      @id @default(autoincrement())
   userId    Int
   projectId Int
-  message  String
   response  String?
   createdAt DateTime @default(now())
-  status   String   @default("pending")
+  status    String   @default("pending")
+  message   String
 
   @@index([projectId], map: "projectIdIndex")
   @@index([userId], map: "userIdIndex")
