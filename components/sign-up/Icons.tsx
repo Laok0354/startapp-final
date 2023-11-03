@@ -8,19 +8,21 @@ const Icons = () => {
             width={30}
             height={30}
             alt="Picture of the author"
+            className="cursor-pointer"
         />
         <Image
             src={"/svg/google.svg"}
             width={30}
             height={30}            
             alt="Picture of the author"
-            className="mx-6"
+            className="mx-6 cursor-pointer"
         />
         <Image
             src={"/svg/facebook.svg"}
             width={30}
             height={30}
             alt="Picture of the author"
+            className="cursor-pointer"
         />
     </section>
     )

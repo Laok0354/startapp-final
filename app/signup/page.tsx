@@ -7,8 +7,8 @@ import MultiSelectInput from "../../components/sign-up/MultiSelectInput";
 
 export default function Signup() {
   return (
-    <main className="bg-gradient-to-br from-primaryv from-30% via-primaryp to-gray-700 flex items-center justify-around">
-      <div className="flex flex-col align-middle justify-center">
+    <main className="bg-gradient-to-br from-primaryv from-30% via-primaryp to-gray-700 flex items-center justify-around h-screen">
+      <div className="flex flex-col items-center justify-center">
         <Image
           src={"/img/StartApp-Logo-lg.png"}
           width={400}

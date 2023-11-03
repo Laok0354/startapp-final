@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import {useState} from 'react';
+import Link from 'next/link';
 
 const UserCard = () => {   
     const [isFollowing, setIsFollowing] = useState(false); 
@@ -35,7 +36,7 @@ const SuggestedUsers = () => {
         <section className='bg-gray-700 px-10 py-3 rounded-xl justify-start'>
             <div className="flex flex-row items-center justify-between">
                 <h1 className="font-semibold mb-4 mt-2 text-[1rem]">Suggested Users For You</h1>
-                <p className='text-gray-50 text-[0.6rem] mb-4 mt-2 hover:underline cursor-pointer'>See All</p>
+                <p className='text-gray-50 text-[0.6rem] mb-4 mt-2 hover:underline cursor-pointer'><Link href={"/users"}> See All</Link></p>
             </div>
             <div className="flex flex-col flex-wrap mb-2">
                 <UserCard/>

@@ -16,7 +16,8 @@ export default function Projects() {
                 </div>
                 <div className="">
                     <SuggestedUsers/>
-                    <CreateProject/>
+                    <CreateProject />
+                    
                 </div>
             </section>
         </article>

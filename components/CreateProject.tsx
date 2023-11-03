@@ -66,7 +66,7 @@ function CreateProjectModal() {
         <section className="divide-y-[0.01px] divide-[#B5B2B2]">
           <div className="p-2">
             <h2 className="">Select a Template</h2>
-            <button className="bg-red-500 text-white p-2" onClick={closeModal}>
+            <button className="bg-red-500 text-white p-2  " onClick={closeModal}>
               Close
             </button>
           </div>
