@@ -5,6 +5,7 @@ import Modal from "react-modal";
 import OptionsMenu from "./OptionsMenu";
 import { ProjectForm } from "./Forms";
 import MembersIndicator from "./MemberIndicator";
+import Image from "next/image"
 
 Modal.setAppElement("#__next");
 
@@ -55,9 +56,20 @@ function CreateProjectModal() {
 
   return (
     <div>
-      <button className="bg-blue-500 text-white p-2" onClick={openModal}>
-        Create Your Own Project
-      </button>
+      <div>
+        <button className="flex justify-center items-center bg-gray-700 text-white p-[3.2rem] rounded-xl mt-8" onClick={openModal}>
+          <div className="flex flex-col justify-center items-center align-middle">
+            <h1 className="text-xl font-semibold">Create Your Own Project</h1>
+            <Image
+              src="/svg/create-project.svg"
+              alt="Profile Picture"
+              width={75}
+              height={75}
+              className="rounded-lg mt-4"
+            />
+          </div>
+        </button>
+      </div>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
