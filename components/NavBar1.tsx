@@ -39,9 +39,9 @@ function Navbar1() {
         </div>
 
         <ul className = "flex flex-row list-none gap-[40px] text-[20px] items-center">
-          <li className="ml-2 text-white/100 hover:text-white active:text-white/30">Projects</li>
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30">People</li>
+          <li className="ml-2 text-white/100 hover:text-white active:text-white/30">Home</li>
           <li className="ml-2 text-white/70 hover:text-white active:text-white/30">About</li>
+          <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Contact</li>
           <Image className= 'w-11 h-11 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/search.svg"
             alt=""
