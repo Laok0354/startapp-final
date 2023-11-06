@@ -6,7 +6,7 @@ import MultiSelectInput from "./sign-up/MultiSelectInput";
 import Icons from "./sign-up/Icons";
 import OptionsMenu from "./OptionsMenu";
 import MembersIndicator from "./MemberIndicator";
-import { getAccessToken } from './getToken';
+import { getAccessToken } from "./getToken";
 
 const Input = ({
   title,
@@ -213,7 +213,7 @@ const LoginForm = () => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         mode: "cors",
         body: JSON.stringify(formData),
@@ -225,6 +225,10 @@ const LoginForm = () => {
         alert(data.Success);
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
+
+        document.cookie = `accessToken=${accessToken}; path=/; sameSite=lax`;
+        document.cookie = `refreshToken=${refreshToken}; path=/; sameSite=lax`;
+
         window.location.href = "/projects";
       } else {
         alert(data.error);
@@ -313,29 +317,25 @@ const ProjectForm = ({
     formData.append("projectMembers", projectMembers);
     formData.append("projectName", projectName);
     formData.append("projectDescription", projectDescription);
-    const accessToken = getAccessToken();
 
     console.log(formData);
     try {
-/*       const response = await fetch("http://localhost:3000/project/create", {
+      const response = await fetch("http://localhost:3000/project/create", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         mode: "cors",
-        body: JSON.stringify({
-          name: projectName,
-          description: projectDescription,
-          creatorId: "",
-        }),
+        credentials: "include",
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
         console.log(data);
-      } */
+      }
     } catch (error) {}
 
     if (formRef.current) {
@@ -397,7 +397,10 @@ const ProjectForm = ({
         <input type="hidden" name="selectedOption" value={selectedOption} />
 
         <div className="w-full flex items-center justify-center">
-          <button className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6" type="submit">
+          <button
+            className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6"
+            type="submit"
+          >
             Create Project
           </button>
         </div>

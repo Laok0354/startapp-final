@@ -75,13 +75,13 @@ router.post("/login", async (req, res) => {
       });
 
       res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
+        httpOnly: true, 
         secure: false,
         sameSite: "strict",
       });
 
       res.cookie("accessToken", accessToken, {
-        httpOnly: true,
+        httpOnly: true, 
         secure: false,
         sameSite: "strict",
       });
@@ -91,7 +91,6 @@ router.post("/login", async (req, res) => {
         accessToken: accessToken,
         refreshToken: refreshToken,
       });
-      
     } else {
       res.status(400).json({ error: "Not Allowed" });
     }

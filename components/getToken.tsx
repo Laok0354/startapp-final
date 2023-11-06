@@ -11,12 +11,9 @@ export async function getAccessToken() {
   
       const accessTokenData = await response.json();
       const accessToken = accessTokenData.accessToken;
-      console.log(accessToken)
       return accessToken;
     } catch (error) {
       console.error('Error:', error);
       return null;
     }
   }
-  
-  
