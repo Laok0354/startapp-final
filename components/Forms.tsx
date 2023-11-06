@@ -213,7 +213,7 @@ const LoginForm = () => {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         mode: "cors",
         body: JSON.stringify(formData),
@@ -314,8 +314,8 @@ const ProjectForm = ({
     e.preventDefault();
     const formData = new FormData(formRef.current!);
 
-    formData.append("projectMembers", projectMembers);
-    formData.append("projectName", projectName);
+/*     formData.append("projectMembers", projectMembers);
+ */    formData.append("projectName", projectName);
     formData.append("projectDescription", projectDescription);
 
     console.log(formData);
@@ -328,7 +328,7 @@ const ProjectForm = ({
         },
         mode: "cors",
         credentials: "include",
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ name: formData }),
       });
 
       const data = await response.json();
