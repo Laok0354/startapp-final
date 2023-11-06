@@ -10,14 +10,23 @@ const prisma = new PrismaClient();
 
 router.use(express.json());
 
+const API_KEY = process.env.API_KEY;
+
 router.get ('/searchHistory', async (req, res) => {
 
     try {
-        const searchHistory = await prisma.searchHistory.findMany({
-        where: {
-            userId: req.body.id
+
+        const apiKey = req.headers['x-api-key'];
+
+        if (apiKey !== API_KEY) {
+            return res.status(401).json({ error: 'Unauthorized' });
         }
-         })
+
+        const searchHistory = await prisma.searchHistory.findMany({
+            where: {
+                userId: req.body.id
+            }
+        })
 
         let searchQuerys = '';
 
@@ -39,7 +48,13 @@ router.get ('/searchHistory', async (req, res) => {
 router.get ('/visitHistory', async(req, res) => {
 
     try {
-             
+            
+        const apiKey = req.headers['x-api-key'];
+
+        if (apiKey !== API_KEY) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
         const visitHistory = await prisma.visitHistory.findMany({
             where: {
                 userId: req.body.id
@@ -72,13 +87,10 @@ router.get ('/visitHistory', async(req, res) => {
     
 });
 
-const API_KEY = process.env.API_KEY;
+
 router.get('/getAllProjects', async (req, res) => {
     const apiKey = req.headers['x-api-key'];
-
-    console.log(apiKey)
-    console.log(API_KEY)
-
+    
     if (apiKey !== API_KEY) {
         return res.status(401).json({ error: 'Unauthorized' });
     }
