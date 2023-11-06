@@ -314,12 +314,12 @@ const ProjectForm = ({
     e.preventDefault();
     const formData = new FormData(formRef.current!);
 
-/*     formData.append("projectMembers", projectMembers);
- */    formData.append("projectName", projectName);
+    formData.append("projectMembers", projectMembers);
+    formData.append("projectName", projectName);
     formData.append("projectDescription", projectDescription);
 
     console.log(formData);
-    try {
+     try {
       const response = await fetch("http://localhost:3000/project/create", {
         method: "POST",
         headers: {
@@ -328,7 +328,7 @@ const ProjectForm = ({
         },
         mode: "cors",
         credentials: "include",
-        body: JSON.stringify({ name: formData }),
+        body: JSON.stringify({formData}),
       });
 
       const data = await response.json();
