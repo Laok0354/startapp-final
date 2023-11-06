@@ -72,6 +72,26 @@ router.get ('/visitHistory', async(req, res) => {
     
 });
 
+const API_KEY = process.env.API_KEY;
+router.get('/getAllProjects', async (req, res) => {
+    const apiKey = req.headers['x-api-key'];
+
+    console.log(apiKey)
+    console.log(API_KEY)
+
+    if (apiKey !== API_KEY) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    try {
+        const projects = await prisma.project.findMany();
+        res.status(200).json(projects);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error });
+    }
+});
+
 module.exports = router;
 
     
