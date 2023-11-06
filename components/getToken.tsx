@@ -1,10 +1,8 @@
 export async function getAccessToken() {
     try {
       const response = await fetch('http://localhost:3000/auth/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: 'GET',
+        credentials: "include"
       });
   
       if (!response.ok) {
@@ -13,7 +11,7 @@ export async function getAccessToken() {
   
       const accessTokenData = await response.json();
       const accessToken = accessTokenData.accessToken;
-  
+      console.log(accessToken)
       return accessToken;
     } catch (error) {
       console.error('Error:', error);
