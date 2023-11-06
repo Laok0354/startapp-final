@@ -5,9 +5,9 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "pong",
+    "email": "pollo",
     "password": "rey",
-    "userName" : "pong",
+    "userName" : " pollo",
     "skillIds" : [1, 2]
 
 }
@@ -113,6 +113,12 @@ Content-Type: application/json
 {
     "searchString": "siii"
 }
+
+
+###
+
+GET http://localhost:3000/userData/getAllProjects
+x-api-key: REYDEREDES
 
 
 ###
