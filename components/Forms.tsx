@@ -292,7 +292,7 @@ const LoginForm = () => {
 const ProjectForm = ({
   handleCreateProject,
 }: {
-  handleCreateProject: () => void;
+  handleCreateProject: (formData: FormData) => void;
 }) => {
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
@@ -308,7 +308,11 @@ const ProjectForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    handleCreateProject();
+    const formData = new FormData(formRef.current!);
+
+    formData.append("projectMembers", projectMembers);
+    formData.append("projectName", projectName);
+    formData.append("projectDescription", projectDescription);
     const accessToken = getAccessToken();
 
     console.log({
@@ -365,7 +369,7 @@ const ProjectForm = ({
               selectedOption={selectedOption}
             />
           </div>
-          <div className="p-4">
+          <div className="p-4 ">
             <div>
               <h1 className="text-2xl">
                 {selectedOption !== "" ? `New ${selectedOption}` : ""}
@@ -377,7 +381,7 @@ const ProjectForm = ({
                 title="Project Name"
                 placeHolder="Enter your Project Name"
                 value={projectName}
-                className="h-8 w-128"
+                className="h-9 w-128 placeholder:text-gray-50 text-gray-50"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
                 onChange={(e) => setProjectName(e.target.value)}
               />
@@ -386,22 +390,25 @@ const ProjectForm = ({
                 title="Description"
                 placeHolder="Enter a brief description"
                 value={projectDescription}
-                className="h-8 w-128 mb-52"
+                className="h-9 w-128 placeholder:text-gray-50 text-gray-50 absolute z-20"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
                 onChange={(e) => setProjectDescription(e.target.value)}
               />
             </div>
           </div>
         </section>
-        <div>
-          <button className="bg-green-500 text-white w-full p-2" type="submit">
-            Crear Proyecto
+
+        {/* Include a hidden input to store selectedOption */}
+        <input type="hidden" name="selectedOption" value={selectedOption} />
+
+        <div className="w-full flex items-center justify-center">
+          <button className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6" type="submit">
+            Create Project
           </button>
         </div>
       </form>
-      <MembersIndicator />
+      <MembersIndicator setProjectMembers={setProjectMembers} />
     </section>
   );
 };
-
 export { SignUpForm, LoginForm, ProjectForm };
