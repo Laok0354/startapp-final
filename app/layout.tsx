@@ -13,7 +13,7 @@ export default function RootLayout({
       </head>
       <body className="flex bg-gray-800 text-white flex-col">
         <header>
-          <NavBar/>
+          {/* <NavBar/> */}
         </header>
         {children}
       </body>
