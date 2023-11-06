@@ -96,7 +96,7 @@ router.post('/login', async (req, res) => {
 
         }
         else{
-            res.json({error: 'Not Allowed'})
+            res.status(400).json({error: 'Not Allowed'})
         }
     } 
     catch (error) 
