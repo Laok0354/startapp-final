@@ -12,7 +12,7 @@ model User {
   id            Int                    @id @default(autoincrement())
   email         String                 @unique
   password      String
-  userName      String
+  userName      String                 @unique
   skills        Skill[]
   refreshTokens RefreshToken[]
   projects      ProjectCollaborators[]
@@ -35,7 +35,7 @@ model RefreshToken {
 
 model Project {
   id            Int                    @id @default(autoincrement())
-  name          String
+  name          String                 @unique
   description   String
   creatorId     Int
   createdAt     DateTime               @default(now())
@@ -82,4 +82,17 @@ model SkillToUser {
   @@unique([A, B], map: "_SkillToUser_AB_unique")
   @@index([B], map: "_SkillToUser_B_index")
   @@map("_SkillToUser")
+}
+
+model CollaborationRequest {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  projectId Int
+  response  String?
+  createdAt DateTime @default(now())
+  status    String   @default("pending")
+  message   String
+
+  @@index([projectId], map: "projectIdIndex")
+  @@index([userId], map: "userIdIndex")
 }
