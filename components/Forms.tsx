@@ -315,12 +315,7 @@ const ProjectForm = ({
     formData.append("projectDescription", projectDescription);
     const accessToken = getAccessToken();
 
-    console.log({
-      name: projectName,
-      description: projectDescription,
-      creatorId: "",
-      accessToken: accessToken
-    });
+    console.log(formData);
     try {
 /*       const response = await fetch("http://localhost:3000/project/create", {
         method: "POST",
