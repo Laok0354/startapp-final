@@ -1,9 +1,6 @@
 import Hearts from "./Hearts"
 import LikeDislikeButton from "./LikeDislikeButton"
 import constants from "./constants"
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-
 
 const Project = (
     {
@@ -63,26 +60,8 @@ const Project = (
     );
 }
 
-const ProjectsScroll = async () => {
-    const projectCount = await prisma.project.count();
-    for (let projectId = 0; projectId < projectCount; projectId++){
-     try {
-          const response = await fetch(`http://localhost:3000/project/getp`, {
-          method: "GET",
-          credentials: "include",
-          /*body: JSON.stringify({"projectId": projectId}) */
-        });
-  
-        const data = await response.json();
-        console.log(data)
-
-        if (!response.ok) {
-          console.log(data);
-        }
-      } catch (error) {console.log(error)
-        console.error();}
-    }
-    let amountProjects = projectCount;
+const ProjectsScroll = () => {
+    let amountProjects = 12;
     let projectNumber = 0;
     let amountMembers = 0;
     let amountLikes = 0;

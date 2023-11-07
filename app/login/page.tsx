@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LoginForm } from "../../components/Forms";
+import { LoginForm } from "../../components/projects/Forms";
 import Icons from "../../components/sign-up/Icons";
 
 export default function login() {

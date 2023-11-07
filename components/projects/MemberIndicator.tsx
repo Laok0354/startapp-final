@@ -5,21 +5,24 @@ interface Participant {
   role: string;
 }
 
-const ProjectParticipantForm = ({ setProjectMembers }: { setProjectMembers: (members: Participant[]) => void }) => {
-  const [participants, setParticipants] = useState<Participant[]>([]);
-  const [newParticipantRole, setNewParticipantRole] = useState<string>('');
-
-  const addParticipant = () => {
-    const participantName = `Member ${participants.length + 1}`;
-    if (newParticipantRole) {
-      const newParticipant = { name: participantName, role: newParticipantRole };
-      setParticipants([...participants, newParticipant]);
-      setProjectMembers([...participants, newParticipant]);
-
-      setNewParticipantRole('');
-    }
-  };
-
+const ProjectParticipantForm = ({ 
+    setProjectMembers, 
+  }: { 
+    setProjectMembers: (members: Participant[]) => void 
+  }) => {
+    const [participants, setParticipants] = useState<Participant[]>([]);
+    const [newParticipantRole, setNewParticipantRole] = useState<string>('');
+  
+    const addParticipant = () => {
+      const participantName = `Member ${participants.length + 1}`;
+      if (newParticipantRole) {
+        const newParticipant = { name: participantName, role: newParticipantRole };
+        setParticipants([...participants, newParticipant]);
+        setNewParticipantRole('');
+        setProjectMembers([...participants, newParticipant]);
+      }
+    };
+  
   const roles = ['Back-End dev', 'Front-End dev', 'Software dev'];
 
   return (

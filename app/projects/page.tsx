@@ -1,6 +1,6 @@
-import ProjectsScroll from "../../components/ProjectsScroll";
-import SuggestedUsers from "../../components/SuggestedUsers";
-import CreateProject from "@/components/CreateProject";
+import ProjectsScroll from "../../components/projects/ProjectsScroll";
+import SuggestedUsers from "../../components/projects/SuggestedUsers";
+import CreateProject from "@/components/projects/CreateProject";
 import SearchBar from "../../components/SearchBar";
 
 export default function Projects() {
@@ -22,4 +22,3 @@ export default function Projects() {
         </article>
     );
 }
-

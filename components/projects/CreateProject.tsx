@@ -51,7 +51,7 @@ function CreateProjectModal() {
   };
 
   const handleCreateProject = () => {
-    closeModal();
+    console.log("")
   };
 
   return (
