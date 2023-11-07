@@ -2,8 +2,8 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import MultiSelectInput from "./sign-up/MultiSelectInput";
-import Icons from "./sign-up/Icons";
+import MultiSelectInput from "../sign-up/MultiSelectInput";
+import Icons from "../sign-up/Icons";
 import OptionsMenu from "./OptionsMenu";
 import MembersIndicator from "./MemberIndicator";
 
@@ -267,10 +267,13 @@ const ProjectForm = ({
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
   const [projectMembers, setProjectMembers] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [formData, setFormData] = useState({
+    name : "",
+    description: "",
+    collaborators: "",
+  });
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -279,20 +282,18 @@ const ProjectForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const formData = new FormData(formRef.current!);
+    setFormData({...formData, collaborators: projectMembers});
 
-    formData.append("projectMembers", projectMembers);
-    formData.append("projectName", projectName);
-    formData.append("projectDescription", projectDescription);
+    console.log(formData)
 
     if (formRef.current) {
       formRef.current.reset();
     }
-    setSelectedOption(options[0]);
-    setSelectedTemplate("");
-    setProjectName("");
-    setProjectDescription("");
-    setProjectMembers("");
+  };
+
+  const handleInputChange = (e: React.FormEvent) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -300,7 +301,7 @@ const ProjectForm = ({
       <form
         onSubmit={handleSubmit}
         ref={formRef}
-        className="divide-y divide-[#B5B2B2] absolute"
+        className="divide-y divide-[#B5B2B2] absolute "
       >
         <section className="grid grid-cols-3 auto-rows-auto divide-x divide-[#B5B2B2]">
           <div className="col-span-1">
@@ -319,38 +320,43 @@ const ProjectForm = ({
             </div>
             <div className="my-2">
               <Input
-                name="projectName"
+                name="name"
                 title="Project Name"
                 placeHolder="Enter your Project Name"
-                value={projectName}
+                value={formData.name}
                 className="h-9 w-128 placeholder:text-gray-50 text-gray-50"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
-                onChange={(e) => setProjectName(e.target.value)}
+                onChange={handleInputChange}
               />
               <Input
-                name="projectDescription"
+                name="description"
                 title="Description"
                 placeHolder="Enter a brief description"
-                value={projectDescription}
+                value={formData.description}
                 className="h-9 w-128 placeholder:text-gray-50 text-gray-50 absolute z-20"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
-                onChange={(e) => setProjectDescription(e.target.value)}
+                onChange={handleInputChange}
               />
             </div>
           </div>
         </section>
 
-        {/* Include a hidden input to store selectedOption */}
         <input type="hidden" name="selectedOption" value={selectedOption} />
 
         <div className="w-full flex items-center justify-center">
-          <button className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6" type="submit">
+          <button
+            className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6"
+            type="submit"
+          >
             Create Project
           </button>
         </div>
       </form>
-      <MembersIndicator setProjectMembers={setProjectMembers} />
+      <MembersIndicator 
+        setProjectMembers={setProjectMembers}
+      />
     </section>
   );
 };
+
 export { SignUpForm, LoginForm, ProjectForm };
