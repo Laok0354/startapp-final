@@ -31,7 +31,14 @@ const config: Config = {
       '4xl': '2.441rem',
       '5xl': '3.052rem',
     },
-      "colors": {
+    extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+      },
+
+      colors: {
         'primaryv': '#9F00FB',
         'primaryp': '#FC0F5F',
         'blue': '#1fb6ff',
@@ -44,38 +51,6 @@ const config: Config = {
         'black': '#000000',
         'violet': '#260E39',
         'darker-purple': '#3902BA',
-        "purple": {
-          50: "#3E6C8C",
-          100: "#D9C8FE",
-          200: "#B08CFD",
-          300: "#8A55FC",
-          400: "#641EFB",
-          500: "#4704D7",
-          600: "#35039F",
-          700: "#280278",
-          800: "#1A0250",
-          900: "#0D0128",
-          950: "#070014"
-        },
-        "gray": {
-          50: "#B5B2B2",
-          100: "#415771",
-          200: "#3A4D64",
-          300: "#304154",
-          400: "#273444",
-          500: "#212D3A",
-          600: "#1A232D",
-          700: "#272932",
-          800: "#0D1117",
-          900: "#070A0D",
-          950: "#040506"
-        }
-      },
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
       
       width:
@@ -86,6 +61,7 @@ const config: Config = {
       }
     },
   },
+  
   plugins: [],
 }
 export default config
