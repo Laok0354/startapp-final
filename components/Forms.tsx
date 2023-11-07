@@ -318,7 +318,7 @@ const ProjectForm = ({
     formData.append("projectDescription", projectDescription);
 
     console.log(formData);
-     try {
+/*      try {
       const response = await fetch("http://localhost:3000/project/create", {
         method: "POST",
         headers: {
@@ -335,7 +335,7 @@ const ProjectForm = ({
       if (!response.ok) {
         console.log(data);
       }
-    } catch (error) {}
+    } catch (error) {} */
 
     if (formRef.current) {
       formRef.current.reset();
