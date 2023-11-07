@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-import { SignUpForm } from "../../components/Forms";
+import { SignUpForm } from "../../components/projects/Forms";
 import Icons from "../../components/sign-up/Icons";
 import MultiSelectInput from "../../components/sign-up/MultiSelectInput";
 
