@@ -60,7 +60,20 @@ const Project = (
     );
 }
 
-const ProjectsScroll = () => {
+const ProjectsScroll = async () => {
+/*     try {
+        const response = await fetch("http://localhost:3000/project/getp/", {
+          method: "GET",
+          credentials: "include",
+        });
+  
+        const data = await response.json();
+  
+        if (!response.ok) {
+          console.log(data);
+        }
+      } catch (error) {} */
+
     let amountProjects = 12;
     let projectNumber = 0;
     let amountMembers = 0;

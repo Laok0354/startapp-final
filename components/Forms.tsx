@@ -6,7 +6,6 @@ import MultiSelectInput from "./sign-up/MultiSelectInput";
 import Icons from "./sign-up/Icons";
 import OptionsMenu from "./OptionsMenu";
 import MembersIndicator from "./MemberIndicator";
-import { getAccessToken } from "./getToken";
 
 const Input = ({
   title,
