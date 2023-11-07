@@ -303,7 +303,7 @@ const ProjectForm = ({
   const [projectMembers, setProjectMembers] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formData, setFormData] = useState({
-    name : "",
+    name: "",
     description: "",
     collaborators: "",
   });
@@ -315,12 +315,9 @@ const ProjectForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormData({...formData, collaborators: projectMembers});
-
-    console.log(formData)
-
+    setFormData({ ...formData, collaborators: projectMembers });
     console.log(formData);
-/*      try {
+    try {
       const response = await fetch("http://localhost:3000/project/create", {
         method: "POST",
         headers: {
@@ -329,7 +326,7 @@ const ProjectForm = ({
         },
         mode: "cors",
         credentials: "include",
-        body: JSON.stringify({formData}),
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
@@ -337,7 +334,7 @@ const ProjectForm = ({
       if (!response.ok) {
         console.log(data);
       }
-    } catch (error) {} */
+    } catch (error) {}
 
     if (formRef.current) {
       formRef.current.reset();
@@ -405,9 +402,7 @@ const ProjectForm = ({
           </button>
         </div>
       </form>
-      <MembersIndicator 
-        setProjectMembers={setProjectMembers}
-      />
+      <MembersIndicator setProjectMembers={setProjectMembers} />
     </section>
   );
 };
