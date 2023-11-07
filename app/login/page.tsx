@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import {LoginForm} from "../../components/Form";
-import Icons from "../../components/Icons";
+import { LoginForm } from "../../components/projects/Forms";
+import Icons from "../../components/sign-up/Icons";
 
 export default function login() {
   return (
@@ -36,7 +36,7 @@ export default function login() {
             </h6>
           </div>
           <div className="flex mt-2 flex-col justify-center align-middle mx-8">
-            <LoginForm/>
+            <LoginForm />
           </div>
         </section>
       </article>
