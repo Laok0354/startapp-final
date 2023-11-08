@@ -40,36 +40,12 @@ router.post('/create',authenticateToken, async (req, res) => {
 })
 
 
-router.post('/join', authenticateToken, async (req, res) => {
+router.put('/modify/:pid', authenticateToken, async (req, res) => {
     try 
     {  
         const project = await prisma.Project.findUnique({
             where: {
-                id: req.body.projectId
-            }
-        })
-        if (project == null) return res.status(404).send({message: "project not found"})
-        await prisma.ProjectCollaborators.create({
-            data: {
-                projectId: req.body.projectId,
-                userId: req.user.id
-            }
-        })
-        res.status(201).send({message: " joined project"});
-    } 
-    catch (error) 
-    {
-       console.log(error)
-       res.status(500).send({message: "couldnt join project"})
-    }
-})
-
-router.put('/modify', authenticateToken, async (req, res) => {
-    try 
-    {  
-        const project = await prisma.Project.findUnique({
-            where: {
-                id: req.body.projectId
+                id: parseInt(req.params.pid)
             }
         });
 
@@ -108,12 +84,12 @@ router.put('/modify', authenticateToken, async (req, res) => {
     }
 })
 
-router.get('/getp', authenticateToken, async (req, res) => {
+router.get('/getp/:pid', authenticateToken, async (req, res) => {
     try 
     {  
         const project = await prisma.Project.findUnique({
             where: {
-                id: req.body.projectId
+                id: parseInt(req.params.pid)
             }
         });
 
@@ -137,12 +113,12 @@ router.get('/getp', authenticateToken, async (req, res) => {
     }
 })
 
-router.delete('/delete', authenticateToken, async (req, res) => {
+router.delete('/delete/:pid', authenticateToken, async (req, res) => {
     try 
     {  
         const project = await prisma.Project.findUnique({
             where: {
-                id: req.body.projectId
+                id: parseInt(req.params.pid)
             }
         });
 
@@ -176,4 +152,18 @@ router.delete('/delete', authenticateToken, async (req, res) => {
     }
 })
 
+router.get('/getAllProjects', async (req, res) => {
+
+    try {
+        const projects = await prisma.project.findMany();
+        res.status(200).json(projects);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "could find any projects" });
+    }
+
+});
+
 module.exports = router;
+
+
