@@ -11,7 +11,7 @@ router.use(express.json());
 
 //search projects full text
 
-router.get('/searchProject', authenticateToken, async (req, res) => {
+router.get('/searchProject/:searchString', authenticateToken, async (req, res) => {
 
     try {
             result = await prisma.project.findMany({
@@ -19,12 +19,12 @@ router.get('/searchProject', authenticateToken, async (req, res) => {
                 OR: [
                     {
                         name: {
-                            contains: req.body.searchString
+                            contains: req.params.searchString
                         }
                     },
                     {
                         description: {
-                            contains: req.body.searchString
+                            contains: req.params.searchString
                         }
                     }
                 ]
@@ -43,7 +43,7 @@ router.get('/searchProject', authenticateToken, async (req, res) => {
             })
             await prisma.searchHistory.create({
                 data: {
-                    searchQuery: req.body.searchString,
+                    searchQuery: req.params.searchString,
                     userId: user.id
                 }
             })
