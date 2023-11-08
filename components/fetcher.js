@@ -1,3 +1,5 @@
+//esto lo tengo aca por si me borran mi codigo
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -26,3 +28,22 @@ const handleSubmit = async (e) => {
     // ...
   }
 };
+
+/*     try {
+      const response = await fetch("http://localhost:3000/project/create", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify({ name: formData }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.log(data);
+      }
+    } catch (error) {} */

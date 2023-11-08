@@ -7,13 +7,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html className="w-screen h-screen">
       <head>
         <title>StartApp</title>
       </head>
-      <body className="flex bg-gray-800 text-white flex-col">
+      <body className="flex h-screen w-screen bg-gray-800 text-white flex-col">
         <header>
-          <NavBar/>
+          {/* <NavBar/> */}
         </header>
         {children}
       </body>
