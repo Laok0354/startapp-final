@@ -25,8 +25,8 @@ function Navbar1() {
 
   return (
     <nav
-      className={`border-b-2 fixed justify-evenly h-[80px] w-full flex flex-row items-center transition duration-300 ease-in-out ${
-        scrolled ? "bg-zinc-950/90 border-b-primaryv" : "bg-transparent border-transparent"
+      className={`fixed justify-evenly h-[80px] w-full flex flex-row items-center transition duration-300 ease-in-out ${
+        scrolled ? "bg-zinc-950/90 shadow-[0_0_0_1px] shadow-primaryv" : "bg-transparent"
       }`}
     >
       <div className="flex flex-row items-center">
@@ -42,12 +42,15 @@ function Navbar1() {
           <li className="ml-2 text-white/100 hover:text-white active:text-white/30">Home</li>
           <li className="ml-2 text-white/70 hover:text-white active:text-white/30">About</li>
           <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Contact</li>
-          <Image className= 'w-11 h-11 opacity-50 hover:opacity-100 active:opacity-30'
+          <div className="relative flex w-[300px] h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30">
+          <Image className= 'w-8 h-8 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/search.svg"
             alt=""
             width = {200}
             height= {100}
           />
+          <input type="text" className="w-[300px] h-8 bg-transparent text-white outline-none" placeholder="Search" />
+          </div>
         </ul>
 
         <div className="flex flex-row list-none gap-[40px] text-[20px] items-center">
@@ -57,16 +60,16 @@ function Navbar1() {
             width = {200}
             height= {100}
         />
-              
-          <button className=" text-primaryv/70 py-[10px] px-[30px] text-[20px] rounded-[17px] justify-center items-center border border-primaryv hover:shadow-[0_0_0_1px] hover:shadow-primaryv font-red hover:text-primaryv active:text-primaryv/30 active:shadow-primaryv/30 active:border-primaryv/30">
+          <div>
+           <button className="ml-5 text-primaryv/70 py-[10px] px-[30px] text-[20px] rounded-[17px] justify-center items-center border border-primaryv hover:shadow-[0_0_0_1px] hover:shadow-primaryv hover:text-primaryv active:text-primaryv/30 active:shadow-primaryv/30 active:border-primaryv/30">
            <Link href="/signup">Sign Up</Link>
           </button>
 
-          <button className="text-white/70 hover:text-white active:text-white/30 border border-transparent hover:border-white active:border-white/30 py-[10px] px-[30px] text-[20px] rounded-[17px] justify-center items-center font-red">
+          <button className="ml-2 text-white/70 hover:text-white active:text-white/30 border border-transparent hover:border-white active:border-white/30 py-[10px] px-[30px] text-[20px] rounded-[17px] justify-center items-center">
            <Link href="/login">Log In</Link>
           </button>
-        
-        </div>  
+          </div>
+        </div> 
       </nav>
   );
 }
