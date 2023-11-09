@@ -13,6 +13,7 @@ GET http://localhost:3000/userData/visitHistory
 Authorization: Bearer
 Content-Type: application/json
 
+
 {
     "userId" : "2"
 }
