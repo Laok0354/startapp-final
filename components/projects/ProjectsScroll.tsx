@@ -1,6 +1,14 @@
 import Hearts from "./Hearts";
 import LikeDislikeButton from "./LikeDislikeButton";
 import constants from "./constants";
+import { Project } from "@prisma/client";
+
+function shuffleArray(array: []) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
 const Project = ({
   title,
@@ -68,6 +76,8 @@ const ProjectsScroll = async () => {
   },
 });
   const data = await response.json();
+  shuffleArray(data);
+
   const projectState = ["In Progress", "Finished", "Abandoned"];
   return (
     <section className="overflow-hidden">
@@ -78,7 +88,7 @@ const ProjectsScroll = async () => {
             : "grid grid-cols-4"
         }
       >
-        {data.map((project) => (
+        {data.map((project: Project) => (
           <div className="col-span-1">
             <Project
               key={project.id}
