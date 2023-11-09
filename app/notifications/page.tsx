@@ -12,17 +12,17 @@ export default function Home () {
       </header>
       
       <main className="bg-[#0A090B] h-screen w-screen">
+      
+        <Image className= 'absolute top-3  left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
+            src="/svg/menu.svg"
+            alt=""
+            width = {200}
+            height= {100}
+          />
+      
         
           <nav className="fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg">
-            {/* <ul className="text-[25px]">
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Dashboard</li>
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">People</li>
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Projects</li>
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Your Projects</li>
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Your Team</li>
-              <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Liked</li>
-            </ul> */}
-            <div className="flex py-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex py-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
              src="/svg/house.svg"
              alt=""
@@ -30,67 +30,67 @@ export default function Home () {
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/dashboard">Dashboard</Link>
              </button>
             </div>
 
-            <div className="flex pb-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
+             src="/svg/person.svg"
              alt=""
              width = {200}
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/login">People</Link>
              </button>
             </div>
 
-            <div className="flex pb-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
+             src="/svg/idea.svg"
              alt=""
              width = {200}
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/login">Projects</Link>
              </button>
             </div>
 
-            <div className="flex pb-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
+             src="/svg/folder.svg"
              alt=""
              width = {200}
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/login">Your Projects</Link>
              </button>
             </div>
 
-            <div className="flex pb-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
+             src="/svg/team.svg"
              alt=""
              width = {200}
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/login">Your Teams</Link>
              </button>
             </div>
 
-            <div className="flex pb-10 justify-center gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
+            <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
              <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
+             src="/svg/corazon.svg"
              alt=""
              width = {200}
              height= {100}
             />
             <button className=" text-[25px]">
-             <Link href="/login">Dashboard</Link>
+             <Link href="/login">Liked</Link>
              </button>
             </div>
           </nav>

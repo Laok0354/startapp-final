@@ -23,6 +23,14 @@ function Navbar1() {
     };
   }, []);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const input = e.currentTarget.querySelector("#search")! as HTMLInputElement;
+    const inputValue = input.value;
+
+    // fetch con el valor
+  }
+
   return (
     <nav
       className={`fixed justify-evenly h-[80px] w-full flex flex-row items-center transition duration-300 ease-in-out ${
@@ -39,17 +47,21 @@ function Navbar1() {
         </div>
 
         <ul className = "flex flex-row list-none gap-[40px] text-[20px] items-center">
-          <li className="ml-2 text-white/100 hover:text-white active:text-white/30">Home</li>
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30">About</li>
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Contact</li>
+          <li className="ml-2 text-white/100 hover:text-white active:text-white/30"><Link href="/">Home</Link></li>
+          <li className="ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">About</Link></li>
+          <li className="ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">Contact</Link></li>
           <div className="relative flex w-[300px] h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30">
-          <Image className= 'w-8 h-8 opacity-50 hover:opacity-100 active:opacity-30'
-            src="/svg/search.svg"
-            alt=""
-            width = {200}
-            height= {100}
-          />
-          <input type="text" className="w-[300px] h-8 bg-transparent text-white outline-none" placeholder="Search" />
+          <form onSubmit={handleSubmit} className="flex items-start gap-3">
+            <button type="submit">
+              <Image className= 'w-8 h-8 opacity-50 hover:opacity-100 active:opacity-30'
+                src="/svg/search.svg"
+                alt=""
+                width = {200}
+                height= {100}
+              />
+            </button>
+            <input type="text" id="search" className="w-[300px] h-8 bg-transparent text-white outline-none" placeholder="Search" />
+          </form>
           </div>
         </ul>
 
