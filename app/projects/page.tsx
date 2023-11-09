@@ -5,8 +5,8 @@ import SearchBar from "../../components/SearchBar";
 
 export default function Projects() {
   return (
-    <article id="__next">
-      <header className="ml-[5.7rem]">
+    <article id="__next" className="">
+      <header className="ml-[5.7rem] mt-6">
         <SearchBar />
         <h1 className="text-2xl font-semibold font-raleway my-4">Projects</h1>
       </header>

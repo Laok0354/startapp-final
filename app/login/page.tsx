@@ -5,7 +5,7 @@ import Icons from "../../components/sign-up/Icons";
 
 export default function login() {
   return (
-    <main className="bg-gradient-to-br from-primaryv from-30% via-primaryp to-gray-700 flex justify-around h-screen items-center">
+    <main className="bg-gradient-to-br from-primaryv to-80% to-black flex justify-around h-screen items-center">
       <div className="ml-24 flex flex-col align-middle justify-center">
         <Image
           src={"/img/StartApp-Logo-lg.png"}

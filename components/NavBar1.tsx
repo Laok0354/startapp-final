@@ -1,4 +1,5 @@
 'use client'
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -42,6 +43,7 @@ function Navbar1() {
           <li className="ml-2 text-white/100 hover:text-white active:text-white/30">Home</li>
           <li className="ml-2 text-white/70 hover:text-white active:text-white/30">About</li>
           <li className="ml-2 text-white/70 hover:text-white active:text-white/30">Contact</li>
+          <li className="ml-2 text-white/100 hover:text-white active:text-white/30"><Link href="/projects">Projects</Link></li>
           <Image className= 'w-11 h-11 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/search.svg"
             alt=""

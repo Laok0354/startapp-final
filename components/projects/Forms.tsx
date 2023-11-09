@@ -166,7 +166,7 @@ const SignUpForm = () => {
         </div>
         <button
           type="submit"
-          className="flex items-center justify-center w-72 mt-4 py-3 bg-darker-purple rounded-lg"
+          className="flex items-center justify-center w-72 mt-4 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Sign Up</h4>
         </button>
@@ -250,7 +250,7 @@ const LoginForm = () => {
       <div className="flex justify-center items-center flex-col">
         <button
           type="submit"
-          className="w-72 mt-3 mb-6 py-3 bg-darker-purple rounded-lg"
+          className="w-72 mt-3 mb-6 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Login</h4>
         </button>

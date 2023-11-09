@@ -2,17 +2,13 @@
 
 import React, { useState } from "react";
 import Modal from "react-modal";
-import OptionsMenu from "./OptionsMenu";
 import { ProjectForm } from "./Forms";
-import MembersIndicator from "./MemberIndicator";
 import Image from "next/image"
 
 Modal.setAppElement("#__next");
 
 function CreateProjectModal() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedTemplate, setSelectedTemplate] = useState("");
-  const [projectName, setProjectName] = useState("");
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -57,7 +53,7 @@ function CreateProjectModal() {
   return (
     <div>
       <div>
-        <button className="flex justify-center items-center bg-gray-700 text-white p-[3.2rem] rounded-xl mt-8" onClick={openModal}>
+        <button className="flex justify-center items-center bg-gray-800 text-white p-[3.2rem] rounded-xl mt-8" onClick={openModal}>
           <div className="flex flex-col justify-center items-center align-middle">
             <h1 className="text-xl font-semibold">Create Your Own Project</h1>
             <Image

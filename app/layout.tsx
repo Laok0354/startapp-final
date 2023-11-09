@@ -11,9 +11,9 @@ export default function RootLayout({
       <head>
         <title>StartApp</title>
       </head>
-      <body className="flex h-screen w-screen bg-gray-800 text-white flex-col">
+      <body className="flex h-screen w-screen bg-gradient-to-br from-primaryv to-80% to-black text-white flex-col">
         <header>
-          {/* <NavBar/> */}
+
         </header>
         {children}
       </body>
