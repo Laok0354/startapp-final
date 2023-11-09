@@ -23,12 +23,22 @@ function Navbar1() {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const input = e.currentTarget.querySelector("#search")! as HTMLInputElement;
     const inputValue = input.value;
 
-    // fetch con el valor
+    try {
+      const response = await fetch(`http://localhost:3000/search/searchProject/${inputValue}`, {
+      });
+
+      const projectsResults = await response.json();
+      console.log(projectsResults)
+      if (!response.ok) {
+        console.log(projectsResults);
+      }
+    } catch (error) {}
+
   }
 
   return (

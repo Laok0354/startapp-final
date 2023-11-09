@@ -11,7 +11,7 @@ router.use(express.json());
 
 //search projects full text
 
-router.get('/searchProject/:searchString', authenticateToken, async (req, res) => {
+router.get('/searchProject/:searchString', async (req, res) => {
 
     try {
             result = await prisma.project.findMany({
@@ -34,7 +34,7 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
         if (result.length == 0) {
             res.status(404).json({message: "No projects found"})
         }
-        else{   
+        else if(req.user.email != null){   
             
             const user = await prisma.user.findUnique({
                 where: {
