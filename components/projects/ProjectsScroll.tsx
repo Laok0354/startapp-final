@@ -68,7 +68,6 @@ const ProjectsScroll = async () => {
   },
 });
   const data = await response.json();
-  console.log(data);
   const projectState = ["In Progress", "Finished", "Abandoned"];
   return (
     <section className="overflow-hidden">
