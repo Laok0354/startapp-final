@@ -1,9 +1,6 @@
-import Hearts from "./Hearts"
-import LikeDislikeButton from "./LikeDislikeButton"
-import constants from "./constants"
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-
+import Hearts from "./Hearts";
+import LikeDislikeButton from "./LikeDislikeButton";
+import constants from "./constants";
 
 const Project = ({
   title,
@@ -63,48 +60,41 @@ const Project = ({
 };
 
 const ProjectsScroll = async () => {
-    const projectCount = await prisma.project.count();
-    for (let projectId = 0; projectId < projectCount; projectId++){
-     try {
-          const response = await fetch(`http://localhost:3000/project/getp`, {
-          method: "GET",
-          credentials: "include",
-          /*body: JSON.stringify({"projectId": projectId}) */
-        });
-  
-        const data = await response.json();
-        console.log(data)
-
-        if (!response.ok) {
-          console.log(data);
+  const timestamp = Date.now();
+  const response = await fetch(`http://localhost:3000/project/getAllProjects?t=${timestamp}`,{
+  headers: {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache',
+  },
+});
+  const data = await response.json();
+  console.log(data);
+  const projectState = ["In Progress", "Finished", "Abandoned"];
+  return (
+    <section className="overflow-hidden">
+      <div
+        className={
+          data.length > 6
+            ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2"
+            : "grid grid-cols-4"
         }
-      } catch (error) {console.log(error)
-        console.error();}
-    }
-    let amountProjects = projectCount;
-    let projectNumber = 0;
-    let amountMembers = 0;
-    let amountLikes = 0;
-    const projectState = ["In Progress", "Finished", "Abandoned"];
-    return (
-        <section className="overflow-hidden">
-            <div className={amountProjects > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-                {[...Array(amountProjects)].map((_, index) => (
-                    <div className="col-span-1">
-                        <Project
-                            key={index}
-                            title={`Project ${projectNumber += 1}`}
-                            description="Lorem ipsum dolor sit."
-                            members={amountMembers = Math.round(Math.random() * 8 + 2)}
-                            joined={amountMembers - 1}
-                            state={projectState[Math.round(Math.random() * 2)]}
-                            likes={amountLikes = Math.round(Math.random() * 100)}
-                        />
-                    </div>
-                ))}
-            </div>
-        </section>
-        );
-    };
+      >
+        {data.map((project) => (
+          <div className="col-span-1">
+            <Project
+              key={project.id}
+              title={project.name}
+              description={project.description}
+              members={Math.round(Math.random() * 8 + 2)}
+              joined={Math.round(Math.random() * 20)}
+              state={projectState[Math.round(Math.random() * 2)]}
+              likes={Math.round(Math.random() * 100)}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default ProjectsScroll;
