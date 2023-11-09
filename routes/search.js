@@ -63,4 +63,54 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
     
 });
 
+
+router.get('/searchUser/:searchString', authenticateToken, async (req, res) => {
+
+    try {
+        let result = await prisma.user.findMany({
+            where: {
+  
+                OR: [
+                    {
+                        userName: {
+                            contains: req.params.searchString
+                        }
+                    },
+                    {
+                        about: {
+                            contains: req.params.searchString
+                        }
+                    }
+                ]
+            }
+        });
+
+        if (result.length == 0) 
+        {
+            res.status(404).json({message: "No users found"})
+        } 
+        else
+        {
+
+            const user = await prisma.user.findUnique({
+                where: {
+                    email: req.user.email
+                }
+            })
+            await prisma.userSearchHistory.create({
+                data: {
+                    searchQuery: req.params.searchString,
+                    userId: user.id
+                }
+            })
+
+            res.status(200).json(result)
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 module.exports = router;

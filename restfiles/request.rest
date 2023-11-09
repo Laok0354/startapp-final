@@ -78,19 +78,6 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/signup
-Authorization: Bearer
-Content-Type: application/json
-
-{
-    "username": "pp",
-    "email": "pp@gmail.com",
-    "password": "pp",
-    "selectedOptions": ["opcion1"]
-}
-
-###
-
 //search project
 
 GET http://localhost:3000/search/searchProject/dog

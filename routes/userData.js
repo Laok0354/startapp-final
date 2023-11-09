@@ -91,17 +91,58 @@ router.get ('/visitHistory', async(req, res) => {
 router.get('/getAllProjects', async (req, res) => {
     const apiKey = req.headers['x-api-key'];
     
-    if (apiKey !== API_KEY) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
     try {
+
+        if (apiKey !== API_KEY) {
+
+            return res.status(401).json({ error: 'Unauthorized' });
+
+        }
+
         const projects = await prisma.project.findMany();
+        
         res.status(200).json(projects);
+
     } catch (error) {
+
         console.log(error);
         res.status(500).json({ error: error });
+
     }
+
+});
+
+router.get ('/userSearchHistory', async (req, res) => {
+
+    try {
+
+        const apiKey = req.headers['x-api-key'];
+
+        if (apiKey !== API_KEY) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        const searchHistory = await prisma.searchHistory.findMany({
+            where: {
+                userId: req.body.id
+            }
+        })
+
+        let searchQuerys = '';
+
+        searchHistory.forEach((search) => {
+            searchQuerys += search.searchQuery + ' ';
+        })
+
+        res.status(200).json(searchQuerys)
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({error: error})
+    }
+
+    
 });
 
 module.exports = router;

@@ -43,7 +43,7 @@ router.post('/create',authenticateToken, async (req, res) => {
 router.put('/modify/:pid', authenticateToken, async (req, res) => {
     try 
     {  
-        const project = await prisma.Project.findUnique({
+        const project = await prisma.project.findUnique({
             where: {
                 id: parseInt(req.params.pid)
             }
@@ -159,10 +159,32 @@ router.get('/getAllProjects', async (req, res) => {
         res.status(200).json(projects);
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "could find any projects" });
+        res.status(500).json({ message: "couldnt find any projects" });
     }
 
 });
+
+router.get('/getMyProjects', authenticateToken, async (req, res) => {
+    
+    try 
+    {
+        const projects = await prisma.project.findMany
+        ({
+            where:
+            {
+                creatorId: req.user.id
+            }
+        });
+        res.status(200).json(projects);
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        res.status(500).json({ message: "couldnt find any projects" });
+    }
+    
+});
+
 
 module.exports = router;
 
