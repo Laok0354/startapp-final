@@ -19,7 +19,6 @@ export default function Home () {
             width = {200}
             height= {100}
           />
-      
         
           <nav className="fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg">
             <div className="flex py-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
@@ -98,9 +97,6 @@ export default function Home () {
         <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
           <div className="w-screen flex gap-96">
             <h1 className=" ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">Notifications</h1>
-            <button className="ml-96 mt-16">
-              <Link className="text-white/70 hover:text-white active:text-white/30 font-red text-[18px] text-center underline" href="/signup">Mark as read</Link>
-            </button>
           </div>
           
           <ul className="flex flex-row list-none gap-[40px] text-[20px] items-center mt-16">
@@ -108,15 +104,6 @@ export default function Home () {
             <li className="text-white/70 hover:text-white active:text-white/30">Unread</li>
             <li className="text-white/70 hover:text-white active:text-white/30">Acepted</li>
             <li className="text-white/70 hover:text-white active:text-white/30">Declined</li>
-            <li className="text-white/70 hover:text-white active:text-white/30 ml-[632px]">Search</li>
-            <li>
-              <Image className= 'w-8 h-8 opacity-50 hover:opacity-100 active:opacity-30'
-               src="/svg/configuration.svg"
-               alt=""
-               width = {200}
-               height= {100}
-               />
-            </li>
           </ul>
         </section>
         <section>
