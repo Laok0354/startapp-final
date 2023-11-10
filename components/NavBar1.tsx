@@ -4,7 +4,13 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-function Navbar1() {
+interface IProps {
+  page: String
+}
+
+function Navbar1(
+  {page} : IProps
+) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -42,9 +48,9 @@ function Navbar1() {
         </div>
 
         <ul className = "flex flex-row list-none gap-[40px] text-[20px] items-center">
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/">Home</Link></li>
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">About</Link></li>
-          <li className="ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">Contact</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Home" ? " text-white/100" : "")} ><Link href="/">Home</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "About" ? " text-white/100" : "")} ><Link href="/about">About</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Contact" ? " text-white/100" : "")} ><Link href="/contact">Contact</Link></li>
         </ul>
 
         <div className="flex flex-row list-none gap-[40px] text-[20px] items-center">

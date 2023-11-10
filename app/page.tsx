@@ -8,7 +8,7 @@ export default function Home () {
   return (
     <>
     <header>
-      <NavBar1/>
+      <NavBar1 page="Home"/>
     </header>
     <section className="pl-24 bg-gradient-to-br from-black from-50% to-primaryv w-full h-[full]">
       <h1 className="mt-[184px] mb-[27px] flex flex-col w-[838px]text-white text-[70px] justify-center font-semibold text-7xl font-red">Build your own team project</h1>
@@ -23,7 +23,7 @@ export default function Home () {
           <ScrollButton/>
       </div>
 
-      <div className="pt-52 text-[25px] font-semibold font-red">
+      <div className="pt-60 text-[25px] font-semibold font-red">
         <h2>Connect with Startups of your interest!</h2>
       </div>
       <div className="pb-2 text-[20px]">
@@ -36,10 +36,17 @@ export default function Home () {
         <p>We have a space for you to upload a project you have in mind, composed by a title, a description, images and a section with the list of members of the project, where you could see if there is room for more collaborators or not, what kind of people are needed and what kind of collaborators are already working on.</p>
       </div>
       <div className="pt-52 text-[25px] font-semibold font-red">
-        <h2>Customize your profile</h2>
+        <h2>Customize your profile!</h2>
       </div>
       <div className="pb-52 text-[20px]">
         <p>Each user has their own space to share their work and knowledge, exposing projects in which they are collaborating at the moment. You can send a request to different users to participate in your project or startup.</p>
+      </div>
+      <div className="pt-52 text-[25px] font-semibold font-red">
+        <h2>Feeds</h2>
+      </div>
+      <div className="pb-52 text-[20px]">
+        <p>We have two feeds, one to find projects and one to find people to build your team, both equipped with recommendation algorithms based on your interests.
+We have an AI that allows the user's search to be successful. Matching projects with users.</p>
       </div>
      </section>
     
