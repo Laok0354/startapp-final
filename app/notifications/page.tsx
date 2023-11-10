@@ -50,26 +50,10 @@ export default function Home () {
             width = {200}
             height= {100}
           />
-<<<<<<< Updated upstream
-        
-          <nav className="fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg">
-            <div className="flex py-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
-             <Image className= 'w-8 h-8'
-             src="/svg/house.svg"
-             alt=""
-             width = {200}
-             height= {100}
-            />
-            <button className=" text-[25px]">
-             <Link href="/dashboard">Dashboard</Link>
-             </button>
-            </div>
-=======
           <button className=" text-[25px]">
             <Link href="/login">Projects</Link>
             </button>
           </div>
->>>>>>> Stashed changes
 
           <div className="flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
             <Image className= 'w-8 h-8'
