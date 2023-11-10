@@ -2,8 +2,8 @@
 
 import React, { useState, useRef } from "react";
 import Link from "next/link";
-import MultiSelectInput from "./sign-up/MultiSelectInput";
-import Icons from "./sign-up/Icons";
+import MultiSelectInput from "../sign-up/MultiSelectInput";
+import Icons from "../sign-up/Icons";
 import OptionsMenu from "./OptionsMenu";
 import MembersIndicator from "./MemberIndicator";
 
@@ -28,7 +28,7 @@ const Input = ({
     <div className="my-2">
       <h6 className={titleClassName}>{title}</h6>
       <input
-        className={`flex justify-center w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 ${className}`}
+        className={`flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
         type="text"
         name={name}
         value={value}
@@ -59,7 +59,7 @@ const PasswordInput = ({
       <h6 className="text-xs font-semibold tracking-widest">PASSWORD</h6>
       <div className="flex flex-row relative justify-between">
         <input
-          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 z-0 "
+          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-700 text-gray-50 placeholder:text-gray-50 p-2 z-0 "
           type={passwordVisible ? "text" : "password"}
           name={name}
           id=""
@@ -161,12 +161,12 @@ const SignUpForm = () => {
             />
           </div>
         </div>
-        <div className="mb-3 mt-3">
+        <div className="mt-4">
           <Icons />
         </div>
         <button
           type="submit"
-          className="flex items-center justify-center w-72 mt-4 py-3 bg-darker-purple rounded-lg"
+          className="flex items-center justify-center w-72 mt-4 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Sign Up</h4>
         </button>
@@ -250,7 +250,7 @@ const LoginForm = () => {
       <div className="flex justify-center items-center flex-col">
         <button
           type="submit"
-          className="w-72 mt-3 mb-6 py-3 bg-darker-purple rounded-lg"
+          className="w-72 mt-3 mb-6 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Login</h4>
         </button>
@@ -262,32 +262,38 @@ const LoginForm = () => {
 const ProjectForm = ({
   handleCreateProject,
 }: {
-  handleCreateProject: () => void;
+  handleCreateProject: (formData: FormData) => void;
 }) => {
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
   const [projectMembers, setProjectMembers] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
+  const [formData, setFormData] = useState({
+    name : "",
+    description: "",
+    collaborators: "",
+  });
 
   const handleOptionClick = (option: string) => {
     setSelectedOption(option);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    handleCreateProject();
+
+    setFormData({...formData, collaborators: projectMembers});
+
+    console.log(formData)
 
     if (formRef.current) {
       formRef.current.reset();
     }
-    setSelectedOption(options[0]);
-    setSelectedTemplate("");
-    setProjectName("");
-    setProjectDescription("");
-    setProjectMembers("");
+  };
+
+  const handleInputChange = (e: React.FormEvent) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -295,7 +301,7 @@ const ProjectForm = ({
       <form
         onSubmit={handleSubmit}
         ref={formRef}
-        className="divide-y divide-[#B5B2B2] absolute"
+        className="divide-y divide-[#B5B2B2] absolute "
       >
         <section className="grid grid-cols-3 auto-rows-auto divide-x divide-[#B5B2B2]">
           <div className="col-span-1">
@@ -306,7 +312,7 @@ const ProjectForm = ({
               selectedOption={selectedOption}
             />
           </div>
-          <div className="p-4">
+          <div className="p-4 ">
             <div>
               <h1 className="text-2xl">
                 {selectedOption !== "" ? `New ${selectedOption}` : ""}
@@ -314,33 +320,41 @@ const ProjectForm = ({
             </div>
             <div className="my-2">
               <Input
-                name="projectName"
+                name="name"
                 title="Project Name"
                 placeHolder="Enter your Project Name"
-                value={projectName}
-                className="h-8 w-128"
+                value={formData.name}
+                className="h-9 w-128 placeholder:text-gray-50 text-gray-50"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
-                onChange={(e) => setProjectName(e.target.value)}
+                onChange={handleInputChange}
               />
               <Input
-                name="projectDescription"
+                name="description"
                 title="Description"
                 placeHolder="Enter a brief description"
-                value={projectDescription}
-                className="h-8 w-128 mb-52"
+                value={formData.description}
+                className="h-9 w-128 placeholder:text-gray-50 text-gray-50 absolute z-20"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
-                onChange={(e) => setProjectDescription(e.target.value)}
+                onChange={handleInputChange}
               />
             </div>
           </div>
         </section>
-        <div>
-          <button className="bg-green-500 text-white w-full p-2" type="submit">
-            Crear Proyecto
+
+        <input type="hidden" name="selectedOption" value={selectedOption} />
+
+        <div className="w-full flex items-center justify-center">
+          <button
+            className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6"
+            type="submit"
+          >
+            Create Project
           </button>
         </div>
       </form>
-      <MembersIndicator/>
+      <MembersIndicator 
+        setProjectMembers={setProjectMembers}
+      />
     </section>
   );
 };

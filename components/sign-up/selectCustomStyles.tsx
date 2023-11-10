@@ -2,7 +2,7 @@
 const customStyles = {
     control: (styles : string[]) => ({
       ...styles,
-      backgroundColor: '#0D1117',
+      backgroundColor: '#272932',
       border: 'none',
       borderRadius : '0.375rem',
       color: '#B5B2B2',
@@ -19,7 +19,7 @@ const customStyles = {
     }),
     placeholder: (styles : string[]) => ({
       ...styles,
-      color: '#3A4D64',
+      color: '#B5B2B2',
       fontSize: '1rem',
       fontWeight: 400,
       lineHeight: '1.25rem',
@@ -27,7 +27,7 @@ const customStyles = {
     }),
     multiValue: (styles : string[]) => ({
       ...styles,
-      backgroundColor: '#35039F',
+      backgroundColor: '#272932',
       color: '#F3F4F6',
       borderRadius: '0.375rem',
       fontSize: '0.875rem',
