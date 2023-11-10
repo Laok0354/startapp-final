@@ -10,7 +10,6 @@ export default function Home () {
     <header>
       <NavBar1/>
     </header>
-
     <section className="pl-24 bg-gradient-to-br from-black from-50% to-primaryv w-full h-[full]">
       <h1 className="mt-[184px] mb-[27px] flex flex-col w-[838px]text-white text-[70px] justify-center font-semibold text-7xl font-red">Build your own team project</h1>
       <div>
@@ -30,8 +29,6 @@ export default function Home () {
         <p className="pb-10">Startapp is a website to connect people with projects and startups and vice versa. It aims to be a platform to share your experience and skills.</p>
         <p>Startapp is a website to connect people with projects and startups and vice versa. It aims to be a platform to share your experience and skills.</p>
       </div>
-       
-      
     </section>
     
     </>

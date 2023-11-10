@@ -17,7 +17,7 @@ export default function login() {
           Develop Your Dreams
         </h2>
       </div>
-      <article className="bg-gray-700 border-2 border-primaryv p-6 px-10 rounded-lg shadow-2xl items-center">
+      <article className="bg-gray-800 border-2 border-primaryv p-6 px-10 rounded-lg shadow-2xl items-center">
         <section className="flex flex-col justify-center align-middle">
           <div className="flex flex-col float-left align-middle mb-6 font-raleway">
             <Image

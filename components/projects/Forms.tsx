@@ -28,7 +28,7 @@ const Input = ({
     <div className="my-2">
       <h6 className={titleClassName}>{title}</h6>
       <input
-        className={`flex justify-center w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 ${className}`}
+        className={`flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
         type="text"
         name={name}
         value={value}
@@ -59,7 +59,7 @@ const PasswordInput = ({
       <h6 className="text-xs font-semibold tracking-widest">PASSWORD</h6>
       <div className="flex flex-row relative justify-between">
         <input
-          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 z-0 "
+          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-700 text-gray-50 placeholder:text-gray-50 p-2 z-0 "
           type={passwordVisible ? "text" : "password"}
           name={name}
           id=""
@@ -161,7 +161,7 @@ const SignUpForm = () => {
             />
           </div>
         </div>
-        <div className="mb-3 mt-3">
+        <div className="mt-4">
           <Icons />
         </div>
         <button

@@ -19,7 +19,7 @@ export default function Signup() {
           Develop Your Dreams
         </h2>
       </div>
-      <article className="bg-gray-700 border-2 border-primaryv py-6 px-16 rounded-lg shadow-2xl mt-8 mb-8 ">
+      <article className="bg-gray-800 border-2 border-primaryv py-6 px-16 rounded-lg shadow-2xl mt-8 mb-8 ">
         <section className="flex flex-col justify-center align-middle">
           <div className="flex flex-col float-left align-middle mb-6 font-raleway">
             <h2 className="font-medium text-3xl tracking-wide">Sign Up</h2>
