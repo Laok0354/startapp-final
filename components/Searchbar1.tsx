@@ -6,7 +6,7 @@ const SearchBar1 = () => {
   const [query, setQuery] = useState('');
 
   const handleSearch = () => {
-    // Lógica para realizar la búsqueda con 'query'
+    
   };
 
   return (

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,9 +8,7 @@ const SideNavbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        
-    
-      <nav className="fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg">
+      <nav className="fixed top-0 bg-zinc-950/90 h-full w-[250px] drop-shadow-lg">
         <div className="flex py-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 text-white/70 hover:text-white active:text-white/30">
          <Image className= 'w-8 h-8'
          src="/svg/house.svg"
@@ -83,3 +83,5 @@ const SideNavbar = () => {
       </nav>
     );
 };
+
+export default SideNavbar;
