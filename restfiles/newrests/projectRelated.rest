@@ -1,0 +1,52 @@
+//create project
+POST http://localhost:3000/project/create
+Authorization: Bearer
+Content-Type: application/json
+
+{
+    "name": "ggg",
+    "description": "ggg"
+}
+###
+
+//get project
+GET http://localhost:3000/project/getp/1
+Authorization: Bearer
+Content-Type: application/json
+
+
+###
+
+//modify project
+PUT http://localhost:3000/project/modify/15
+Content-Type: application/json
+
+{
+    "name": "modified bruuhhh",
+    "description": "modified testinggg"
+}
+###
+
+//delete project
+DELETE http://localhost:3000/project/delete/16
+Authorization: Bearer
+Content-Type: application/json
+
+
+###
+
+//search project
+
+GET http://localhost:3000/search/searchProject/dog
+Authorization: Bearer
+Content-Type: application/json
+
+###
+
+//get my projects
+
+GET http://localhost:3000/project/getMyProjects
+Authorization: Bearer
+Content-Type: application/json
+
+###
