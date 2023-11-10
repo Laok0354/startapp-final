@@ -13,6 +13,7 @@ model User {
   email         String                 @unique
   password      String
   userName      String                 @unique
+  about         String                 @default("")
   skills        Skill[]
   refreshTokens RefreshToken[]
   projects      ProjectCollaborators[]
@@ -71,6 +72,15 @@ model SearchHistory {
   userId      Int
   searchQuery String
   createdAt   DateTime @default(now())
+
+  @@index([userId], map: "userIdIndex")
+}
+
+model userSearchHistory {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  searchQuery     String
+  createdAt       DateTime @default(now())
 
   @@index([userId], map: "userIdIndex")
 }

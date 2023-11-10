@@ -1,7 +1,6 @@
 //request user searchHistory
 GET http://localhost:3000/userData/searchHistory
-Authorization: Bearer
-Content-Type: application/json
+x-api-key: REYDEREDES
 
 {
     "userId" : "2"
@@ -10,8 +9,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3000/userData/visitHistory
-Authorization: Bearer
-Content-Type: application/json
+x-api-key: REYDEREDES
 
 
 {
@@ -26,3 +24,10 @@ x-api-key: REYDEREDES
 
 
 ###
+
+
+GET http://localhost:3000/auth/check
+Content-Type: application/json
+
+###
+

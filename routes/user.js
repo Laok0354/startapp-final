@@ -61,6 +61,7 @@ router.post('/', async (req, res) => {
                 email: req.body.email,
                 password: hashedPassword,
                 userName: req.body.userName,
+                about: req.body.about,
                 skills: {
                     connect: req.body.skillIds.map((id) => ({ id })),
                 }
@@ -69,6 +70,7 @@ router.post('/', async (req, res) => {
         res.status(201).send({message: "user created"});
     }
     catch (error) {
+        console.log(error);
         res.status(500).json({ error: error })
     }
 })
@@ -92,6 +94,7 @@ router.get('/', authenticateToken, async (req, res) => {
     })
     res.json(userInfo)
 });
+
 
 
 

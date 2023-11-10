@@ -128,6 +128,15 @@ router.post('/login', async (req, res) => {
 
 });
 
+router.get("/check", authenticateToken, async (req, res) => {
+  try {
+    res.status(200).send("authorized");
+  } catch (error) {
+    res.status(401).send("unauthorized");
+  }
+});
+
+
 function generateAccessToken(user) {
 
   if (user.email) {
