@@ -100,13 +100,15 @@ const User = (
     return(
         <section className='flex flex-row items-center mb-4 mt-4 w-217 '>
             <div>
+            <Link href="../../app/profile">
                 <Image
                     src={imageDir}
                     alt="Picture of the author"
                     width={50}
                     height={50}
                     className='rounded-full cursor-pointer'
-                />  
+                    />  
+                </Link>
             </div>
             <div className='flex flex-row justify-around items-center w-full'>
                 <a className='hover:underline hover:text-[#BE71EB] transition-all' href={userUrl}>{userName}</a>
