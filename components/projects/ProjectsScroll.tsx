@@ -68,6 +68,7 @@ const Project = ({
 };
 
 const ProjectsScroll = async () => {
+  console.log((await fetch("http://localhost:3000/auth/check")).status)
   const timestamp = Date.now();
   const response = await fetch(`http://localhost:3000/project/getAllProjects?t=${timestamp}`,{
   headers: {
