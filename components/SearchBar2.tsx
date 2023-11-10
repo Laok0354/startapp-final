@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import React, { useState, useEffect } from "react";
 
 function SearchBar2 () {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -10,6 +11,7 @@ function SearchBar2 () {
         // fetch con el valor
 }
     return (
+      <div className="relative flex w-[300px] h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30">
         <form onSubmit={handleSubmit} className="flex items-start gap-3">
             <button type="submit">
               <Image className= 'w-8 h-8 opacity-50 hover:opacity-100 active:opacity-30'
@@ -21,6 +23,7 @@ function SearchBar2 () {
             </button>
             <input type="text" id="search" className="w-[300px] h-8 bg-transparent text-white outline-none" placeholder="Search" />
           </form>
+        </div>
     );
 }
 

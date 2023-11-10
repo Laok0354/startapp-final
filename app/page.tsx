@@ -13,9 +13,7 @@ export default function Home () {
     <section className="pl-24 bg-gradient-to-br from-black from-50% to-primaryv w-full h-[full]">
       <h1 className="mt-[184px] mb-[27px] flex flex-col w-[838px]text-white text-[70px] justify-center font-semibold text-7xl font-red">Build your own team project</h1>
       <div>
-      <p className="mb-[47px] w-[829px] h-[80px] text-white text-[30px]">
-        Connect ideas with people to create starups and unique entrepeneurships.
-      </p>
+      <p className="mb-[47px] w-[829px] h-[80px] text-white text-[30px]">Connect ideas with people to create starups and unique entrepeneurships.</p>
       </div>
 
       <div className="flex itemx-center gap-2">
@@ -25,11 +23,25 @@ export default function Home () {
           <ScrollButton/>
       </div>
 
-      <div className="py-52 text-[20px]">
-        <p className="pb-10">Startapp is a website to connect people with projects and startups and vice versa. It aims to be a platform to share your experience and skills.</p>
-        <p>Startapp is a website to connect people with projects and startups and vice versa. It aims to be a platform to share your experience and skills.</p>
+      <div className="pt-52 text-[25px] font-semibold font-red">
+        <h2>Connect with Startups of your interest!</h2>
       </div>
-    </section>
+      <div className="pb-2 text-[20px]">
+        <p>Startapp aims to connect people with projects and vice versa. It is an exclusive platform to share your experience and skills with the world of entrepreneurship.</p>
+      </div>
+      <div className="pt-52 text-[25px] font-semibold font-red">
+        <h2>Upload your idea!</h2>
+      </div>
+      <div className="pb-52 text-[20px]">
+        <p>We have a space for you to upload a project you have in mind, composed by a title, a description, images and a section with the list of members of the project, where you could see if there is room for more collaborators or not, what kind of people are needed and what kind of collaborators are already working on.</p>
+      </div>
+      <div className="pt-52 text-[25px] font-semibold font-red">
+        <h2>Customize your profile</h2>
+      </div>
+      <div className="pb-52 text-[20px]">
+        <p>Each user has their own space to share their work and knowledge, exposing projects in which they are collaborating at the moment. You can send a request to different users to participate in your project or startup.</p>
+      </div>
+     </section>
     
     </>
   )
