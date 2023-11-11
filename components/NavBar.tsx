@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface IProps {
-  page: String
+  page : String
 }
 
 function Navbar({page} : IProps) {
@@ -51,9 +51,10 @@ function Navbar({page} : IProps) {
         </div>
 
         <ul className = "flex flex-row list-none gap-[40px] text-[20px] items-center">
-          <li className={"ml-2" + (page == "Home" ? "text-white/100" : "text-white/70 hover:text-white active:text-white/30")} ><Link href="/">Home</Link></li>
-          <li className={"ml-2" + (page == "About" ? "text-white/100" : "text-white/70 hover:text-white active:text-white/30")} ><Link href="/about">About</Link></li>
-          <li className={"ml-2" + (page == "Contact" ? "text-white/100" : "text-white/70 hover:text-white active:text-white/30")} ><Link href="/contact">Contact</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Home" ? "text-white/100" : "")} ><Link href="/">Home</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "About" ? "text-white/100" : "")} ><Link href="/about">About</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Contact" ? "text-white/100" : "")} ><Link href="/contact">Contact</Link></li>
+          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Contact" ? "text-white/100" : "")} ><Link href="/contact">Projects</Link></li>
         </ul>
 
         <div className="flex flex-row list-none gap-[40px] text-[20px] items-center">
