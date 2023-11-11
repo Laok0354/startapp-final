@@ -1,5 +1,4 @@
 "use client"
-
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -21,9 +20,7 @@ function SearchBar2({ className }: { className: string }) {
     setIsInputSelected(false);
   }
 
-  const inputClass = `h-8 bg-transparent text-white outline-none transition-all duration-300 ${
-    isInputSelected ? "w-96" : "w-32"
-  }`;
+  const inputClass = `h-8 bg-transparent text-white outline-none transition-all duration-300`;
 
   return (
     <div className={`${isInputSelected ? "w-96" : "w-64"}  relative flex w-[300px] h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30 ${className}`}>

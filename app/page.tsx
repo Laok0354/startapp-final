@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import NavBar1 from "../components/NavBar1";
+import NavBar from "../components/NavBar";
 import ScrollButton from "@/components/ScrollButton";
 
 
@@ -8,7 +8,7 @@ export default function Home () {
   return (
     <>
     <header>
-      <NavBar1 page="Home"/>
+      <NavBar page="Home"/>
     </header>
     <section className="pl-24 bg-gradient-to-br from-black from-50% to-primaryv w-full h-[full]">
       <h1 className="mt-[184px] mb-[27px] flex flex-col w-[838px]text-white text-[70px] justify-center font-semibold text-7xl font-red">Build your own team project</h1>
