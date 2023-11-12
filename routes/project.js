@@ -57,7 +57,7 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
         });
 
         if (!project) {
-            return res.status(404).send(); 
+            return res.status(404).send({message: 'couldnt find project'});
         }
 
         const isCollaborator = await prisma.projectCollaborators.findFirst({
@@ -68,7 +68,20 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
         });
         
         if (!isCollaborator) {
-            return res.status(401).send(); 
+            return res.status(401).send({message: "not authorized"});
+        }
+
+        const existingProject = await prisma.project.findFirst({
+            where: {
+                name: req.body.name,
+                NOT: {
+                    id: parseInt(req.params.pid)
+                }
+            }
+        });
+
+        if (existingProject) {
+            return res.status(409).send({message: "project with same name already exists"});
         }
 
         await prisma.project.update({
