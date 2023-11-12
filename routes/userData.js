@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 router.use(express.json());
 
-const API_KEY = process.env.API_KEY;
+let API_KEY = process.env.API_KEY;
 
 router.get ('/searchHistory', async (req, res) => {
 
@@ -89,11 +89,10 @@ router.get ('/visitHistory', async(req, res) => {
 
 
 router.get('/getAllProjects', async (req, res) => {
-    const apiKey = req.headers['x-api-key'];
     
     try {
 
-        if (apiKey !== API_KEY) {
+        if (API_KEY !== API_KEY) {
 
             return res.status(401).json({ error: 'Unauthorized' });
 
