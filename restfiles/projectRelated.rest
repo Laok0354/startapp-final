@@ -4,8 +4,8 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "ggg",
-    "description": "ggg"
+    "name": "holaa",
+    "description": "nacho vigi"
 }
 ###
 
@@ -18,12 +18,12 @@ Content-Type: application/json
 ###
 
 //modify project
-PUT http://localhost:3000/project/modify/15
+PUT http://localhost:3000/project/modify/43
 Content-Type: application/json
 
 {
     "name": "modified bruuhhh",
-    "description": "modified testinggg"
+    "description": "modified vigi"
 }
 ###
 

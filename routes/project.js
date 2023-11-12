@@ -14,8 +14,11 @@ router.use (express.json());
 router.post('/create',authenticateToken, async (req, res) => {
     try 
     {  
+        if (!req.body.name || !req.body.description) {
+            return res.status(400).send({ message: "Project name and description are required" });
+        }
       
-        const newProject = await prisma.Project.create({
+        const newProject = await prisma.project.create({
             data: {
                 name: req.body.name,
                 description: req.body.description,
@@ -23,7 +26,11 @@ router.post('/create',authenticateToken, async (req, res) => {
             }
         });
 
-        await prisma.ProjectCollaborators.create({
+        if (!newProject) {
+            return res.status(409).send({message: "couldnt create project"}); 
+        }
+
+        await prisma.projectCollaborators.create({
             data: {
                 projectId: newProject.id, 
                 userId: req.user.id 
@@ -34,8 +41,8 @@ router.post('/create',authenticateToken, async (req, res) => {
     } 
     catch (error) 
     {
-       console.log(error)
-       res.status(500).send({message: "couldnt create project"})
+        console.log(error)
+        res.status(error.message).send({message: "couldnt create project"})
     }
 })
 
@@ -53,7 +60,7 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
             return res.status(404).send(); 
         }
 
-        const isCollaborator = await prisma.ProjectCollaborators.findFirst({
+        const isCollaborator = await prisma.projectCollaborators.findFirst({
             where: {
                 projectId: project.id,
                 userId: req.user.id
@@ -64,7 +71,7 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
             return res.status(401).send(); 
         }
 
-        await prisma.Project.update({
+        await prisma.project.update({
             where: {
                 id: project.id
             },
@@ -80,7 +87,7 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
     catch (error) 
     {
        console.log(error)
-       res.status(500).send({message: "couldnt update project"})
+       res.status(500).send({message: "couldnt ff project"})
     }
 })
 
