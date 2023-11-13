@@ -24,6 +24,7 @@ function Navbar({page} : IProps) {
 
     window.addEventListener("scroll", handleScroll);
 
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -51,10 +52,11 @@ function Navbar({page} : IProps) {
         </div>
 
         <ul className = "flex flex-row list-none gap-[40px] text-[20px] items-center">
-          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Home" ? "text-white/100" : "")} ><Link href="/">Home</Link></li>
-          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "About" ? "text-white/100" : "")} ><Link href="/about">About</Link></li>
-          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Contact" ? "text-white/100" : "")} ><Link href="/contact">Contact</Link></li>
-          <li className={"ml-2 text-white/70 hover:text-white active:text-white/30" + (page == "Contact" ? "text-white/100" : "")} ><Link href="/contact">Projects</Link></li>
+          <li className={"ml-2 hover:text-white active:text-white/30 " + (page == "Home" ? "text-white" : "text-white/70")} ><Link href="/">Home</Link></li>
+          <li className={"ml-2 hover:text-white active:text-white/30 " + (page == "Projects" ? "text-white" : "text-white/70")} ><Link href="/projects">Projects</Link></li>
+          <li className={"ml-2 hover:text-white active:text-white/30 " + (page == "About" ? "text-white" : "text-white/70")} ><Link href="/about">About</Link></li>
+          <li className={"ml-2 hover:text-white active:text-white/30 " + (page == "Contact & Terms" ? "text-white" : "text-white/70")} ><Link href="/contact">Contact & Terms</Link></li>
+          
         </ul>
 
         <div className="flex flex-row list-none gap-[40px] text-[20px] items-center">
