@@ -5,7 +5,8 @@ Content-Type: application/json
 
 {
     "name": "holaa",
-    "description": "nacho vigi"
+    "description": "nacho vigi",
+    "statusId": 1
 }
 ###
 
@@ -22,8 +23,9 @@ PUT http://localhost:3000/project/modify/43
 Content-Type: application/json
 
 {
-    "name": "modified bruuhhh",
-    "description": "modified vigi"
+    "name": "modified pipi",
+    "description": "modified vigi",
+    "statusId": 1
 }
 ###
 
