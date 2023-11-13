@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import MultiSelectInput from "../sign-up/MultiSelectInput";
-import Icons from "../sign-up/Icons";
-import OptionsMenu from "./OptionsMenu";
-import MembersIndicator from "./MemberIndicator";
+import MultiSelectInput from "./sign-up/MultiSelectInput";
+import Icons from "./sign-up/Icons";
+import OptionsMenu from "./projects/OptionsMenu";
+import MembersIndicator from "./projects/MemberIndicator";
+import { Participant, Project } from "./projects/Participant";
 
 const Input = ({
   title,
@@ -28,7 +29,7 @@ const Input = ({
     <div className="my-2">
       <h6 className={titleClassName}>{title}</h6>
       <input
-        className={`flex justify-center w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 ${className}`}
+        className={`flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
         type="text"
         name={name}
         value={value}
@@ -59,7 +60,7 @@ const PasswordInput = ({
       <h6 className="text-xs font-semibold tracking-widest">PASSWORD</h6>
       <div className="flex flex-row relative justify-between">
         <input
-          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-800 text-gray-50 p-2 z-0 "
+          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-700 text-gray-50 placeholder:text-gray-50 p-2 z-0 "
           type={passwordVisible ? "text" : "password"}
           name={name}
           id=""
@@ -180,12 +181,12 @@ const SignUpForm = () => {
             />
           </div>
         </div>
-        <div className="mb-3 mt-3">
+        <div className="mt-4">
           <Icons />
         </div>
         <button
           type="submit"
-          className="flex items-center justify-center w-72 mt-4 py-3 bg-darker-purple rounded-lg"
+          className="flex items-center justify-center w-72 mt-4 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Sign Up</h4>
         </button>
@@ -283,7 +284,7 @@ const LoginForm = () => {
       <div className="flex justify-center items-center flex-col">
         <button
           type="submit"
-          className="w-72 mt-3 mb-6 py-3 bg-darker-purple rounded-lg"
+          className="w-72 mt-3 mb-6 py-3 bg-primaryv rounded-lg"
         >
           <h4 className="text-xl tracking-wide font-[550]">Login</h4>
         </button>
@@ -300,12 +301,12 @@ const ProjectForm = ({
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
-  const [projectMembers, setProjectMembers] = useState("");
+  const [participants, setParticipants] = useState<Participant[]>([]);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Project>({
     name: "",
     description: "",
-    collaborators: "",
+    collaborators: [],
   });
 
   const handleOptionClick = (option: string) => {
@@ -315,7 +316,7 @@ const ProjectForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormData({ ...formData, collaborators: projectMembers });
+    setFormData({ ...formData, collaborators: participants});
     console.log(formData);
     try {
       const response = await fetch("http://localhost:3000/project/create", {
@@ -335,11 +336,18 @@ const ProjectForm = ({
         console.log(data);
       }
     } catch (error) {}
+    
+    console.log(formData);
 
     if (formRef.current) {
       formRef.current.reset();
     }
   };
+
+  // useEffect(() => {
+  //   console.log(formData);
+  //   console.log({ participants });
+  // }, [formData, participants]);
 
   const handleInputChange = (e: React.FormEvent) => {
     const { name, value } = e.target;
@@ -402,7 +410,10 @@ const ProjectForm = ({
           </button>
         </div>
       </form>
-      <MembersIndicator setProjectMembers={setProjectMembers} />
+      <MembersIndicator
+        participants={participants}
+        setParticipants={setParticipants}
+      />
     </section>
   );
 };

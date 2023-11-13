@@ -43,7 +43,7 @@ const LikeDislikeButton = ({
           height="18"
           fill="currentColor"
           viewBox="0 0 16 16"
-          className={`text-black cursor-pointer ${liked ? 'active' : ''}`}
+          className={`text-white cursor-pointer ${liked ? 'active' : ''}`}
         >
           <path d={liked ? filled : notFilled} />
         </svg>
@@ -56,7 +56,7 @@ const LikeDislikeButton = ({
           height="18"
           fill="currentColor"
           viewBox="0 0 16 16"
-          className={`text-black cursor-pointer ${disliked ? 'active' : ''}`}
+          className={`text-white cursor-pointer ${disliked ? 'active' : ''}`}
         >
           <path d={disliked ? filledDislike : notFilledDislike} />
         </svg>
