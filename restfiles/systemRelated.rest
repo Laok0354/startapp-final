@@ -11,6 +11,7 @@ x-api-key: REYDEREDES
 GET http://localhost:3000/userData/visitHistory
 x-api-key: REYDEREDES
 
+
 {
     "userId" : "2"
 }

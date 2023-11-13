@@ -3,10 +3,10 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "wili",
+    "email": "pipi",
     "password": "rey",
-    "userName" : " wili",
-    "about" : "im a software engineer",
+    "userName" : "pipi",
+    "about" : "im a pepe engineer",
     "skillIds" : [1, 2]
 }
 ###
@@ -16,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "pong",
+    "email": "pipi",
     "password": "rey"
 }
 ###
