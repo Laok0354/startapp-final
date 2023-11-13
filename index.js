@@ -24,6 +24,7 @@ const project = require('./routes/project');
 const search = require('./routes/search')
 const userData = require('./routes/userData');
 const userInteractions = require('./routes/userInteractions');
+const dbData = require('./routes/dbData');
 
 app.use('/user', user);
 app.use ('/auth', auth);
@@ -31,6 +32,7 @@ app.use('/project', project);
 app.use('/search', search);
 app.use('/userData', userData);
 app.use('/userInteractions', userInteractions);
+app.use('/dbData', dbData);
 
 app.listen(PORT, () => 
     console.log(`Server running on port ${PORT}`)
