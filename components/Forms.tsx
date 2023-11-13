@@ -313,31 +313,37 @@ const ProjectForm = ({
     setSelectedOption(option);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    setFormData({ ...formData, collaborators: participants});
+  
+    setFormData({ ...formData, collaborators: participants });
     console.log(formData);
-    try {
-      const response = await fetch("http://localhost:3000/project/create", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
-        credentials: "include",
-        body: JSON.stringify(formData),
-      });
+  
+    fetch("http://localhost:3000/project/create", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      credentials: "include",
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
 
-      const data = await response.json();
+        if (response.status === 401) {
+          window.location.href = '/login';
+          return Promise.reject('Unauthorized');
+        }
 
-      if (!response.ok) {
-        console.log(data);
-      }
-    } catch (error) {}
-    
-    console.log(formData);
+        if (!response.ok) {
+          return response.json().then((data) => {
+            console.log(data);
+            throw new Error(`Server error: ${data.message}`);
+          });
+        }
+        return response.json();
+      })
 
     if (formRef.current) {
       formRef.current.reset();

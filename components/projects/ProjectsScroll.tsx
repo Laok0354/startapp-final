@@ -2,8 +2,10 @@
 
 import LikeDislikeButton from "./LikeDislikeButton"
 import constants from "./constants"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Modal from "react-modal";
+import { Project } from ".prisma/client";
+
 
 Modal.setAppElement("#__next");
 
@@ -91,36 +93,55 @@ const Project = (
     );
 }
 
-const ProjectsScroll = async () => {
-  console.log((await fetch("http://localhost:3000/auth/check")).status)
-  const timestamp = Date.now();
-  const response = await fetch(`http://localhost:3000/project/getAllProjects?t=${timestamp}`,{
-  headers: {
-    'Cache-Control': 'no-cache',
-    'Pragma': 'no-cache',
-  },
-});
-  const data = await response.json();
-  shuffleArray(data);
+const ProjectsScroll = () => {
+  const [projectsData, setProjectsData] = useState([]);
+  const [error, setError] = useState(null);
 
-  const projectState = ["In Progress", "Finished", "Abandoned"];
-    return (
-        <section className="overflow-hidden">
-      <div className={ data.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-        {data.map((project) => (
-          <div className="col-span-1">
-                        <Project
-                            key={project.id}
-                            title={project.name}
-                            description={project.description}
-                            members={Math.round(Math.random() * 8 + 2)}
-                            joined={Math.round(Math.random() * 20)}
-                        />
-                    </div>
-                ))}
-            </div>
-        </section>
-        );
-    };
+  useEffect(() => {
+    const timestamp = Date.now();
 
+    fetch(`http://localhost:3000/project/getAllProjects?t=${timestamp}`, {
+      headers: {
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        shuffleArray(data);
+        setProjectsData(data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  }, []);
+
+  if (error) {
+    return <div style={{ color: 'red' }}>{`Couldn't load projects. Error: ${error}`}</div>;
+  }
+
+  return (
+    <section className="overflow-hidden">
+      <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
+        {projectsData.map((project: Project) => (
+          <div className="col-span-1" key={project.id}>
+            <Project
+              title={project.name}
+              description={project.description}
+              members={Math.round(Math.random() * 8 + 2)}
+              joined={Math.round(Math.random() * 20)}
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+  
 export default ProjectsScroll;
