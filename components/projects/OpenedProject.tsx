@@ -1,4 +1,5 @@
 import JoinedUsers from "./JoinedUsers";
+import MessageRequest from "./MessageRequest"
 
 const OpenedProject = ({
     title, 
@@ -11,6 +12,10 @@ const OpenedProject = ({
     members : number,
     joined : number,
 }) => {   
+    const onChange = () => {
+        console.log("")
+    }
+
     return (
         <section>
             <div className="flex flex-col justify-center items-center w-full">
@@ -22,7 +27,14 @@ const OpenedProject = ({
                 <h3>Vacantes: {members - joined}</h3>
             </div>
             <div>
-                {/* Que posicion queres tomar? */}
+                <MessageRequest
+                    title="Message"
+                    name="message"
+                    placeHolder="Send a Message"
+                    className=""
+                    titleClassName=""
+                    onChange={onChange}
+                />
             </div>
             <div>
                 {/* Posibilidad para poner un link de discord */}
