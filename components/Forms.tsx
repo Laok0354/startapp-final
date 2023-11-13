@@ -92,6 +92,16 @@ const SignUpForm = () => {
     skillIds: [] as number[],
   });
 
+  const [skillData, setSkillData] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/dbData/skills")
+      .then((response) => response.json())
+      .then((data) => {
+        setSkillData(data);
+      });
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Datos del formulario enviados:", formData);
@@ -169,11 +179,10 @@ const SignUpForm = () => {
             <MultiSelectInput
               isMulti={true}
               name="skillIds"
-              options={[
-                { value: 1, label: "Back-End dev" },
-                { value: 2, label: "Front-End dev" },
-                { value: 3, label: "Software dev" },
-              ]}
+              options={skillData.map((skill) => ({
+                value: skill.id,
+                label: skill.name,
+              }))}
               skillIds={formData.skillIds}
               onSelectedOptionsChange={(skillIds) =>
                 setFormData({ ...formData, skillIds })
