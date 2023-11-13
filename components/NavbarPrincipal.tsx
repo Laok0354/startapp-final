@@ -13,13 +13,15 @@ function NavbarPrincipal () {
             width = {200}
             height= {100}
           />
-
-          <Image className= 'w-[140px] h-[50px]'
+          <button>
+            <Link href="/"><Image className= 'w-[140px] h-[50px]'
             src="/img/StartApp-Logo-lg.png"
             alt=""
             width = {200}
             height= {100}
-          />
+            />
+            </Link>
+          </button>
           </div>
 
           <div className="flex flex-row items-center gap-[80px] ml-56">

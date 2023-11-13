@@ -29,7 +29,7 @@ export default function Home () {
           height= {100}
         />
         </button>
-        <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar}/>
+        <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page=""/>
         
         <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
           <div className="w-screen flex gap-96">
