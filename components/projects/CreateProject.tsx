@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { ProjectForm } from "../Forms";
 import Image from "next/image";
+import { Project } from "./Participant";
 
 Modal.setAppElement("#__next");
 
@@ -41,13 +42,14 @@ function CreateProjectModal() {
       height: "80%",
       overflow: "auto",
       background: "#0D1117",
-      border: "1px solid #B5B2B2",
+      border: "1px solid #9F00FB",
       padding: "0px",
     },
   };
 
-  const handleCreateProject = () => {
-    console.log("");
+  const handleCreateProject = ({ formData} : { formData : Project }) => {
+    console.log(formData);
+    closeModal();
   };
 
   return (
@@ -74,10 +76,10 @@ function CreateProjectModal() {
         onRequestClose={closeModal}
         style={customStyles}
       >
-        <section className="divide-y-[0.01px] divide-[#B5B2B2]">
+        <section className="divide-y divide-primaryv">
           <div className="p-2 flex flex-row justify-between items-center">
             <h2 className="">Select a Template</h2>
-            <button className="bg-red-500 text-white p-2" onClick={closeModal}>
+            <button className=" text-white p-2" onClick={closeModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
