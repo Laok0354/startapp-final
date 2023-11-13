@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import styles from './NumberInput.module.css'
 import Link from "next/link";
-import MultiSelectInput from "../sign-up/MultiSelectInput";
-import Icons from "../sign-up/Icons";
-import OptionsMenu from "./OptionsMenu";
-import MembersIndicator from "./MemberIndicator";
+import MultiSelectInput from "./sign-up/MultiSelectInput";
+import Icons from "./sign-up/Icons";
+import OptionsMenu from "./projects/OptionsMenu";
+import { Project } from "./projects/Participant";
 
 const Input = ({
   title,
@@ -24,17 +25,29 @@ const Input = ({
   titleClassName: string;
   onChange: (e: React.FormEvent) => void;
 }) => {
+  const [isInputSelected, setIsInputSelected] = useState(false);
+
+  const handleInputFocus = () => {
+    setIsInputSelected(true);
+  }
+
+  const handleInputBlur = () => {
+    setIsInputSelected(false);
+  }
+
   return (
     <div className="my-2">
       <h6 className={titleClassName}>{title}</h6>
       <input
-        className={`flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
+        className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} outline-none flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
         type="text"
         name={name}
         value={value}
         id=""
         placeholder={placeHolder}
         onChange={onChange}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
       />
     </div>
   );
@@ -50,22 +63,34 @@ const PasswordInput = ({
   onChange: (e: React.FormEvent) => void;
 }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isInputSelected, setIsInputSelected] = useState(false);
+
+  const handleInputFocus = () => {
+    setIsInputSelected(true);
+  }
+
+  const handleInputBlur = () => {
+    setIsInputSelected(false);
+  }
 
   const handleClick = () => {
     setPasswordVisible(!passwordVisible);
   };
+
   return (
     <div className="my-2">
       <h6 className="text-xs font-semibold tracking-widest">PASSWORD</h6>
       <div className="flex flex-row relative justify-between">
         <input
-          className="flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-700 text-gray-50 placeholder:text-gray-50 p-2 z-0 "
+          className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} outline-none flex justify-center mt-1 w-80 h-12 rounded-md bg-gray-700 text-gray-50 placeholder:text-gray-50 p-2 z-0`}
           type={passwordVisible ? "text" : "password"}
           name={name}
           id=""
           placeholder="Enter your Password"
           value={value}
           onChange={onChange}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
         />
         <button
           type="button"
@@ -83,6 +108,41 @@ const PasswordInput = ({
   );
 };
 
+const NumberInput = ({
+  onChange,
+  value,
+  name
+} : {
+  onChange: (e: React.FormEvent) => void;
+  value: number
+  name: string
+}) => { 
+  const [isInputSelected, setIsInputSelected] = useState(false);
+
+  const handleInputFocus = () => {
+    setIsInputSelected(true);
+  }
+
+  const handleInputBlur = () => {
+    setIsInputSelected(false);
+  }
+
+  return(
+    <div className={styles.customNumberInput}>
+     <input
+          type="number"
+          name={name}
+          value={value}
+          onChange={onChange}
+          min={1}
+          max={12}
+          className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} outline-none flex justify-center rounded-md bg-gray-700 p-2 h-9 w-28 placeholder:text-gray-50 text-gray-50`}
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+        />
+    </div>
+)}
+  
 const SignUpForm = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -262,17 +322,16 @@ const LoginForm = () => {
 const ProjectForm = ({
   handleCreateProject,
 }: {
-  handleCreateProject: (formData: FormData) => void;
+  handleCreateProject: ({ formData } : { formData: Project }) => void;
 }) => {
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
-  const [projectMembers, setProjectMembers] = useState("");
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [formData, setFormData] = useState({
-    name : "",
+  const [formData, setFormData] = useState<Project>({
+    name: "",
     description: "",
-    collaborators: "",
+    collaborators: 0,
   });
 
   const handleOptionClick = (option: string) => {
@@ -282,9 +341,13 @@ const ProjectForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormData({...formData, collaborators: projectMembers});
+    setFormData({
+      name: formData.name,
+      description: formData.description,
+      collaborators: formData.collaborators,
+    });
 
-    console.log(formData)
+    handleCreateProject({ formData });
 
     if (formRef.current) {
       formRef.current.reset();
@@ -301,9 +364,9 @@ const ProjectForm = ({
       <form
         onSubmit={handleSubmit}
         ref={formRef}
-        className="divide-y divide-[#B5B2B2] absolute "
+        className="divide-y divide-primaryv"
       >
-        <section className="grid grid-cols-3 auto-rows-auto divide-x divide-[#B5B2B2]">
+        <section className="grid grid-cols-3 auto-rows-auto divide-x divide-primaryv">
           <div className="col-span-1">
             <OptionsMenu
               options={options}
@@ -333,28 +396,30 @@ const ProjectForm = ({
                 title="Description"
                 placeHolder="Enter a brief description"
                 value={formData.description}
-                className="h-9 w-128 placeholder:text-gray-50 text-gray-50 absolute z-20"
+                className="h-9 w-128 placeholder:text-gray-50 text-gray-50 z-20"
                 titleClassName="text-xs font-raleway font-light tracking-wide"
                 onChange={handleInputChange}
               />
+              <div>
+                <h6 className="text-xs font-raleway font-light tracking-wide">Members</h6>
+                <NumberInput
+                  name="collaborators"
+                  value={formData.collaborators}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
         </section>
-
-        <input type="hidden" name="selectedOption" value={selectedOption} />
-
         <div className="w-full flex items-center justify-center">
           <button
-            className="bg-green-500 text-white p-2 bg-purple-500 w-36 rounded-md mt-6"
+            className="text-white p-2 bg-primaryv w-36 rounded-md mt-6"
             type="submit"
           >
             Create Project
           </button>
         </div>
       </form>
-      <MembersIndicator 
-        setProjectMembers={setProjectMembers}
-      />
     </section>
   );
 };
