@@ -95,7 +95,21 @@ router.get('/', authenticateToken, async (req, res) => {
     res.json(userInfo)
 });
 
+router.get('/getAllUsers', async (req, res) => {
+    
+    try {
 
+        const users = await prisma.user.findMany();
+        
+        res.status(200).json(users);
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({ error: error });
+
+    }
+})
 
 
 

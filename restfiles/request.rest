@@ -99,3 +99,4 @@ GET http://localhost:3000/project/getAllProjects
 
 ###
 
+GET http://localhost:3000/user/getAllUsers
