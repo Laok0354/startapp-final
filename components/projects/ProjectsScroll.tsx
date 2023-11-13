@@ -1,6 +1,7 @@
 "use client"
 
 import LikeDislikeButton from "./LikeDislikeButton"
+import OpenedProject from "./OpenedProject"
 import constants from "./constants"
 import { useState } from "react"
 import Modal from "react-modal";
@@ -80,24 +81,12 @@ const Project = (
             onRequestClose={closeModal}
             style={customStyles}
         >
-            <section>
-                <div>
-                    <h1>{title}</h1>
-                    <h2>{description}</h2>
-                </div>
-                <div>
-                    <h3>Members: {members}</h3>
-                    <h3>Joined: {joined}</h3>
-                    {/* Nombres de los Mimebros que se unieron */}
-                    <h3>Vacantes</h3>
-                </div>
-                <div>
-                    {/* Que posicion queres tomar? */}
-                </div>
-                <div>
-                    {/* Posibilidad para poner un link de discord */}
-                </div>
-            </section>
+           <OpenedProject
+                title={title}
+                description={description}
+                members={members}
+                joined={joined}
+           />
         </Modal>
     </article>
     );
