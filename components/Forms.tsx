@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import MultiSelectInput from "../sign-up/MultiSelectInput";
-import Icons from "../sign-up/Icons";
-import OptionsMenu from "./OptionsMenu";
-import MembersIndicator from "./MemberIndicator";
+import MultiSelectInput from "./sign-up/MultiSelectInput";
+import Icons from "./sign-up/Icons";
+import OptionsMenu from "./projects/OptionsMenu";
+import MembersIndicator from "./projects/MemberIndicator";
+import { Participant, Project } from "./projects/Participant";
 
 const Input = ({
   title,
@@ -267,12 +268,12 @@ const ProjectForm = ({
   const options = ["Template 1", "Template 2", "Template 3"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
-  const [projectMembers, setProjectMembers] = useState("");
+  const [participants, setParticipants] = useState<Participant[]>([]);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [formData, setFormData] = useState({
-    name : "",
+  const [formData, setFormData] = useState<Project>({
+    name: "",
     description: "",
-    collaborators: "",
+    collaborators: [],
   });
 
   const handleOptionClick = (option: string) => {
@@ -282,14 +283,25 @@ const ProjectForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    setFormData({...formData, collaborators: projectMembers});
+    let updatedParticipants: Participant[] = participants;
 
-    console.log(formData)
+    setFormData({
+      name: formData.name,
+      description: formData.description,
+      collaborators: updatedParticipants,
+    });
+
+    console.log(formData);
 
     if (formRef.current) {
       formRef.current.reset();
     }
   };
+
+  // useEffect(() => {
+  //   console.log(formData);
+  //   console.log({ participants });
+  // }, [formData, participants]);
 
   const handleInputChange = (e: React.FormEvent) => {
     const { name, value } = e.target;
@@ -352,8 +364,9 @@ const ProjectForm = ({
           </button>
         </div>
       </form>
-      <MembersIndicator 
-        setProjectMembers={setProjectMembers}
+      <MembersIndicator
+        participants={participants}
+        setParticipants={setParticipants}
       />
     </section>
   );

@@ -87,7 +87,7 @@ const Project = (
 const ProjectsScroll = () => {
     let amountProjects = 12;
     let projectNumber = 0;
-    let amountMembers = 0;
+    let amountMembers = 9;
     return (
         <section className="overflow-hidden">
             <div className={amountProjects > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
@@ -97,7 +97,7 @@ const ProjectsScroll = () => {
                             key={index}
                             title={`Project ${projectNumber += 1}`}
                             description="Lorem ipsum dolor sit."
-                            members={amountMembers = Math.round(Math.random() * 8 + 2)}
+                            members={amountMembers}
                             joined={amountMembers - 1}
                         />
                     </div>
