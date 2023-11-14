@@ -28,7 +28,7 @@ const UserCard = () => {
         <button
           onClick={handleFollow}
           className={`text-[0.7rem] rounded h-6 w-16 ${
-            isFollowing ? "bg-gray-600" : "bg-primaryv"
+            isFollowing ? "bg-gray-300" : "bg-primaryv"
           }`}
         >
           <h6>{isFollowing ? "Unfollow" : "Follow"}</h6>

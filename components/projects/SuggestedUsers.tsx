@@ -33,7 +33,7 @@ const UserCard = () => {
 
 const SuggestedUsers = () => {
     return(      
-        <section className='bg-gray-800 px-10 py-3 rounded-xl justify-start mt-2'>
+        <section className='bg-gray-800 px-10 py-3 rounded-xl justify-start mt-2 border-2 border-primaryv'>
             <div className="flex flex-row items-center justify-between">
                 <h1 className="font-semibold mb-4 mt-2 text-[1rem]">Suggested Users For You</h1>
                 <p className='text-gray-50 text-[0.6rem] mb-4 mt-2 hover:underline cursor-pointer'><Link href={"/users"}> See All</Link></p>

@@ -14,13 +14,16 @@ const Project = (
     description,
     members,
     joined,
+    stateText
     } : {
     title : string | number,
     description : string
     members : number,
     joined : number,
+    stateText : string
 }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    let stateTextColor;
 
     const openModal = () => {
         setModalIsOpen(true);
@@ -52,6 +55,16 @@ const Project = (
         },
       };
 
+        if (stateText === "In Progress") {
+            stateTextColor = " text-orange";
+        } else if (stateText === "Finished") {
+            stateTextColor = " text-green";
+        } else if (stateText === "Abandoned") {
+            stateTextColor = " text-red";
+        } else {
+            stateTextColor = " text-purple-500";
+        }
+
     return (
     <article>
         <section className="flex align-middle justify-center">
@@ -60,9 +73,10 @@ const Project = (
                     <h1 onClick={openModal} className="text-[1rem] font-semibold font-raleway cursor-pointer">{title}</h1>
                     <p className="text-xs text-[#8F8F8F]">{description}</p>
                 </div>
-                <div className="">
-                    <h3 className="text-sm mb-3 font-semibold text-primaryv">Members: <span className="text-white font-normal">{members}</span></h3>
+                <div className="mt-2">
+                    <h3 className="text-sm mb-1 font-semibold text-primaryv">Members: <span className="text-white font-normal">{members}</span></h3>
                     <h3 className="text-sm mb-1 font-semibold text-primaryv">Joined: <span className="text-white font-normal">{joined}</span></h3>
+                    <h3 className={`text-sm font-bold mt-4 ${stateTextColor}`}>{stateText}</h3>
                 </div>
                 <div className="">
                     <div className="flex flex-row justify-end mt-3">
@@ -93,6 +107,7 @@ const Project = (
 }
 
 const ProjectsScroll = () => {
+    const stateText = ["In Progress", "Finished", "Abandoned"]
     let amountProjects = 24;
     let projectNumber = 0;
     let amountMembers = 9;
@@ -107,6 +122,7 @@ const ProjectsScroll = () => {
                             description="Lorem ipsum dolor sit."
                             members={amountMembers}
                             joined={amountMembers - 1}
+                            stateText={stateText[0]}
                         />
                     </div>
                 ))}

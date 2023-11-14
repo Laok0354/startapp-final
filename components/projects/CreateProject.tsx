@@ -47,7 +47,7 @@ function CreateProjectModal() {
     },
   };
 
-  const handleCreateProject = ({ formData} : { formData : Project }) => {
+  const handleCreateProject = ({ formData }: { formData: Project }) => {
     console.log(formData);
     closeModal();
   };
@@ -56,10 +56,10 @@ function CreateProjectModal() {
     <div>
       <div>
         <button
-          className="flex justify-center items-center bg-gray-800 text-white p-[3.2rem] rounded-xl mt-8"
+          className="flex justify-center items-center bg-gray-800 text-white p-[3.2rem] rounded-xl mt-8 border-2 border-primaryv"
           onClick={openModal}
         >
-          <div className="flex flex-col justify-center items-center align-middle">
+          <div className="flex flex-col justify-center items-center align-middle ">
             <h1 className="text-xl font-semibold">Create Your Own Project</h1>
             <Image
               src="/svg/create-project.svg"
