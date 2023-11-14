@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
 
 router.use(express.json());
 
-let API_KEY = process.env.API_KEY;
+const API_KEY = process.env.API_KEY;
 
 router.get ('/searchHistory', async (req, res) => {
 
