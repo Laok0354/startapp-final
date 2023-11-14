@@ -18,11 +18,13 @@ function shuffleArray(array: []) {
 
 const Project = (
     {
+    id,
     title, 
     description,
     members,
     joined,
     } : {
+    id : number,
     title : string | number,
     description : string
     members : number,
@@ -134,11 +136,10 @@ const ProjectsScroll = () => {
 return (
   <section className="overflow-hidden">
     <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-      {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => {
-        console.log('Project:', project); // Log the project object
-        return (
+      {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => {        return (
           <div className="col-span-1" key={project.id}>
             <Project
+              id={project.id}
               title={project.name}
               description={project.description}
               members={project.maxMembers}
