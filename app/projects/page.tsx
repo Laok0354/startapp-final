@@ -11,7 +11,7 @@ export default function Projects() {
         <SearchBar className='bg-gray-800 w-24 hover:transition-all duration-1000'/> 
       </header>
       <section className="flex flex-row justify-around flex-grow align-top">
-        <div className="mt-12">
+        <div className="mt-4 ">
           <ProjectsScroll />
         </div>
         <div className="">

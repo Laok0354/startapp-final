@@ -19,26 +19,31 @@ const OpenedProject = ({
     return (
         <section>
             <div className="flex flex-col justify-center items-center w-full">
-                <h1>{title}</h1>
-                <h2>{description}</h2>
+                <h1 className="text-3xl font-raleway font-semibold">{title}</h1>
+                <h2 className="text-xl">{description}</h2>
             </div>
-            <div>
-                <JoinedUsers/>
-                <h3>Vacantes: {members - joined}</h3>
-            </div>
-            <div>
-                <MessageRequest
-                    title="Message"
-                    name="message"
-                    placeHolder="Send a Message"
-                    className=""
-                    titleClassName=""
-                    onChange={onChange}
-                />
-            </div>
-            <div>
-                {/* Posibilidad para poner un link de discord */}
-            </div>
+            <section className="grid grid-col-3 gap-x-36">
+                <div className="grid col-start-3 row-start-2">
+                    <JoinedUsers/>
+                    <h3>Vacantes: {members - joined}</h3>
+                </div>
+                <div className="grid col-start-1 row-start-2 ml-16">
+                    <MessageRequest
+                        title="Message"
+                        name="message"
+                        placeHolder="Send a Message"
+                        className=""
+                        titleClassName=""
+                        onChange={onChange}
+                    />
+                    <button>
+                        <h1>Join</h1>
+                    </button>
+                </div>
+                <div>
+                    {/* Posibilidad para poner un link de discord */}
+                </div>
+            </section>
         </section>
  )}
 

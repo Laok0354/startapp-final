@@ -32,9 +32,8 @@ const MessageRequest = ({
             <section>
                 <div className="my-2">
                     <h6 className={titleClassName}>{title}</h6>
-                    <input
-                        className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} absolute break-words whitespace-nowrap text-overflow overflow-clip overflow-y-scroll outline-none flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
-                        type="text"
+                    <textarea
+                        className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} absolute w-80 border rounded py-2 px-2 pr-12 whitespace-normal overflow-hidden overflow-ellipsis outline-none flex justify-center h-24 bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
                         name={name}
                         id=""
                         placeholder={placeHolder}
