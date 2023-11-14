@@ -44,3 +44,5 @@ Authorization: Bearer <token>
 Content-Type: application/json
 
 ###
+
+GET http://localhost:3000/user/getAllUsers
