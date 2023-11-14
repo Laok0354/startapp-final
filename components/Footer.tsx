@@ -3,12 +3,12 @@ import Image from "next/image";
 
 function Footer () {
     return(
-        <footer className="bg-black h-full w-full relative flex flex-row">
+    <footer className="bg-black h-full w-full relative flex flex-row shadow-2xl">
        <ul>
-        <li className="pl-10 pt-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/contact">Contact & Terms</Link></li>
-        <li className="pl-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">About</Link></li>
-        <li className="pl-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/projects">Projects</Link></li>
-        <li className="pl-10 pb-10 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/">Home</Link></li>
+          <li className="pl-10 pt-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/contact">Contact & Terms</Link></li>
+          <li className="pl-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">About</Link></li>
+          <li className="pl-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/projects">Projects</Link></li>
+          <li className="pl-10 pb-10 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/">Home</Link></li>
        </ul>
 
       <div className="relative flex w-full justify-end">

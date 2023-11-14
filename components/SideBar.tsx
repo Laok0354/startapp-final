@@ -1,16 +1,14 @@
-
 import Link from "next/link";
 import Image from "next/image";
 
 interface SideNavbarProps {
-  isOpen: boolean;
-  toggleNavbar: () => void;
   page : string
 }
-const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : SideNavbarProps) => {
+
+const SideNavbar: React.FC<SideNavbarProps> = ({ page} : SideNavbarProps) => {
     return (
       <nav 
-        className={`fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg ${isOpen ? 'block' : 'hidden'}`}>
+        className={`fixed top-20 bg-black h-full w-[250px] border-r-2 border-[#1C1C1C] drop shadow-lg block`}>
 
           <div className={"flex py-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 hover:text-white active:text-white/30 " + (page == "Dashboard" ? "text-white" : "text-white/70")}>
             <Image className= 'w-8 h-8'
@@ -24,7 +22,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
             </button>
           </div>
 
-          <div className={"flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 hover:text-white active:text-white/30 " + (page == "Users" ? "text-white" : "text-white/70")}>
+          <div className={`flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 hover:text-white active:text-white/30 ${page === "users" ? "text-white/100" : "text-white/70"}`}>
             <Image className= 'w-8 h-8'
               src="/svg/person.svg"
               alt=""
@@ -32,7 +30,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
               height= {100}
             />
             <button className=" text-[25px]">
-              <Link href="/users">U</Link>
+              <Link href="/users">Users</Link>
             </button>
           </div>
 
