@@ -29,7 +29,7 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({
               className={`relative cursor-pointer p-2 flex flex-row`}
             >
               {selectedOption === option && (
-                <div className="bg-purple-500 w-1 rounded-lg mr-2"></div>
+                <div className="bg-primaryv w-1 rounded-lg mr-2"></div>
               )}
               <li
                 className={`w-full p-1 ${

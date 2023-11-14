@@ -1,6 +1,7 @@
 "use client"
 
 import LikeDislikeButton from "./LikeDislikeButton"
+import OpenedProject from "./OpenedProject"
 import constants from "./constants"
 import { useEffect, useState } from "react"
 import Modal from "react-modal";
@@ -40,23 +41,23 @@ const Project = (
 
     const customStyles = {
         overlay: {
-          backgroundColor: "rgba(0, 0, 0, 0.8)",
-          zIndex: 999,
+            backgroundColor: "rgba(0, 0, 0, 0.8)",
+            zIndex: 999,
         },
-        content: {
-          top: "50%",
-          left: "50%",
-          right: "auto",
-          bottom: "auto",
-          marginRight: "-50%",
-          transform: "translate(-50%, -50%)",
-          borderRadius: "8px",
-          width: "80%",
-          height: "80%",
-          overflow: "auto",
-          background: "#272932",
-          border: "1px solid #B5B2B2",
-          padding: "0px",
+            content: {
+            top: "50%",
+            left: "50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+            borderRadius: "8px",
+            width: "70%",
+            height: "70%",
+            overflow: "auto",
+            background: "#0D1117",
+            border: "1px solid #9F00FB",
+            padding: "0px",
         },
       };
 
@@ -65,7 +66,7 @@ const Project = (
         <section className="flex align-middle justify-center">
             <div className="py-4 px-4 bg-gray-800 w-40 h-60 rounded-xl flex flex-col justify-between border-2 border-primaryv">
                 <div>  
-                    <h1 className="text-[1rem] font-semibold font-raleway">{title}</h1>
+                    <h1 onClick={openModal} className="text-[1rem] font-semibold font-raleway cursor-pointer">{title}</h1>
                     <p className="text-xs text-[#8F8F8F]">{description}</p>
                 </div>
                 <div className="">
@@ -73,7 +74,7 @@ const Project = (
                     <h3 className="text-sm mb-1 font-semibold text-primaryv">Joined: <span className="text-white font-normal">{joined}</span></h3>
                 </div>
                 <div className="">
-                    <div className="flex flex-row justify-end mt-3 ">
+                    <div className="flex flex-row justify-end mt-3">
                         <LikeDislikeButton
                             filled={constants.likeFilledPath}
                             notFilled={constants.likeNotFilledPath}
@@ -88,7 +89,14 @@ const Project = (
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             style={customStyles}
-        ></Modal>
+        >
+           <OpenedProject
+                title={title}
+                description={description}
+                members={members}
+                joined={joined}
+           />
+        </Modal>
     </article>
     );
 }

@@ -11,7 +11,7 @@ function UnFollowModal() {
     
     const [isFollowing, setIsFollowing] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [unfollow, setUnfollow] = useState(false);
+    const [unfollow, setUnfollow] = useState(true);
     
       const openModal = () => {
         setModalIsOpen(true);

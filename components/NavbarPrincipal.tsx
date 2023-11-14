@@ -13,29 +13,24 @@ function NavbarPrincipal () {
             width = {200}
             height= {100}
           />
-
-          <Image className= 'w-[140px] h-[50px]'
+          <button>
+            <Link href="/"><Image className= 'w-[140px] h-[50px]'
             src="/img/StartApp-Logo-lg.png"
             alt=""
             width = {200}
             height= {100}
-          />
+            />
+            </Link>
+          </button>
           </div>
 
           <div className="flex flex-row items-center gap-[80px] ml-56">
-          <Image className= 'w-9 h-9 opacity-50 hover:opacity-100 active:opacity-30'
-            src="/svg/search.svg"
-            alt=""
-            width = {200}
-            height= {100}
-          />
           <Image className= 'w-[3px] h-[46px]'
             src="/img/palito.png"
             alt=""
             width = {200}
             height= {100}
             />
-
           </div>
 
           <div className="flex flex-row items-center gap-[40px] mr-10">
