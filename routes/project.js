@@ -17,13 +17,28 @@ router.post('/create',authenticateToken, async (req, res) => {
         if (!req.body.name || !req.body.description) {
             return res.status(400).send({ message: "Project name and description are required" });
         }
+
+        const existingProject = await prisma.project.findFirst({
+            where: {
+                name: req.body.name
+            }
+        });
+        
+        if (existingProject) {
+            return res.status(409).send({message: "project with same name already exists"});
+        }
       
         const newProject = await prisma.project.create({
             data: {
                 name: req.body.name,
                 description: req.body.description,
-                statusId: req.body.statusId,
-                creatorId: req.user.id
+                status: {
+                    connect: {
+                        id: req.body.statusId 
+                    }
+                },
+                creatorId: req.user.id,
+                maxMembers: req.body.maxMembers
             }
         });
 
@@ -40,17 +55,6 @@ router.post('/create',authenticateToken, async (req, res) => {
 
         if (!projectCollabortors) {
             return res.status(409).send({message: "couldnt create project, collaborators"}); 
-        }
-
-        projectStatus = await prisma.projectStatus.create({
-            data: {
-                projectId: newProject.id,
-                statusId: req.body.statusId
-            }
-        });
-
-        if (!projectStatus) {
-            return res.status(409).send({message: "couldnt create project, status"}); 
         }
 
         res.status(201).send(message = "project created");
@@ -108,38 +112,13 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
                 name: req.body.name,
                 description: req.body.description,
                 statusId: req.body.statusId,
+                maxMembers: req.body.maxMembers
             }
         });
 
         if (!updatedProject) {
             return res.status(409).send({message: "couldnt update project updated"}); 
         }
-
-        let existingProjectStatus = await prisma.projectStatus.findUnique({
-            where: {
-                projectId: project.id
-            }
-        });
-
-        if (!existingProjectStatus) {
-            return res.status(409).send({message: "couldnt find project status"}); 
-        }
-
-        console.log(existingProjectStatus.id)
-
-        let updatedProjectStatus = await prisma.projectStatus.update({
-            where: {
-                id: existingProjectStatus.id
-            },
-            data: {
-                statusId: req.body.statusId
-            }
-        })
-
-        if (!updatedProjectStatus) {
-            return res.status(409).send({message: "couldnt update project status"}); 
-        }
-        
 
         res.status(201).send({message: "project updated"});
 

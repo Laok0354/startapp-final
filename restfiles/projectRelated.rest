@@ -4,14 +4,15 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "holaa",
+    "name": "wopwwwww ",
     "description": "nacho vigi",
-    "statusId": 1
+    "statusId" :3,
+    "maxMembers": 3
 }
 ###
 
 //get project
-GET http://localhost:3000/project/getp/1
+GET http://localhost:3000/project/getp/61
 Authorization: Bearer
 Content-Type: application/json
 
@@ -19,18 +20,19 @@ Content-Type: application/json
 ###
 
 //modify project
-PUT http://localhost:3000/project/modify/43
+PUT http://localhost:3000/project/modify/61
 Content-Type: application/json
 
 {
-    "name": "modified pipi",
+    "name": "modified wowwww",
     "description": "modified vigi",
-    "statusId": 1
+    "statusId": 4,
+    "maxCollaborators": 4
 }
 ###
 
 //delete project
-DELETE http://localhost:3000/project/delete/16
+DELETE http://localhost:3000/project/delete/61
 Authorization: Bearer
 Content-Type: application/json
 
@@ -39,7 +41,7 @@ Content-Type: application/json
 
 //search project
 
-GET http://localhost:3000/search/searchProject/dog
+GET http://localhost:3000/search/searchProject/wow
 Authorization: Bearer
 Content-Type: application/json
 
