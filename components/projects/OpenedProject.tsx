@@ -12,32 +12,29 @@ const OpenedProject = ({
     members : number,
     joined : number,
 }) => {   
-    const onChange = () => {
-        console.log("")
-    }
 
     return (
         <section>
-            <div className="flex flex-col justify-center items-center w-full">
+            <div className="flex flex-col justify-center items-center w-full mt-2">
                 <h1 className="text-3xl font-raleway font-semibold">{title}</h1>
                 <h2 className="text-xl">{description}</h2>
             </div>
-            <section className="grid grid-col-3 gap-x-36">
+            <section className="grid grid-col-3 ">
                 <div className="grid col-start-3 row-start-2">
-                    <JoinedUsers/>
-                    <h3>Vacantes: {members - joined}</h3>
+                    <JoinedUsers
+                        members={members}
+                        joined={joined}
+                    />
                 </div>
-                <div className="grid col-start-1 row-start-2 ml-16">
+                <div className="flex justify-center flex-col items-center col-start-1 row-start-2 ml-16">
                     <MessageRequest
-                        title="Message"
+                        title="Send a Message"
                         name="message"
                         placeHolder="Send a Message"
-                        className=""
-                        titleClassName=""
-                        onChange={onChange}
+                        titleClassName="mb-1 px-2"
                     />
-                    <button>
-                        <h1>Join</h1>
+                    <button className="flex justify-center items-center px-20 py-2 bg-primaryv rounded-lg h-12 mt-4 hover:bg-primaryv/70">
+                        <h1 className="font-semibold">Join</h1>
                     </button>
                 </div>
                 <div>

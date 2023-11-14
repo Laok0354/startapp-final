@@ -1,5 +1,5 @@
 import User from '../../components/User'
-import SideNavbar from '../../components/SideNavbar'
+import SideNavbar from '../../components/SideBar'
 import SearchBar from '@/components/SearchBar2';
 
 export default function Users () {  
@@ -12,15 +12,15 @@ export default function Users () {
         project: "Project 1"
     }
 
-
-
     return (
         <main>
             <header>
                 <div className='flex justify-center mt-2'>
                     <SearchBar className='bg-gray-800 w-24 hover:transition-all duration-1000'/> 
                 </div>
-                <SideNavbar />
+                <SideNavbar 
+                    page = "users"
+                />
             </header>
             <section id='__unfollow' className='flex justify-center h-screen items-center'>
                 <article className='divide-y w-217 mt-8 mb-8'>
