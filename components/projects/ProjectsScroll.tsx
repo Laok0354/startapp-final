@@ -5,8 +5,7 @@ import OpenedProject from "./OpenedProject"
 import constants from "./constants"
 import { useEffect, useState } from "react"
 import Modal from "react-modal";
-import { Project } from ".prisma/client";
-
+import { Project, ProjectCollaborators } from ".prisma/client"
 
 Modal.setAppElement("#__next");
 
@@ -128,27 +127,30 @@ const ProjectsScroll = () => {
         setError(error.message);
       });
   }, []);
-
   if (error) {
     return <div style={{ color: 'red' }}>{`Couldn't load projects. Error: ${error}`}</div>;
   }
 
-  return (
-    <section className="overflow-hidden">
-      <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-        {projectsData.map((project: Project) => (
+return (
+  <section className="overflow-hidden">
+    <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
+      {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => {
+        console.log('Project:', project); // Log the project object
+        return (
           <div className="col-span-1" key={project.id}>
             <Project
               title={project.name}
               description={project.description}
-              members={Math.round(Math.random() * 8 + 2)}
-              joined={Math.round(Math.random() * 20)}
+              members={project.maxMembers}
+              joined={project.collaborators.length}
             />
           </div>
-        ))}
-      </div>
-    </section>
-  );
+        );
+      })}
+    </div>
+  </section>
+);
+
 };
 
   

@@ -208,7 +208,11 @@ router.delete('/delete/:pid', authenticateToken, async (req, res) => {
 router.get('/getAllProjects', async (req, res) => {
 
     try {
-        const projects = await prisma.project.findMany();
+        const projects = await prisma.project.findMany({
+            include: {
+                collaborators: true
+            }
+        });
         res.status(200).json(projects);
     } catch (error) {
         console.log(error);
