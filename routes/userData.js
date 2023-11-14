@@ -91,7 +91,7 @@ router.get ('/visitHistory', async(req, res) => {
 router.get('/getAllProjects', async (req, res) => {
     
     try {
-
+    
         const projects = await prisma.project.findMany();
         
         res.status(200).json(projects);

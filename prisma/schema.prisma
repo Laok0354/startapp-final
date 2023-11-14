@@ -38,12 +38,16 @@ model Project {
   id            Int                    @id @default(autoincrement())
   name          String                 @unique
   description   String
-  creatorId     Int
+  creatorId     Int 
+  statusId      Int                    @default(1) 
+  status        status                 @relation(fields: [statusId], references: [id])          
+  maxMembers Int                 @default(5)
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
   collaborators ProjectCollaborators[]
 
   @@index([creatorId], map: "userIdIndex")
+  @@index([statusId], map: "statusIdIndex")
 }
 
 model ProjectCollaborators {
@@ -56,6 +60,14 @@ model ProjectCollaborators {
   @@index([userId], map: "userIdIndex")
   @@index([projectId], map: "projectIdIndex")
 }
+
+model status{
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  projects Project[]
+}
+
+
 
 model VisitHistory {
   id        Int      @id @default(autoincrement())
@@ -106,3 +118,5 @@ model CollaborationRequest {
   @@index([projectId], map: "projectIdIndex")
   @@index([userId], map: "userIdIndex")
 }
+
+
