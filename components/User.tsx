@@ -4,7 +4,7 @@ import {useState} from 'react'
 import Link from 'next/link'
 import Modal from "react-modal";
 
-Modal.setAppElement("#__unfollow");
+/* Modal.setAppElement("#__unfollow");
 
 
 function UnFollowModal() {
@@ -79,20 +79,22 @@ function UnFollowModal() {
         </Modal>
     </div>
   )
-}
+} */
 
 const User = (
     {
+        id,
         imageDir,
         userName,
         userUrl,
         projectUrl,
         project,
     } : {
+        id: number
         imageDir: string
         userName: string
         userUrl: string
-        projectUrl: string
+        projectUrl: string | null
         project: string
     }) => {
 
@@ -116,7 +118,7 @@ const User = (
                     <h2 className='opacity-70 font-semibold text-xl'>Popular Project</h2>
                     <a className='hover:underline hover:text-[#BE71EB] transition-all' href={projectUrl}>{project}</a>
                 </div>
-                <UnFollowModal/>                
+{/*                 <UnFollowModal/>  */}               
             </div>
         </section>
     )       

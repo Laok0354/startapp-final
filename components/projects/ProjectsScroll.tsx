@@ -153,7 +153,7 @@ const ProjectsScroll = () => {
     return (
       <section className="overflow-hidden">
           <div className={25 > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-              {[...Array(25)].map((_, index) => (
+              {[...Array(24)].map((_, index) => (
                   <div className="col-span-1" key={index}>
                       <Project
                           id={index}

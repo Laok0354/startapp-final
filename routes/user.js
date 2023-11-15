@@ -99,7 +99,11 @@ router.get('/getAllUsers', async (req, res) => {
     
     try {
 
-        const users = await prisma.user.findMany();
+        const users = await prisma.user.findMany({
+            include: {
+                projects: true
+            }
+        });
         
         res.status(200).json(users);
 
