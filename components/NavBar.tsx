@@ -45,7 +45,7 @@ function Navbar({page} : IProps) {
       <div className="flex flex-row items-center">
           <button>
             <Link href="/"><Image className= 'w-[140px] h-[50px]'
-            src="/img/StartApp-Logo-lg.png"
+            src="/svg/StartApplogoWHITE.svg"
             alt=""
             width = {200}
             height= {100}

@@ -46,17 +46,6 @@ export default function Home () {
         <section className="w-full h-60 bg-[#0A090B]"> 
            <div className="px-8">
              <Notifications/>
-           {/* <div className=" relative flex justify-between items-center gap-10 pl-20 pr-20 mt-10 w-[1300px] h-20 bg-black border-2 border-[#1C1C1C] shadow-lg">
-              <Image className= 'w-10 h-10'
-               src="/img/sin-foto.png"
-               alt=""
-               width = {200}
-               height= {100}
-              />
-            
-             <h3 className="text-[18px] font-semibold w-full">Helen Curry has edited file "The Memories".</h3>
-             <h6 className="text-white/70">yesteday</h6>
-           </div> */}
           </div>
         </section>
       </main>
