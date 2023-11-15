@@ -149,6 +149,28 @@ const ProjectsScroll = () => {
     return <div style={{ color: 'red' }}>{`Couldn't load projects. Error: ${error}`}</div>;
   }
 
+  if (projectsData.length === 0) {
+    return (
+      <section className="overflow-hidden">
+          <div className={25 > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
+              {[...Array(25)].map((_, index) => (
+                  <div className="col-span-1" key={index}>
+                      <Project
+                          id={index}
+                          title="Loading..."
+                          description="Loading..."
+                          members= {0}
+                          joined= {0}
+                          stateText={"Loading..."}
+                      />
+                  </div>
+              ))}
+          </div>
+      </section>
+      );
+
+  }
+
 return (
   <section className="overflow-hidden">
     <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>

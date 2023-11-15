@@ -57,13 +57,15 @@ const JoinedUsers = ({
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-        console.log(response.json())
         return response.json();
       })
       .then((data) => {
-        const collaborators = data.collaborators;
+        const collaborators = data.project.collaborators;
+        console.log(data.project.collaborators)
         const userCards = collaborators.map((user) => {
-          return <UserCard key={user.id} />;
+          return <UserCard 
+          key={user.id}
+          />;
         });
         setJoinedData(userCards);
       })

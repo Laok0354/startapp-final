@@ -4,11 +4,13 @@ import { useState } from "react"
 import Image from "next/image"
 
 const MessageRequest = ({
+    id,
     title,
     placeHolder,
     name,
     titleClassName,
   }: {
+    id: number
     title: string;
     placeHolder: string;
     name: string;
@@ -43,6 +45,35 @@ const MessageRequest = ({
         }
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        fetch(`http://localhost:3000/userInteractions/sendCollaborationRequest/${id}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            credentials: "include",
+            body: JSON.stringify({
+            message: valorTextarea,
+          }),
+        })
+          .then((response) => {
+            if (response.status === 401) {
+                window.location.href = '/login';
+                return Promise.reject('Unauthorized');
+              }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data.message);
+            setValorTextarea("");
+          })
+          .catch((error) => {
+            console.error("Error sending message:", error);
+          });
+      };
+
     return(
         <>
             <section>
@@ -58,6 +89,10 @@ const MessageRequest = ({
                         onBlur={handleInputBlur}
                         value={valorTextarea}
                     />
+                    <button className="flex justify-center items-center px-20 py-2 bg-primaryv rounded-lg h-12 mt-4 hover:bg-primaryv/70 mx-auto" 
+                    onClick={handleSubmit}>
+                        <h1 className="font-semibold">Join</h1>
+                    </button>
                 </div>
         </section>
     </>

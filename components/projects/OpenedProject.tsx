@@ -31,14 +31,15 @@ const OpenedProject = ({
                 </div>
                 <div className="flex justify-center flex-col items-center col-start-1 row-start-2 ml-16">
                     <MessageRequest
+                        id={id}
                         title="Send a Message"
                         name="message"
                         placeHolder="Send a Message"
                         titleClassName="mb-1 px-2"
                     />
-                    <button className="flex justify-center items-center px-20 py-2 bg-primaryv rounded-lg h-12 mt-4 hover:bg-primaryv/70">
+{/*                     <button className="flex justify-center items-center px-20 py-2 bg-primaryv rounded-lg h-12 mt-4 hover:bg-primaryv/70">
                         <h1 className="font-semibold">Join</h1>
-                    </button>
+                    </button> */}
                 </div>
                 <div>
                     {/* Posibilidad para poner un link de discord */}
