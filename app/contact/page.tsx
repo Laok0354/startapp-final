@@ -21,29 +21,29 @@ export default function Contact () {
 We will be pleased to respond to you by email or on any of our social media channels:</p>
           </div>
 
-        <div className="relative flex w-full justify-start">
-          <div className="relative pt-10 pr-10">
+        <div className=" flex w-full justify-start">
+          <div className=" pt-10 pr-10">
           <Link href="/">
             <Image className= 'w-[70px] h-[70px]'
-            src="/img/gmail.png"
+            src="/svg/gmail.svg"
             alt=""
             width = {200}
             height= {100}
           /></Link>
           </div>
-          <div className="relative pt-10 pr-10">
+          <div className=" pt-10 pr-10">
           <Link href="/">
             <Image className= 'w-[70px] h-[70px]'
-            src="/img/x.png"
+            src="/svg/x.svg"
             alt=""
             width = {200}
             height= {100}
           /></Link>
           </div>
-          <div className="relative pt-10 pr-10">
+          <div className=" pt-10 pr-10">
           <Link href="/">
             <Image className= 'w-[70px] h-[70px]'
-            src="/img/Ig.png"
+            src="/svg/Ig.svg"
             alt=""
             width = {200}
             height= {100}

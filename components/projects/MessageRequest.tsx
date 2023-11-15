@@ -9,16 +9,20 @@ const MessageRequest = ({
     placeHolder,
     name,
     titleClassName,
+    handleChange,
+    valorTextarea,
+    height
   }: {
     id: number
     title: string;
     placeHolder: string;
     name: string;
     titleClassName: string;
+    handleChange: ( event : any ) => void;
+    valorTextarea: string;
+    height: number;
   }) =>{
     const [isInputSelected, setIsInputSelected] = useState(false);
-    const [valorTextarea, setValorTextarea] = useState('');
-    const [height, setHeight] = useState(10);
 
     const handleInputFocus = () => {
         setIsInputSelected(true);
@@ -26,23 +30,6 @@ const MessageRequest = ({
 
     const handleInputBlur = () => {
         setIsInputSelected(false);
-    }
-
-    const handleChange = (event) => {
-      setValorTextarea(event.target.value);
-      handleKeyPress(valorTextarea);
-    };
-
-    const handleKeyPress = (valorTextarea : string) => {
-        if (valorTextarea.length > 100) {
-            setHeight(32);
-        }
-        else if (valorTextarea.length > 40) {
-            setHeight(16);
-        }
-        else{
-            setHeight(10);
-        }
     }
 
     const handleSubmit = (e) => {

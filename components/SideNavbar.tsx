@@ -32,7 +32,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
               height= {100}
             />
             <button className=" text-[25px]">
-              <Link href="/users">U</Link>
+              <Link href="/users">People</Link>
             </button>
           </div>
 

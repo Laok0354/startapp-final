@@ -6,7 +6,7 @@ import Image from "next/image";
 function Notifications (){
 
   return (
-    <div className=" relative flex justify-between items-center gap-10 pl-20 pr-20 mt-10 w-[1300px] h-20 bg-black border-2 border-[#1C1C1C] shadow-lg">
+    <div className="flex justify-between items-center gap-10 pl-20 pr-20 mt-10 w-[1300px] h-20 bg-black border-2 border-[#1C1C1C] shadow-lg">
     <Image className= 'w-10 h-10'
      src="/img/sin-foto.png"
      alt=""

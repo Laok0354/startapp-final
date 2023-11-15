@@ -39,7 +39,7 @@ const Input = ({
     <div className="my-2">
       <h6 className={titleClassName}>{title}</h6>
       <input
-        className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} outline-none flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
+        className={`${isInputSelected ? "outline-2 outline-primaryv transition-colors duration-200" : "outline-none"} outline-none transition-all duration-300 flex justify-center w-80 h-12 rounded-md bg-gray-700 text-gray-50 p-2 placeholder:text-gray-50 ${className}`}
         type="text"
         name={name}
         value={value}
