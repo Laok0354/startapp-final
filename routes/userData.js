@@ -80,7 +80,7 @@ router.get ('/visitHistory', async(req, res) => {
 
     } catch (error) {
         
-        console.log(error);
+        console.log(error); 
         res.status(500).json({error: error})
 
     }
@@ -93,6 +93,9 @@ router.get('/getAllProjects', async (req, res) => {
     try {
     
         const projects = await prisma.project.findMany();
+        include: {
+            collaborators: true
+        }
         
         res.status(200).json(projects);
 

@@ -17,6 +17,7 @@ model User {
   skills        Skill[]
   refreshTokens RefreshToken[]
   projects      ProjectCollaborators[]
+  likes         ProjectLike[]
 }
 
 model Skill {
@@ -41,13 +42,27 @@ model Project {
   creatorId     Int 
   statusId      Int                    @default(1) 
   status        status                 @relation(fields: [statusId], references: [id])          
-  maxMembers Int                 @default(5)
+  maxMembers    Int                    @default(5)
+  likes         ProjectLike[]
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
   collaborators ProjectCollaborators[]
 
   @@index([creatorId], map: "userIdIndex")
   @@index([statusId], map: "statusIdIndex")
+}
+
+model ProjectLike {
+  id        Int     @id @default(autoincrement())
+
+  userId    Int     
+  projectId Int
+
+  user      User    @relation(fields: [userId], references: [id])
+  project   Project @relation(fields: [projectId], references: [id])
+
+  @@unique([userId, projectId], map: "userProjectIndex")
+  @@index([projectId])
 }
 
 model ProjectCollaborators {

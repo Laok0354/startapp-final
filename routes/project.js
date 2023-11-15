@@ -138,6 +138,7 @@ router.get('/getp/:pid', authenticateToken, async (req, res) => {
                 id: parseInt(req.params.pid)
             },
             include: {
+                collaborators: true,
                 status: {
                     select: {
                         name: true
