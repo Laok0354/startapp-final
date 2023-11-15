@@ -5,10 +5,6 @@ import {useState} from 'react';
 import Link from 'next/link';
 
 const UserCard = () => {   
-    const [isFollowing, setIsFollowing] = useState(false); 
-    const handleFollow = () => {
-        setIsFollowing(!isFollowing);
-    }
     return (
         <section className="flex flex-row justify-center items-center m-2">
             <Image
@@ -23,9 +19,6 @@ const UserCard = () => {
                     <h4 className="font-raleway text-xs">Username</h4>
                     <h6 className="font-light font-raleway text-gray-50 text-[0.65rem]">User Bio</h6>
                 </div>
-                <button onClick={handleFollow} className={`text-[0.7rem] rounded h-6 w-16 ${isFollowing ? "bg-zinc-600" : "bg-primaryv"}`}>
-                    <h6>{isFollowing ? "Unfollow" : "Follow"}</h6>
-                </button>
             </div>
         </section>
     );

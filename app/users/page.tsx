@@ -13,17 +13,14 @@ export default function Users () {
     }
 
     return (
-        <main className='h-screen'>
+        <main className='h-screen overflow-hidden'>
             <header>
                 <SideNavbar 
                     page={"Users"}
                 />
             </header>
-            <section className='flex items-center h-screen flex-col ml-64 '>
-                <div className='flex justify-center mt-2'>
-                    <SearchBar className='bg-gray-800 w-24 hover:transition-all duration-1000'/> 
-                </div>
-                <article className={`flex flex-col justify-items-end w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${users > 8 ? "max-h-[500px] overflow-y-auto px-2" : ""}`}>
+            <section className='flex items-center h-screen flex-col ml-64 mt-32'>
+                <article className={`flex flex-col justify-center w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${users > 8 ? "max-h-[550px] overflow-y-auto px-2" : ""}`}>
                     {[...Array(users)].map((_, index) => (
                         <div className='flex justify-center'>
                             <User
