@@ -106,6 +106,7 @@ const Project = (
             style={customStyles}
         >
            <OpenedProject
+                id={id}
                 title={title}
                 description={description}
                 members={members}
@@ -119,7 +120,7 @@ const Project = (
 const ProjectsScroll = () => {
   const [projectsData, setProjectsData] = useState([]);
   const [error, setError] = useState(null);
-  const stateText = ["In Progress", "Finished", "Abandoned"]
+  const stateText = ["0","In Progress", "Finished", "Abandoned", "Paused"]
 
   useEffect(() => {
     const timestamp = Date.now();
@@ -159,7 +160,7 @@ return (
               description={project.description}
               members={project.maxMembers}
               joined={project.collaborators.length}
-              stateText={stateText[0]}
+              stateText={stateText[project.statusId]}
             />
           </div>
         );

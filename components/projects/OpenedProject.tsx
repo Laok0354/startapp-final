@@ -2,11 +2,13 @@ import JoinedUsers from "./JoinedUsers";
 import MessageRequest from "./MessageRequest"
 
 const OpenedProject = ({
+    id,
     title, 
     description,
     members,
     joined,
     } : {
+    id: number
     title : string | number,
     description : string
     members : number,
@@ -22,6 +24,7 @@ const OpenedProject = ({
             <section className="grid grid-col-3 ">
                 <div className="grid col-start-3 row-start-2">
                     <JoinedUsers
+                        id={id}
                         members={members}
                         joined={joined}
                     />

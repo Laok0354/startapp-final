@@ -4,15 +4,15 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "wopwwwww ",
-    "description": "nacho vigi",
+    "name": "ae ",
+    "description": "pollo",
     "statusId" :3,
     "maxMembers": 3
 }
 ###
 
 //get project
-GET http://localhost:3000/project/getp/61
+GET http://localhost:3000/project/getp/10
 Authorization: Bearer
 Content-Type: application/json
 

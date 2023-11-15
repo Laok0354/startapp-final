@@ -373,7 +373,8 @@ const ProjectForm = ({
   const [formData, setFormData] = useState<Project>({
     name: "",
     description: "",
-    collaborators: 0,
+    maxMembers: 0,
+    statusId: 1
   });
 
   const handleOptionClick = (option: string) => {
@@ -386,11 +387,14 @@ const ProjectForm = ({
     setFormData({
       name: formData.name,
       description: formData.description,
-      collaborators: formData.collaborators,
+      maxMembers: formData.maxMembers,
+      statusId: 1
     });
 
     handleCreateProject({ formData });
-  
+    
+    console.log(formData)
+
     fetch("http://localhost:3000/project/create", {
       method: "POST",
       headers: {
@@ -424,7 +428,13 @@ const ProjectForm = ({
 
   const handleInputChange = (e: React.FormEvent) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    
+      if (name === "maxMembers") {
+      const parsedValue = parseInt(value, 10);
+      setFormData({ ...formData, [name]: parsedValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
@@ -471,8 +481,8 @@ const ProjectForm = ({
               <div>
                 <h6 className="text-xs font-raleway font-light tracking-wide">Members</h6>
                 <NumberInput
-                  name="collaborators"
-                  value={formData.collaborators}
+                  name="maxMembers"
+                  value={Number (formData.maxMembers)}
                   onChange={handleInputChange}
                 />
               </div>
