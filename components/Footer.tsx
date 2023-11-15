@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Footer () {
     return(
-    <footer className="bg-black h-full w-full relative flex flex-row shadow-2xl">
+    <footer className="bg-black w-full relative flex flex-row shadow-2xl">
        <ul>
           <li className="pl-10 pt-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/contact">Contact & Terms</Link></li>
           <li className="pl-10 pb-5 ml-2 text-white/70 hover:text-white active:text-white/30"><Link href="/about">About</Link></li>
@@ -14,7 +14,7 @@ function Footer () {
       <div className="relative flex w-full justify-end">
         <div className="relative flex left-44">
          <Image className= 'w-[40px] h-[40px] mt-8'
-            src="/img/StartAppmini.png"
+            src="/svg/StartAppS.svg"
             alt=""
             width = {200}
             height= {100}
@@ -24,7 +24,7 @@ function Footer () {
         <div className="relative pt-48 pr-10">
           <Link href="/">
             <Image className= 'w-[30px] h-[30px]'
-            src="/img/gmail.png"
+            src="/svg/gmail.svg"
             alt=""
             width = {200}
             height= {100}
@@ -33,7 +33,7 @@ function Footer () {
         <div className="relative pt-48 pr-10">
           <Link href="/">
             <Image className= 'w-[30px] h-[30px]'
-            src="/img/Ig.png"
+            src="/svg/Ig.svg"
             alt=""
             width = {200}
             height= {100}
@@ -42,7 +42,7 @@ function Footer () {
         <div className="relative pt-48 pr-14">
           <Link href="/">
             <Image className= 'w-[30px] h-[30px]'
-            src="/img/x.png"
+            src="/svg/x.svg"
             alt=""
             width = {200}
             height= {100}
