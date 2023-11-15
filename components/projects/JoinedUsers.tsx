@@ -5,10 +5,6 @@ import { useState } from "react";
 import Link from "next/link";
 
 const UserCard = () => {
-  const [isFollowing, setIsFollowing] = useState(false);
-  const handleFollow = () => {
-    setIsFollowing(!isFollowing);
-  };
   return (
     <section className="flex flex-row justify-center items-center m-2">
       <Image
@@ -25,14 +21,6 @@ const UserCard = () => {
             User Bio
           </h6>
         </div>
-        <button
-          onClick={handleFollow}
-          className={`text-[0.7rem] rounded h-6 w-16 ${
-            isFollowing ? "bg-gray-300" : "bg-primaryv"
-          }`}
-        >
-          <h6>{isFollowing ? "Unfollow" : "Follow"}</h6>
-        </button>
       </div>
     </section>
   );
@@ -46,7 +34,7 @@ const JoinedUsers = ({
   joined: number;
 }) => {
   return (
-    <section className="px-6 py-3 rounded-xl justify-start mt-2 w-[20rem] bg-gray-700 border border-primaryv">
+    <section className="px-6 py-3 rounded-xl justify-start mt-8 w-[20rem] bg-gray-700 border border-primaryv">
       <div className="flex flex-row items-center justify-between">
         <div>
           <h1 className="font-semibold mt-2 text-[1rem]">Joined Users</h1>
@@ -62,6 +50,7 @@ const JoinedUsers = ({
         </p>
       </div>
       <div className="flex flex-col flex-wrap mb-2">
+        <UserCard />
         <UserCard />
         <UserCard />
         <UserCard />

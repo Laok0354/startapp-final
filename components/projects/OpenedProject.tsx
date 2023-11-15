@@ -1,5 +1,8 @@
+"use client"
+
 import JoinedUsers from "./JoinedUsers";
 import MessageRequest from "./MessageRequest"
+import { useState } from "react";
 
 const OpenedProject = ({
     title, 
@@ -11,8 +14,27 @@ const OpenedProject = ({
     description : string
     members : number,
     joined : number,
-}) => {   
+}) => {
+    const [valorTextarea, setValorTextarea] = useState('');
+    const [height, setHeight] = useState(10);
 
+    const handleChange = (event) => {
+        setValorTextarea(event.target.value);
+        handleKeyPress(valorTextarea);
+    };
+
+    const handleKeyPress = (valorTextarea : string) => {
+        if (valorTextarea.length > 100) {
+            setHeight(32);
+        }
+        else if (valorTextarea.length > 40) {
+            setHeight(16);
+        }
+        else{
+            setHeight(10);
+        }
+    }
+  
     return (
         <section>
             <div className="flex flex-col justify-center items-center w-full mt-2">
@@ -32,6 +54,9 @@ const OpenedProject = ({
                         name="message"
                         placeHolder="Send a Message"
                         titleClassName="mb-1 px-2"
+                        valorTextarea={valorTextarea}
+                        handleChange={handleChange}
+                        height={height}
                     />
                     <button className="flex justify-center items-center px-20 py-2 bg-primaryv rounded-lg h-12 mt-4 hover:bg-primaryv/70">
                         <h1 className="font-semibold">Join</h1>
