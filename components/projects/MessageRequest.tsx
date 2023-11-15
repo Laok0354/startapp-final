@@ -53,11 +53,10 @@ const MessageRequest = ({
             return response.json();
           })
           .then((data) => {
-            console.log(data.message);
-            setValorTextarea("");
+            alert(data.message);
           })
           .catch((error) => {
-            console.error("Error sending message:", error);
+            alert("Error sending message:" + error);
           });
       };
 
