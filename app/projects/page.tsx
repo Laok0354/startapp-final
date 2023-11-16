@@ -23,7 +23,7 @@ export default function Projects() {
           handleOpenNavbar={handleOpenNavbar}
         />
       </header>
-      <section className="flex flex-row justify-around items-center flex-grow mt-32">
+      <section className="flex flex-row justify-around items-center flex-grow mt-[6.5rem]">
         <div className={`mt-4 transition-all duration-700 ${isOpen ? "ml-52" : ""}`}>
           <ProjectsScroll />
         </div>
