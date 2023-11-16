@@ -2,16 +2,41 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
+import { data } from "autoprefixer";
 
 function SearchBar2({ className }: { className: string }) {
   const [isInputSelected, setIsInputSelected] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
+  const [inputValue, setInputValue] = useState('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const input = e.currentTarget.querySelector("#search")! as HTMLInputElement;
-    const inputValue = input.value;
-  }
+    setInputValue(input.value);
+  };
+
+  useEffect(() => {
+    if (inputValue) {
+      fetch(`http://localhost:3000/search/searchProject/${inputValue}`, {
+        credentials: "include",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response.json());
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          setSearchResults(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching search results:", error);
+        });
+    }
+  }, [inputValue]);
+
 
   const handleInputFocus = () => {
     setIsInputSelected(true);

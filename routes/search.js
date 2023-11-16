@@ -11,12 +11,10 @@ router.use(express.json());
 
 //search projects full text
 
-router.get('/searchProject/:searchString', authenticateToken, async (req, res) => {
+router.get('/searchProject/:searchString', authenticateToken(), async (req, res) => {
 
     try {
         const searchString = req.params.searchString;
-
-        if (req.user) {
             const user = await prisma.user.findUnique({
                 where: {
                     email: req.user.email
@@ -29,7 +27,6 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
                     userId: user.id
                 }
             });
-        }
 
         const result = await prisma.project.findMany({
             where: {
@@ -59,14 +56,45 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
     }
 });
 
+router.get('/searchProject/:searchString', async (req, res) => {
+    try {
+        const searchString = req.params.searchString;
 
+        const result = await prisma.project.findMany({
+            where: {
+                OR: [
+                    {
+                        name: {
+                            contains: searchString
+                        }
+                    },
+                    {
+                        description: {
+                            contains: searchString
+                        }
+                    }
+                ]
+            }
+        });
 
-router.get('/searchUser/:searchString', authenticateToken, async (req, res) => {
+        if (result.length === 0) {
+            res.status(404).json({ message: "No projects found" });
+        } else {
+            res.status(200).json(result);
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal server error" });
+        console.log(error);
+    }
+});
+
+router.get('/searchUser/:searchString', async (req, res) => {
 
     try {
         const searchString = req.params.searchString;
 
         if (req.user) {
+            authenticateToken()
             const user = await prisma.user.findUnique({
                 where: {
                     email: req.user.email
