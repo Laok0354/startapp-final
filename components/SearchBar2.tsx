@@ -26,7 +26,7 @@ function SearchBar2({ className }: { className: string }) {
   }`;
 
   return (
-    <div className={`${isInputSelected ? "w-96" : "w-64"}  transition-all duration-1000 relative flex h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30 ${className}`}>
+    <div className={`${isInputSelected ? "w-96" : "w-64 "}  transition-all duration-1000 flex h-12 gap-4 items-center p-3 border-[1px] border-primaryv rounded-full hover:shadow-[0_0_0_1px] hover:shadow-primaryv active:shadow-primaryv/30 active:border-primaryv/30 ${className}`}>
       <form onSubmit={handleSubmit} className="flex items-start gap-3">
         <button type="submit">
           <Image

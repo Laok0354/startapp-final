@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import SearchBar from "./SearchBar2";
 import Image from "next/image";
 
 function NavbarPrincipal () {
@@ -21,6 +22,10 @@ function NavbarPrincipal () {
             />
             </Link>
           </button>
+          </div>
+
+          <div className='flex justify-center items-center mt-2'>
+            <SearchBar className='absolute bg-gray-800 w-16 mb-1 hover:transition-all duration-1000'/> 
           </div>
 
           <div className="flex flex-row items-center gap-[80px] ml-56">
