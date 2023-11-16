@@ -4,7 +4,13 @@ import Image from 'next/image';
 import {useState} from 'react';
 import Link from 'next/link';
 
-const UserCard = () => {   
+const UserCard = ({
+    userName,
+    userBio
+} : {
+    userName: string,
+    userBio: string
+}) => {   
     return (
         <section className="flex flex-row justify-center items-center m-2">
             <Image
@@ -16,8 +22,8 @@ const UserCard = () => {
             />
             <div className="flex justify-between w-48">
                 <div className="flex flex-col">
-                    <h4 className="font-raleway text-xs">Username</h4>
-                    <h6 className="font-light font-raleway text-gray-50 text-[0.65rem]">User Bio</h6>
+                    <h4 className="font-raleway text-xs">{userName}</h4>
+                    <h6 className="font-light font-raleway text-gray-50 text-[0.65rem]">{userBio}</h6>
                 </div>
             </div>
         </section>
@@ -32,9 +38,18 @@ const SuggestedUsers = () => {
                 <p className='text-gray-50 text-[0.6rem] mb-4 mt-2 hover:underline cursor-pointer'><Link href={"/users"}> See All</Link></p>
             </div>
             <div className="flex flex-col flex-wrap mb-2">
-                <UserCard/>
-                <UserCard/>
-                <UserCard/>
+                <UserCard
+                    userName='Username'
+                    userBio='User Bio'
+                />
+                <UserCard
+                    userName='Username'
+                    userBio='User Bio'
+                />
+                <UserCard
+                    userName='Username'
+                    userBio='User Bio'
+                />
             </div>
         </section>
     );

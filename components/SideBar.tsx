@@ -7,18 +7,15 @@ import NavbarPrincipal from "./NavbarPrincipal-SearchBar";
 
 interface SideNavbarProps {
   page : string
+  isOpen : boolean
+  handleOpenNavbar : () => void
 }
 
-const SideNavbar: React.FC<SideNavbarProps> = ({ page } : SideNavbarProps) => {
-    const [isOpen, setIsOpen] = useState(false);
+const SideNavbar: React.FC<SideNavbarProps> = ({ page, isOpen, handleOpenNavbar } : SideNavbarProps) => {
 
-    const handleOpenNavbar = () => {
-        setIsOpen(!isOpen);
-    }
     return (
       <main>
-        <NavbarPrincipal/>  
-        <nav className={`fixed top-20 bg-black h-full border-r-2 border-[#1C1C1C] drop shadow-lg block transition-all duration-700 ${isOpen ? "w-[250px]" : "w-[100px]"}`}>
+        <nav className={`fixed top-20 bg-black/80 h-full border-r-2 border-[#1C1C1C] drop shadow-lg block transition-all duration-700 ${isOpen ? "w-[250px]" : "w-[100px]"}`}>
           <div className="flex justify-end items-baseline">
               <div className=" flex flex-col top-0 mr-2">
                   <button onClick={handleOpenNavbar} className="bg-none border-0 cursor-pointer w-[60px] h-[60px] p-0">

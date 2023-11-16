@@ -54,7 +54,7 @@ const JoinedUsers = ({
         </div>
       </div>
       <div className="flex flex-col justify-center items-center flex-wrap mb-2 overflow-hidden">
-        <article className={`flex flex-col justify-center mt-4 mb-8 ${users > 4 ? "max-h-[200px] overflow-y-auto px-2" : ""}`}>
+        <article className={`flex flex-col justify-center mt-4 ${users > 4 ? "max-h-[200px] overflow-y-auto px-2" : ""}`}>
           {[...Array(users)].map((_, index) => (
               <div className='flex justify-center'>
                   <UserCard
