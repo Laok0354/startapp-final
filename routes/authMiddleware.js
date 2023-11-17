@@ -9,7 +9,7 @@ function authenticateToken(req, res, next){
     //const authHeader = req.headers['authorization']
     //const token = authHeader && authHeader.split(' ')[1]
     
-    if (req.cookies.accessToke == null || req.cookies.accessToke == undefined) return res.sendStatus(401)
+    if (req.cookies.accessToken == null || req.cookies.accessToken == undefined) return res.sendStatus(401)
     
     const token = req.cookies.accessToken;
     
