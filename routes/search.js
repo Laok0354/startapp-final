@@ -11,7 +11,7 @@ router.use(express.json());
 
 //search projects full text
 
-router.get('/searchProject/:searchString', authenticateToken(), async (req, res) => {
+router.get('/searchProject/:searchString', authenticateToken, async (req, res) => {
 
     try {
         const searchString = req.params.searchString;
