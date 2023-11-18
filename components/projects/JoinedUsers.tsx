@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { data } from "autoprefixer";
 
 const UserCard = ({
   username,
@@ -93,8 +94,10 @@ const JoinedUsers = ({
           <Link href={"/users"}>See All</Link>
         </p>
       </div>
-      <div className="flex flex-col flex-wrap mb-2">
+      <div className="flex flex-col justify-center items-center flex-wrap mb-2 overflow-hidden">
+      <article className={`flex flex-col justify-center mt-4 ${joinedData.length > 4 ? "max-h-[200px] overflow-y-auto px-2" : ""}`}>
         {joinedData}
+        </article>
       </div>
     </section>
   );

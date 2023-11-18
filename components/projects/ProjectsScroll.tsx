@@ -1,6 +1,6 @@
 "use client"
 
-import LikeDislikeButton from "./LikeDislikeButton"
+import LikeDislikeButton from "./LikeButton"
 import OpenedProject from "./OpenedProject"
 import constants from "./constants"
 import { useEffect, useState } from "react"
@@ -33,6 +33,7 @@ const Project = (
     stateText : string
 }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [liked, setLiked] = useState(false);
     let stateTextColor;
 
     const openModal = () => {
@@ -42,6 +43,14 @@ const Project = (
     const closeModal = () => {
         setModalIsOpen(false);
     };
+
+    const handleLike = () => {
+        if (!liked) {
+          setLiked(true);
+        } else {
+          setLiked(false);
+        }
+      };
 
     const customStyles = {
         overlay: {
@@ -64,6 +73,7 @@ const Project = (
             padding: "0px",
         },
       };
+      
 
         if (stateText === "In Progress") {
             stateTextColor = " text-orange";
@@ -93,8 +103,8 @@ const Project = (
                         <LikeDislikeButton
                             filled={constants.likeFilledPath}
                             notFilled={constants.likeNotFilledPath}
-                            filledDislike={constants.dislikeFilledPath}
-                            notFilledDislike={constants.dislikeNotFilledPath}
+                            liked={liked}
+                            handleLike={handleLike}
                         />
                     </div>
                 </div>
@@ -111,6 +121,7 @@ const Project = (
                 description={description}
                 members={members}
                 joined={joined}
+                closeModal={closeModal}
            />
         </Modal>
     </article>

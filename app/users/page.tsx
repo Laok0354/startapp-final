@@ -1,8 +1,13 @@
-import User from "../../components/User";
-import SideNavbar from "../../components/SideBar";
-import SearchBar from "@/components/SearchBar2";
+"use client"
+
+import User from '../../components/User'
+import SideNavbar from '../../components/SideBar'
+import NavbarPrincipal from '@/components/NavbarPrincipal-SearchBar';
+import { useState } from 'react';
 
 export default async function Users() {
+  const [isOpen, setIsOpen] = useState(false);
+  
   const response = await fetch(`http://localhost:3000/user/getAllUsers`);
 
   if (!response.ok) {
@@ -11,19 +16,23 @@ export default async function Users() {
 
   const data = await response.json();
 
+  const handleOpenNavbar = () => {
+      setIsOpen(!isOpen);
+    }
+
+
   return (
     <main>
-      <header>
-        <div className="flex justify-center mt-2">
-          <SearchBar className="bg-gray-800 w-24 hover:transition-all duration-1000" />
-        </div>
-        <SideNavbar page="users" />
-      </header>
-      <section
-        id="__unfollow"
-        className="flex justify-center h-screen items-center"
-      >
-        <article className="divide-y w-217 mt-8 mb-8">
+          <header>
+              <NavbarPrincipal/>
+              <SideNavbar 
+                  page={"Users"}
+                  isOpen={isOpen}
+                  handleOpenNavbar={handleOpenNavbar}
+              />
+          </header>
+          <section className={`flex items-center h-screen flex-col mt-16 transition-all duration-700 w-screen ${isOpen ? "ml-24" : ""}`}>
+          <article className={`flex flex-col justify-center w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${data.length > 8 ? "max-h-[550px] overflow-y-auto px-2" : ""}`}>
           {data.map((user) => (
             <div className="flex justify-center" key={user.id}>
               <User
@@ -33,11 +42,10 @@ export default async function Users() {
                 userUrl={`/profile/${user.id}`}
                 project={user.projects.length > 0 ? user.projects[0].id : "No projects"}
                 projectUrl={user.projects.length > 0 ? `project/${user.projects[0].id}` : null}
-              />
-            </div>
-          ))}
+                />
+                </div>
+            ))}
         </article>
-      </section>
-    </main>
-  );
-}
+    </section>
+</main>
+)}

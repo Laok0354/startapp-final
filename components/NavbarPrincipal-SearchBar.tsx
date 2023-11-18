@@ -5,7 +5,7 @@ import Image from "next/image";
 
 function NavbarPrincipal () {
     return (
-    <nav className="bg-black border-b-2 border-[#1C1C1C] fixed justify-evenly h-[80px] w-full flex flex-row items-center">
+    <nav className="bg-black/80 border-b-2 border-[#1C1C1C] fixed justify-between h-[80px] w-full flex flex-row items-center">
           <div className="flex flex-row items-center gap-[80px] mr-52">
           <Image className= 'w-14 h-14 px-20 opacity-0'
             src="/svg/menu.svg"
