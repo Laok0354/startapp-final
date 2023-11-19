@@ -305,4 +305,111 @@ router.delete('/deleteCollaborationRequest/:id', authenticateToken, async (req, 
     }
 });
 
+
+router.post('/like/:pid', authenticateToken, async (req, res) => {
+    
+    try {
+        
+        const existingLike = await prisma.ProjectLike.findUnique({
+          where: {
+            userId_projectId: {
+              userId: req.user.id,
+              projectId: parseInt(req.params.pid),
+            },
+          },
+        });
+      
+        if (existingLike) {
+          
+            const updatedLike = await prisma.ProjectLike.update({
+                where: {
+                    userId_projectId: {
+                    userId: req.user.id,
+                    projectId: parseInt(req.params.pid),
+                    },
+                },
+                data: {
+                    liked: !existingLike.liked,
+                },
+            });
+        
+            if (updatedLike !== null) {
+                res.json({ message: 'Project like updated correctly' });
+            }
+         
+        } else {
+          
+          const newLike = await prisma.ProjectLike.create({
+            data: {
+            
+              liked: true,
+
+              project: {
+                connect: {
+                  id: parseInt(req.params.pid),
+                },
+              },
+                user: {
+                    connect: {
+                    id: req.user.id,
+                    },
+                },
+            },
+          });
+
+          if (newLike !== null) {
+            res.json({ message: 'Project liked successfully' });
+          }
+      
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+
+});
+
+
+router.get('/getLiked', authenticateToken, async (req, res) => {
+        
+    try {
+
+        const projectLikes = await prisma.ProjectLike.findMany({
+            where: {
+                userId: req.user.id,
+                liked : true
+            },
+            include: {
+                project: true
+            }
+        });
+
+        if (projectLikes.length === 0) {
+            return res.status(404).json({ error: "No projects liked" });
+        }
+
+        const projects = projectLikes.map(like => like.project);
+
+        res.status(200).json(projects);
+
+    } catch (error) {
+
+        console.log(error);
+        res.status(500).json({error: error});
+        
+    }
+});
+
+//delete all prject likkes 
+
+router.delete('/deleteAllLikes', authenticateToken, async (req, res) => {
+    const dP = await prisma.ProjectLike.deleteMany({});
+
+    if(dP === null) {
+        res.status(500).send({message: "couldnt delete project likes"});
+    }
+
+    res.status(200).send({message: "deleted all project likes"});
+});
 module.exports = router;
