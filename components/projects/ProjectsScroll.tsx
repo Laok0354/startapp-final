@@ -50,7 +50,36 @@ const Projects = (
         } else {
           setLiked(false);
         }
-      };
+        fetch(`http://localhost:3000/project/like/${id}`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+          credentials: "include",
+        })
+          .then((response) => {
+             if (response.status === 401) {
+                window.location.href = '/login';
+                return Promise.reject('Unauthorized');
+              }
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            console.log(response)
+            return response.json();
+          })
+          .then((data) => {
+            // Handle the response data if needed
+            
+            // Update the liked state
+          })
+          .catch((error) => {
+            console.error('Error liking project:', error);
+            // Handle error if needed
+          });
+            };
 
     const customStyles = {
         overlay: {
