@@ -56,7 +56,7 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
     }
 });
 
-router.get('/searchProject/:searchString', async (req, res) => {
+router.get('/searchProjectUnlogged/:searchString', async (req, res) => {
     try {
         const searchString = req.params.searchString;
 

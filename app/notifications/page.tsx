@@ -9,46 +9,94 @@ import Notifications from "@/components/Notifications";
 
 export default function Home () {
   const [isOpen, setIsOpen] = useState(true);
+  const [collabRequests, setCollabRequests] = useState([]);
+  const [visibleProjects, setVisibleProjects] = useState([]);
+
 
   const toggleNavbar = () => {
     console.log('toggleNavbar called');
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/userInteractions/getOwnCollaborationRequests", {
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCollabRequests(data);
+/*         setVisibleProjects(data.slice(0, 5)); */
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleAccept = (id) => {
+    fetch(`http://localhost:3000/acceptCollaborationRequest/${id}`, {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify({ response: 'accepted' }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to accept collaboration request');
+        }
+/*         const updatedProjects = collabRequests.filter((project) => project.id !== id);
+        setVisibleProjects(updatedProjects.slice(0, 5)); */
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handleDecline = (id) => {
+    fetch(`http://localhost:3000/rejectCollaborationRequest/${id}`, {
+      method: 'POST',
+      credentials: "include",
+      body: JSON.stringify({ response: 'rejected' }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to reject collaboration request');
+        }
+/*         const updatedProjects = collabRequests.filter((project) => project.id !== id);
+        setVisibleProjects(updatedProjects.slice(0, 5)); */
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+
   return (
     <>
-    <header>
-      <NavbarPrincipal/>
+      <header>
+        <NavbarPrincipal />
       </header>
-      
+
       <main className="bg-[#0A090B] h-screen w-screen">
-       <button onClick={toggleNavbar}>
-        <Image className= 'absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
-          src="/svg/menu.svg"
-          alt=""
-          width = {200}
-          height= {100}
-        />
-        </button>
-        <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page=""/>
-        
-        <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
-          <div className="w-screen flex gap-96">
-            <h1 className=" ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">Notifications</h1>
-          </div>
-          
-          <ul className="flex flex-row list-none gap-[40px] text-[20px] items-center mt-16">
-            <li className="ml-[95px] px-[5px]">All</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Unread</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Acepted</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Declined</li>
-          </ul>
-        </section>
-        <section className="w-full h-60 bg-[#0A090B]"> 
-           <div className="px-8">
-             <Notifications/>
+        <button onClick={toggleNavbar}>{/* Your Image component */}</button>
+        <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page="" />
+
+        <section className="w-full h-60 bg-[#0A090B]">
+          <div className="px-8">
+            {/* Rendering Notifications component with visibleProjects */}
+            {collabRequests.map((collabRequest) => (
+              <Notifications
+                key={collabRequest.id}
+                id={collabRequest.id}
+                userId={collabRequest.userId}
+                name={collabRequest.userId}
+                message={collabRequest.message}
+                onAccept={() => handleAccept(collabRequest.id)}
+                onDecline={() => handleDecline(collabRequest.id)}
+                isAccepted={collabRequest.isAccepted}
+              />
+            ))}
           </div>
         </section>
       </main>
     </>
-  )
+  );
 }
