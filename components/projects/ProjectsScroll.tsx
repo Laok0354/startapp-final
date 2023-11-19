@@ -70,14 +70,8 @@ const Projects = (
             console.log(response)
             return response.json();
           })
-          .then((data) => {
-            // Handle the response data if needed
-            
-            // Update the liked state
-          })
           .catch((error) => {
             console.error('Error liking project:', error);
-            // Handle error if needed
           });
             };
 
@@ -157,62 +151,68 @@ const Projects = (
     );
 }
 
-const ProjectsScroll = () => {
+const ProjectsScroll = ({ searchResults }) => {
   const [projectsData, setProjectsData] = useState([]);
   const [error, setError] = useState(null);
-  const stateText = ["0","In Progress", "Finished", "Abandoned", "Paused"]
+  const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const stateText = ["0", "In Progress", "Finished", "Abandoned", "Paused"];
 
   useEffect(() => {
-    fetch(`http://localhost:3000/project/getAllProjects`, {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
+    if (!initialDataLoaded && searchResults === undefined) {
+      fetch(`http://localhost:3000/project/getAllProjects`, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+        },
       })
-      .then((data) => {
-        shuffleArray(data);
-        setProjectsData(data);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
-  }, []);
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          shuffleArray(data);
+          setProjectsData(data);
+          setInitialDataLoaded(true);
+        })
+        .catch((error) => {
+          setError(error.message);
+        });
+    } else if (searchResults !== undefined) {
+      setProjectsData(searchResults);
+    }
+  }, [searchResults, initialDataLoaded]);
+
   if (error) {
     return <div style={{ color: 'red' }}>{`Couldn't load projects. Error: ${error}`}</div>;
   }
 
-  if (projectsData.length === 0) {
+  if (projectsData.length === 0 && searchResults === undefined && !initialDataLoaded) {
     return (
       <section className="overflow-hidden">
-          <div className={25 > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-              {[...Array(24)].map((_, index) => (
-                  <div className="col-span-1" key={index}>
-                      <Projects
-                          id={index}
-                          title="Loading..."
-                          description="Loading..."
-                          members= {0}
-                          joined= {0}
-                          stateText={"Loading..."}
-                      />
-                  </div>
-              ))}
-          </div>
+        <div className={25 > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
+          {[...Array(24)].map((_, index) => (
+            <div className="col-span-1" key={index}>
+              <Projects
+                id={index}
+                title="Loading..."
+                description="Loading..."
+                members={0}
+                joined={0}
+                stateText={"Loading..."}
+              />
+            </div>
+          ))}
+        </div>
       </section>
-      );
-
+    );
   }
 
-return (
-  <section className="overflow-hidden">
-    <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
-      {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => {        return (
+  return (
+    <section className="overflow-hidden">
+      <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
+        {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => (
           <div className="col-span-1" key={project.id}>
             <Projects
               id={project.id}
@@ -223,13 +223,10 @@ return (
               stateText={stateText[project.statusId]}
             />
           </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
+        ))}
+      </div>
+    </section>
+  );
 };
 
-  
 export default ProjectsScroll;

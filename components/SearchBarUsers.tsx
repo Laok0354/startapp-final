@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useState, useEffect, use } from "react";
 import { data } from "autoprefixer";
 
-function SearchBar2({ className }: { className: string }) {
+function SearchBarUsers({ className, onSearchResults }: { className: string }) {
   const [isInputSelected, setIsInputSelected] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -18,7 +18,7 @@ function SearchBar2({ className }: { className: string }) {
 
   useEffect(() => {
     if (inputValue) {
-      fetch(`http://localhost:3000/search/searchProject/${inputValue}`, {
+      fetch(`http://localhost:3000/search/searchUser/${inputValue}`, {
         credentials: "include",
       })
         .then((response) => {
@@ -30,9 +30,10 @@ function SearchBar2({ className }: { className: string }) {
         .then((data) => {
           console.log(data);
           setSearchResults(data);
+          onSearchResults(data);
         })
         .catch((error) => {
-          fetch(`http://localhost:3000/search/searchProjectUnlogged/${inputValue}`, {
+          fetch(`http://localhost:3000/search/searchUserUnlogged/${inputValue}`, {
         credentials: "include",
       })
         .then((response) => {
@@ -44,13 +45,15 @@ function SearchBar2({ className }: { className: string }) {
         .then((data) => {
           console.log(data);
           setSearchResults(data);
+          onSearchResults(data);
         })
         .catch((error) => {
-          console.error("Error fetching search results:", error);
+          console.error("Error fetching search results", error);
+          alert("No users found.")
         });
         });
     }
-  }, [inputValue]);
+  }, [inputValue, onSearchResults()]);
 
 
   const handleInputFocus = () => {
@@ -90,4 +93,4 @@ function SearchBar2({ className }: { className: string }) {
   );
 }
 
-export default SearchBar2;
+export default SearchBarUsers;

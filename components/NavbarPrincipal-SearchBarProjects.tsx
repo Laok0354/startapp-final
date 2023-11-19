@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import SearchBar from "./SearchBar2";
+import SearchBar from "./SearchBarProjects";
 import Image from "next/image";
 
-function NavbarPrincipal () {
+function NavbarPrincipal ({ onSearchResults }) {
     return (
     <nav className="bg-black/80 border-b-2 border-[#1C1C1C] fixed justify-between h-[80px] w-full flex flex-row items-center">
           <div className="flex flex-row items-center gap-[80px] mr-52">
@@ -25,7 +25,7 @@ function NavbarPrincipal () {
           </div>
 
           <div className='flex justify-center items-center mt-2'>
-            <SearchBar className='absolute bg-gray-800 w-16 mb-1 hover:transition-all duration-1000'/> 
+          <SearchBar className='absolute bg-gray-800 w-16 mb-1 hover:transition-all duration-1000' onSearchResults={onSearchResults} /> 
           </div>
 
           <div className="flex flex-row items-center gap-[80px] ml-56">

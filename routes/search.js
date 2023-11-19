@@ -28,7 +28,10 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
                 }
             });
 
-        const result = await prisma.project.findMany({
+        let result = await prisma.project.findMany({
+            include: {
+                collaborators: true
+            },
             where: {
                 OR: [
                     {
@@ -56,11 +59,14 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
     }
 });
 
-router.get('/searchProject/:searchString', async (req, res) => {
+router.get('/searchProjectUnlogged/:searchString', async (req, res) => {
     try {
         const searchString = req.params.searchString;
 
         const result = await prisma.project.findMany({
+            include: {
+                collaborators: true
+            },
             where: {
                 OR: [
                     {
@@ -88,13 +94,10 @@ router.get('/searchProject/:searchString', async (req, res) => {
     }
 });
 
-router.get('/searchUser/:searchString', async (req, res) => {
+router.get('/searchUser/:searchString', authenticateToken, async (req, res) => {
 
     try {
         const searchString = req.params.searchString;
-
-        if (req.user) {
-            authenticateToken()
             const user = await prisma.user.findUnique({
                 where: {
                     email: req.user.email
@@ -107,9 +110,11 @@ router.get('/searchUser/:searchString', async (req, res) => {
                     userId: user.id
                 }
             });
-        }
 
-        const result = await prisma.user.findMany({
+        let result = await prisma.user.findMany({
+            include: {
+                projects: true
+            },
             where: {
                 OR: [
                     {
@@ -128,10 +133,47 @@ router.get('/searchUser/:searchString', async (req, res) => {
 
         if (result.length === 0) {
             res.status(404).json({ message: "No users found" });
+        } else {
+            res.status(200).json(result);
         }
 
-        
-        res.status(200).json(result);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+});
+
+router.get('/searchUserUnlogged/:searchString', async (req, res) => {
+
+    try {
+        const searchString = req.params.searchString;
+
+        let result = await prisma.user.findMany({
+            include: {
+                projects: true
+            },
+            where: {
+                OR: [
+                    {
+                        userName: {
+                            contains: searchString
+                        }
+                    },
+                    {
+                        about: {
+                            contains: searchString
+                        }
+                    }
+                ]
+            }
+        });
+
+        if (result.length === 0) {
+            res.status(404).json({ message: "No users found" });
+        } else {
+            res.status(200).json(result);
+        }
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Internal server error" });

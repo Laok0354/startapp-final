@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from 'react'
-import NavbarPrincipal from '@/components/NavbarPrincipal-SearchBar';
+import NavbarPrincipal from '@/components/NavbarPrincipal';
 import SideNavbar from '@/components/SideBar';
 import Link from 'next/link'
 
