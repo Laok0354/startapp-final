@@ -15,7 +15,7 @@ export default function Projects() {
         setIsOpen(!isOpen);
     }
 
-    const handleSearchResults = (results) => {
+    const handleSearchResults = (results: []) => {
       setSearchResults(results);
     };
 

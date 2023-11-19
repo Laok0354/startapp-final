@@ -12,7 +12,7 @@ export default function Users() {
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSearchResults = (results) => {
+  const handleSearchResults = (results: []) => {
     setSearchResults(results);
   };
 
