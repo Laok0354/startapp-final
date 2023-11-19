@@ -8,7 +8,12 @@ import { useState } from 'react';
 export default async function Users() {
   const [isOpen, setIsOpen] = useState(false);
   
-  const response = await fetch(`http://localhost:3000/user/getAllUsers`);
+  const response = await fetch(`http://localhost:3000/user/getAllUsers`, {
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Network response was not ok");
