@@ -15,6 +15,19 @@ router.post('/sendCollaborationRequest/:projectId', authenticateToken, async (re
     
     try {
 
+        
+        const existingCollaborator = await prisma.collaborator.findFirst({
+            where: {
+                projectId: projectId,
+                userId: userId
+            }
+        });
+
+        if (existingCollaborator) {
+            return res.status(400).json({ error: "User is already a collaborator of the project" });
+        }
+
+
         await prisma.collaborationRequest.create({
             data: {
                 userId: req.user.id,
@@ -32,6 +45,7 @@ router.post('/sendCollaborationRequest/:projectId', authenticateToken, async (re
         
     }
 }) 
+
 router.get('/getOwnCollaborationRequests', authenticateToken, async (req, res) => {
     
     try {
