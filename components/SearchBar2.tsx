@@ -32,22 +32,7 @@ function SearchBar2({ className }: { className: string }) {
           setSearchResults(data);
         })
         .catch((error) => {
-          fetch(`http://localhost:3000/search/searchProjectUnlogged/${inputValue}`, {
-        credentials: "include",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            console.log(response.json());
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setSearchResults(data);
-        })
-        .catch((error) => {
           console.error("Error fetching search results:", error);
-        });
         });
     }
   }, [inputValue]);

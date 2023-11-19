@@ -16,7 +16,7 @@ function shuffleArray(array: []) {
   }
 }
 
-const Projects = (
+const Project = (
     {
     id,
     title, 
@@ -134,7 +134,9 @@ const ProjectsScroll = () => {
   const stateText = ["0","In Progress", "Finished", "Abandoned", "Paused"]
 
   useEffect(() => {
-    fetch(`http://localhost:3000/project/getAllProjects`, {
+    const timestamp = Date.now();
+
+    fetch(`http://localhost:3000/project/getAllProjects?t=${timestamp}`, {
       headers: {
         'Cache-Control': 'no-cache',
         'Pragma': 'no-cache',
@@ -164,7 +166,7 @@ const ProjectsScroll = () => {
           <div className={25 > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
               {[...Array(24)].map((_, index) => (
                   <div className="col-span-1" key={index}>
-                      <Projects
+                      <Project
                           id={index}
                           title="Loading..."
                           description="Loading..."
@@ -185,7 +187,7 @@ return (
     <div className={projectsData.length > 6 ? "max-h-[500px] overflow-y-auto grid grid-cols-4 gap-4 px-2" : "grid grid-cols-4"}>
       {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => {        return (
           <div className="col-span-1" key={project.id}>
-            <Projects
+            <Project
               id={project.id}
               title={project.name}
               description={project.description}
