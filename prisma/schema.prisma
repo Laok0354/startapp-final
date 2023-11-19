@@ -116,3 +116,13 @@ model CollaborationRequest {
   @@index([projectId], map: "projectIdIndex")
   @@index([userId], map: "userIdIndex")
 }
+
+model ProjectLike {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  projectId Int
+  liked     Boolean @default(false)
+
+  @@unique([userId, projectId], map: "userProjectIndex")
+  @@index([projectId])
+}
