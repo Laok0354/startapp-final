@@ -16,7 +16,7 @@ Authorization: Bearer <token>
 
 ###
 
-GET http://localhost:3000/userInteractions/getOwnCollaborationRequest/1
+GET http://localhost:3000/userInteractions/getOwnCollaborationRequest/42
 Content-Type: application/json
 Authorization: Bearer <token>
 
@@ -29,14 +29,14 @@ Authorization: Bearer <token>
 
 ###
 
-GET http://localhost:3000/userInteractions/getCollaborationRequest/4
+GET http://localhost:3000/userInteractions/getCollaborationRequest/19
 Content-Type: application/json
 Authorization: Bearer <token>
 
 
 ###
 
-POST http://localhost:3000/userInteractions/acceptCollaborationRequest/10
+POST http://localhost:3000/userInteractions/acceptCollaborationRequest/19
 Content-Type: application/json
 Authorization: Bearer <token>
 
@@ -46,7 +46,7 @@ Authorization: Bearer <token>
 
 ###
 
-POST http://localhost:3000/userInteractions/rejectCollaborationRequest/9
+POST http://localhost:3000/userInteractions/rejectCollaborationRequest/21
 Content-Type: application/json
 Authorization: Bearer <token>
 
