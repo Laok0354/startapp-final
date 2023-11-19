@@ -18,6 +18,7 @@ model User {
   refreshTokens RefreshToken[]
   projects      ProjectCollaborators[]
   likes         ProjectLike[]
+  recommendedProjects RecommendedProject[]
 }
 
 model Skill {
@@ -47,10 +48,27 @@ model Project {
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
   collaborators ProjectCollaborators[]
+  recommendedProjects RecommendedProject[]
 
   @@index([creatorId], map: "userIdIndex")
   @@index([statusId], map: "statusIdIndex")
  
+}
+
+model RecommendedProject {
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  userId    Int
+  affinity  Float    
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  project   Project  @relation(fields: [projectId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
 }
 
 model ProjectLike {

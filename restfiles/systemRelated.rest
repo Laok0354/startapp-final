@@ -33,3 +33,45 @@ Content-Type: application/json
 
 GET http://localhost:3000/dbData/skills
 
+
+###
+
+POST http://localhost:3000/recommendations/recommend
+Content-Type: application/json
+
+{
+    "id": 56,
+    "projectsWithAffinities": [
+        {
+            "projectId": 4,
+            "affinity": 0.9
+        },
+        {
+            "projectId": 2,
+            "affinity": 0.6
+        },
+        {
+            "projectId": 3,
+            "affinity": 0.4
+        },
+        {
+            "projectId": 5,
+            "affinity": 1
+        }
+    ]
+}
+###
+
+DELETE  http://localhost:3000/recommendations/deleteAllRecommendations
+Content-Type: application/json
+
+###
+
+
+
+
+
+
+
+
+
