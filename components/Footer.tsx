@@ -31,7 +31,7 @@ function Footer () {
           /></Link>
         </div>
         <div className="relative pt-48 pr-10">
-          <Link href="/">
+          <Link href="https://instagram.com/startapp.oficial?igshid=MTNiYzNiMzkwZA==">
             <Image className= 'w-[30px] h-[30px]'
             src="/svg/Ig.svg"
             alt=""
@@ -40,7 +40,7 @@ function Footer () {
           /></Link>
         </div>
         <div className="relative pt-48 pr-14">
-          <Link href="/">
+          <Link href="https://x.com/StartAppOficial?t=d3_QjjqROU-3lxJVb-noUQ&s=08">
             <Image className= 'w-[30px] h-[30px]'
             src="/svg/x.svg"
             alt=""
