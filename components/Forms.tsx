@@ -324,7 +324,7 @@ const ProjectForm = ({
 }: {
   handleCreateProject: ({ formData } : { formData: Project }) => void;
 }) => {
-  const options = ["Template 1", "Template 2", "Template 3"];
+  const options = ["New Project"];
   const [selectedTemplate, setSelectedTemplate] = useState("");
   const [selectedOption, setSelectedOption] = useState<string>(options[0]);
   const formRef = useRef<HTMLFormElement | null>(null);
@@ -378,7 +378,7 @@ const ProjectForm = ({
           <div className="p-4 ">
             <div>
               <h1 className="text-2xl">
-                {selectedOption !== "" ? `New ${selectedOption}` : ""}
+                {selectedOption !== "" ? `${selectedOption}` : ""}
               </h1>
             </div>
             <div className="my-2">
@@ -400,7 +400,7 @@ const ProjectForm = ({
                 titleClassName="text-xs font-raleway font-light tracking-wide"
                 onChange={handleInputChange}
               />
-              <div>
+              <div className="mb-32">
                 <h6 className="text-xs font-raleway font-light tracking-wide">Members</h6>
                 <NumberInput
                   name="collaborators"
@@ -411,9 +411,9 @@ const ProjectForm = ({
             </div>
           </div>
         </section>
-        <div className="w-full flex items-center justify-center">
+        <div className="w-full flex items-center justify-center ">
           <button
-            className="text-white p-2 bg-primaryv w-36 rounded-md mt-6"
+            className="text-white p-2 bg-primaryv w-36 rounded-md mt-9"
             type="submit"
           >
             Create Project

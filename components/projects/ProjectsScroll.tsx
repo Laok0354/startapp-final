@@ -117,16 +117,23 @@ const Project = (
     );
 }
 
-const ProjectsScroll = () => {
+const ProjectsScroll = ({ 
+    amountProjects,
+    amountColumns,
+    className
+} : { 
+    amountProjects : number 
+    amountColumns : number
+    className : string
+}) => {
     const stateText = ["In Progress", "Finished", "Abandoned"]
-    let amountProjects = 24;
     let projectNumber = 0;
     let amountMembers = 9;
     return (
-        <section className="overflow-hidden">
-            <div className={amountProjects > 4 ? "max-h-[500px] overflow-y-auto grid grid-cols-3 gap-4 px-2" : "grid grid-cols-3"}>
+        <section className="overflow-hidden w-full flex justify-center">
+            <div className={amountProjects > 4 ?  `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns}`}>
                 {[...Array(amountProjects)].map((_, index) => (
-                    <div className="col-span-1">
+                    <div className="col-span-1 w-fit">
                         <Project
                             key={index}
                             title={`Project ${projectNumber += 1}`}

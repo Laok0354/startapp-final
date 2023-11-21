@@ -9,12 +9,14 @@ interface SideNavbarProps {
   page: string;
   isOpen: boolean;
   handleOpenNavbar: () => void;
+  setActiveTab: (tab: string) => void;
 }
 
 const SideNavbar: React.FC<SideNavbarProps> = ({
   page,
   isOpen,
   handleOpenNavbar,
+  setActiveTab
 }: SideNavbarProps) => {
   return (
     <main>
