@@ -9,18 +9,26 @@ import Notifications from "@/components/Notifications";
 
 export default function Home () {
   const [isOpen, setIsOpen] = useState(true);
+  const [activeTab, setActiveTab] = useState('All');
 
   const toggleNavbar = () => {
     console.log('toggleNavbar called');
     setIsOpen(!isOpen);
   };
+
+  const handleTabClick = (tab : string) => {
+    setActiveTab(tab);
+  }
+
+  const amountNotifications = 12
+
   return (
     <>
     <header>
       <NavbarPrincipal/>
     </header>
       
-      <main className="bg-[#0A090B] h-screen w-screen">
+      <main className="bg-[#0A090B] h-screen w-screen overflow-hidden">
        <button onClick={toggleNavbar}>
         <Image className= 'absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
           src="/svg/menu.svg"
@@ -37,16 +45,31 @@ export default function Home () {
           </div>
           
           <ul className="flex flex-row list-none gap-[40px] text-[20px] items-center mt-16">
-            <li className="ml-[95px] px-[5px]">All</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Unread</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Acepted</li>
-            <li className="text-white/70 hover:text-white active:text-white/30">Declined</li>
+            <li className="ml-[95px] px-[5px]" ><a href="#" onClick={() => handleTabClick('All')}>All</a></li>
+            <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Unread')}>Unread</a></li>
+            <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Accepted')}>Accepted</a></li>
+            <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Declined')}>Declined</a></li>
           </ul>
         </section>
         <section className="w-full h-60 bg-[#0A090B]"> 
-           <div className="px-8">
-             <Notifications nameUser="Jane Austen" nameProject="StartApp"/>
-          </div>
+          {activeTab === "All" && (
+              <div className={amountNotifications > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
+                {[...Array(amountNotifications)].map((_, index) => (
+                    <div className="col-span-1">
+                        <Notifications nameUser={"Jane Austen"} nameProject={"StartApp"}></Notifications>
+                    </div>
+                ))}
+            </div>
+            )}
+            {activeTab === "Unread" && (
+              <h3>Unread</h3>
+            )}
+            {activeTab === "Accepted" && (
+              <h3>Accepted</h3>
+            )}
+            {activeTab === "Declined" && (
+              <h3>Declined</h3>
+            )}
         </section>
       </main>
     </>
