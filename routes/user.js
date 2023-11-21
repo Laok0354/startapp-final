@@ -101,7 +101,15 @@ router.get('/getAllUsers', async (req, res) => {
 
         const users = await prisma.user.findMany({
             include: {
-                projects: true
+                projects: {
+                    include: {
+                        project: {
+                            include:  {
+                                likes: true
+                            }
+                        }
+                    }
+                }
             }
         });
         

@@ -9,11 +9,37 @@ import Notifications from "@/components/Notifications";
 
 export default function Home () {
   const [isOpen, setIsOpen] = useState(true);
+  const [notifsResults, setNotifsResults] = useState([]);
+
 
   const toggleNavbar = () => {
     console.log('toggleNavbar called');
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+      fetch(`http://localhost:3000/userInteractions/getCollaborationRequests`, {
+        headers: {
+          'Cache-Control': 'no-cache',
+          'Pragma': 'no-cache',
+        },
+        credentials: "include"
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setNotifsResults(data);
+          console.log(notifsResults)
+        })
+        .catch((error) => {
+          console.log(`Error fetching notifications: ${error}`);
+        });
+      }, []);
+
   return (
     <>
     <header>
@@ -45,7 +71,15 @@ export default function Home () {
         </section>
         <section className="w-full h-60 bg-[#0A090B]"> 
            <div className="px-8">
-             <Notifications nameUser="Jane Austen" nameProject="StartApp"/>
+           {notifsResults.map((notifData) => (
+            <div className="col-span-1" key={notifData.id}>
+              <Notifications
+                nameUser={notifData.id}
+                nameProject={notifData.projectId}
+                notifMessage={notifData.message}
+              />
+            </div>
+        ))}
           </div>
         </section>
       </main>

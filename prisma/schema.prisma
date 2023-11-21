@@ -130,3 +130,16 @@ model CollaborationRequest {
   @@index([projectId], map: "projectIdIndex")
   @@index([userId], map: "userIdIndex")
 }
+
+model RecommendedProject {
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  userId    Int
+  affinity  Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
+}

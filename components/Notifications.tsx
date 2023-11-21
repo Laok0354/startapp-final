@@ -5,11 +5,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface NotificationsProps{
+  requestId:String
   nameUser:String;
   nameProject:String;
+  notifMessage:String;
  }
 
-function Notifications ({nameUser,nameProject}:NotificationsProps){
+function Notifications ({requestId, nameUser,nameProject,notifMessage}:NotificationsProps){
    const [accepted, setAccepted] = useState(false);
    const [declined, setDeclined] = useState(false);
 
@@ -46,8 +48,11 @@ function Notifications ({nameUser,nameProject}:NotificationsProps){
    }
    else{
     message = (
-      <h3 className="text-[18px] font-semibold w-full">{nameUser} wants to join your team for project "{nameProject}"!</h3>
-    );
+      <div>
+        <h3 className="text-[18px] font-semibold w-full">{nameUser} wants to join your team for project "{nameProject}"!</h3>
+        <p className="text-xs text-[#8F8F8F]">{notifMessage}</p>
+      </div>
+      );
    }
 
   return (
