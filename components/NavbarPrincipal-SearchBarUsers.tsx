@@ -38,12 +38,13 @@ function NavbarPrincipal ({ onSearchResults }) {
           </div>
 
           <div className="flex flex-row items-center gap-[40px] mr-10">
-          <Image className= 'w-12 h-12 opacity-100 active:opacity-30'
+          <Link href="/notifications"><Image className= 'w-12 h-12 opacity-100 active:opacity-30'
             src="/svg/notification.svg"
             alt=""
             width = {200}
             height= {100}
             />
+          </Link>
 
           <Image className= 'w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/plus.svg"
