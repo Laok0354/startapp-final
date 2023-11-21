@@ -32,7 +32,7 @@ We will be pleased to respond to you by email or on any of our social media chan
           /></Link>
           </div>
           <div className=" pt-10 pr-10">
-          <Link href="/">
+          <Link href="https://x.com/StartAppOficial?t=d3_QjjqROU-3lxJVb-noUQ&s=08">
             <Image className= 'w-[70px] h-[70px]'
             src="/svg/x.svg"
             alt=""
@@ -41,7 +41,7 @@ We will be pleased to respond to you by email or on any of our social media chan
           /></Link>
           </div>
           <div className=" pt-10 pr-10">
-          <Link href="/">
+          <Link href="https://instagram.com/startapp.oficial?igshid=MTNiYzNiMzkwZA==">
             <Image className= 'w-[70px] h-[70px]'
             src="/svg/Ig.svg"
             alt=""

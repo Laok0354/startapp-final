@@ -8,9 +8,7 @@ import Footer from "@/components/Footer";
 export default function Home () {
   return (
     <>
-    <header>
-      <NavBar page="Home"/>
-    </header>
+    <header><NavBar page="Home"/></header>
     <section className="pl-24 bg-gradient-to-br from-black from-50% to-primaryv w-full h-[full]">
       <h1 className="mt-[184px] mb-[27px] flex flex-col w-[838px]text-white text-[70px] justify-center font-semibold text-7xl font-red">Build your own team project</h1>
       <div>
