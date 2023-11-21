@@ -25,7 +25,11 @@ export default function Projects() {
       </header>
       <section className="flex flex-row justify-around items-center flex-grow mt-[6.5rem]">
         <div className={`mt-4 transition-all duration-700 ${isOpen ? "ml-52" : ""}`}>
-          <ProjectsScroll />
+          <ProjectsScroll 
+            amountProjects={24}
+            amountColumns={3}
+            className=""
+          />
         </div>
         <div className="">
           <SuggestedUsers />
