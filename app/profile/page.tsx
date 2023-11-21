@@ -14,7 +14,7 @@ export default function Home (){
     return(
         <>
         <main className="">
-        <body className="bg-[#0A090B] h-screen w-screen">
+        <section className="bg-[#0A090B] h-screen w-screen">
         <header><NavbarPrincipal/></header>
           <button onClick={toggleNavbar}>
            <Image className= 'absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
@@ -35,20 +35,22 @@ export default function Home (){
               height= {100}
             />
            </div>
-           <button className="absolute top-80 left-14 pl-[990px]">
-            <Image className= 'w-10 h-10'
-              src="/svg/edit.svg"
-              alt=""
-              width = {200}
-              height= {100}
-            />
-           </button>
           </section>
-            <div className="relative pt-40 h-20">
-              <input className="bg-transparent border-0"></input>
-              <input></input>
+            <div className="relative pt-6 justify-center w-40 h-20 pl-[400px]">
+              <form>
+              <input
+                className="w-96 bg-transparent text-white text-3xl placeholder:font-semibold placeholder:text-white/70"
+                type="text"
+                placeholder="Name:"
+              />
+              <input
+                className="w-96 bg-transparent text-white text-2xl placeholder:font-semibold placeholder:text-white placeholder:text-20"
+                type="text"
+                placeholder="Profession:"
+              />
+              </form>
             </div>
-        </body>
+        </section>
         </main>
         </>
     )

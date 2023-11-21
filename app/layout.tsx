@@ -10,7 +10,7 @@ export default function RootLayout({
       <head>
         <title>StartApp</title>
       </head>
-      <body className="flex h-full w-screen bg-gradient-to-br from-primaryv to-80% to-black text-white flex-col overflow-x-hidden">
+      <body className="flex h-[full] w-screen bg-gradient-to-br from-primaryv to-80% to-black text-white flex-col overflow-x-hidden">
         <header>
 
         </header>

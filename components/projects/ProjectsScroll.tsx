@@ -151,7 +151,17 @@ const Projects = (
     );
 }
 
-const ProjectsScroll = ({ searchResults }) => {
+const ProjectsScroll = ({ 
+  amountProjects,
+  amountColumns,
+  className,
+  searchResults
+} : { 
+  amountProjects : number 
+  amountColumns : number
+  className : string
+  searchResults: any
+}) => {
   const [projectsData, setProjectsData] = useState([]);
   const [error, setError] = useState(null);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
