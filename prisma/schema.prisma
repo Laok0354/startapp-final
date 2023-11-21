@@ -19,6 +19,7 @@ model User {
   projects      ProjectCollaborators[]
   likes         ProjectLike[]
   recommendedProjects RecommendedProject[]
+  collaborationRequests CollaborationRequest[]
 }
 
 model Skill {
@@ -49,6 +50,7 @@ model Project {
   updatedAt     DateTime               @updatedAt
   collaborators ProjectCollaborators[]
   recommendedProjects RecommendedProject[]
+  collaborationRequests CollaborationRequest[]
 
   @@index([creatorId], map: "userIdIndex")
   @@index([statusId], map: "statusIdIndex")
@@ -145,6 +147,8 @@ model CollaborationRequest {
   id        Int      @id @default(autoincrement())
   userId    Int
   projectId Int
+  user     User     @relation(fields: [userId], references: [id])
+  project  Project  @relation(fields: [projectId], references: [id])
   response  String?
   createdAt DateTime @default(now())
   status    String   @default("pending")

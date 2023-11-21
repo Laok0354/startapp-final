@@ -114,6 +114,20 @@ router.get('/getCollaborationRequests', authenticateToken, async (req, res) => {
                 projectId: {
                     in: projectIds
                 }
+            },
+            include: {
+
+                user: {
+                    select: {
+                        userName: true
+                    }
+                },
+                project: {
+                    select: {
+                        name: true
+                    }
+                }
+                
             }
         });
 
