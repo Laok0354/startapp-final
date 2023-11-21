@@ -55,16 +55,4 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3000/project/like/45
-Authorization: Bearer
-Content-Type: application/json
-
-
-###
-
-DELETE http://localhost:3000/project/deleteAllLikes
-Authorization: Bearer
-Content-Type: application/json
-
-###
 

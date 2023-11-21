@@ -16,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "pipi",
+    "email": "pong",
     "password": "rey"
 }
 ###
@@ -39,10 +39,17 @@ Content-Type: application/json
 ###
 
 // Search for users
-GET http://localhost:3000/search/searchUser/engineer
-Authorization: Bearer <token>
+GET http://localhost:3000/search/searchUser/pepe
 Content-Type: application/json
 
 ###
 
 GET http://localhost:3000/user/getAllUsers
+
+###
+
+GET http://localhost:3000/recommendations/getRecommended
+Content-Type: application/json
+Authorization: Bearer
+
+###
