@@ -18,7 +18,7 @@ export default function Home () {
     <>
     <header>
       <NavbarPrincipal/>
-      </header>
+    </header>
       
       <main className="bg-[#0A090B] h-screen w-screen">
        <button onClick={toggleNavbar}>
@@ -45,7 +45,7 @@ export default function Home () {
         </section>
         <section className="w-full h-60 bg-[#0A090B]"> 
            <div className="px-8">
-             <Notifications/>
+             <Notifications nameUser="Jane Austen" nameProject="StartApp"/>
           </div>
         </section>
       </main>
