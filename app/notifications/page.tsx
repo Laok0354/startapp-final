@@ -34,7 +34,6 @@ export default function Home () {
         })
         .then((data) => {
           setNotifsResults(data);
-          console.log(notifsResults)
         })
         .catch((error) => {
           console.log(`Error fetching notifications: ${error}`);
@@ -81,23 +80,60 @@ export default function Home () {
                 {notifsResults.map((notifData) => (
                   <div className="col-span-1" key={notifData.id}>
                     <Notifications
-                      requestId={notifData.id}
-                      nameUser={notifData.id}
-                      nameProject={notifData.projectId}
+                      notifId={notifData.id}
+                      nameUser={notifData.user.userName}
+                      nameProject={notifData.project.name}
                       notifMessage={notifData.message}
+                      notifStatus={notifData.status}
                     />
                   </div>
                 ))}
             </div>
             )}
             {activeTab === "Unread" && (
-              <h3>Unread</h3>
+              <div className={notifsResults.length > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
+                {notifsResults.filter((notifData) => notifData.status === "pending").map((notifData) => (
+                  <div className="col-span-1" key={notifData.id}>
+                    <Notifications
+                      notifId={notifData.id}
+                      nameUser={notifData.user.userName}
+                      nameProject={notifData.project.name}
+                      notifMessage={notifData.message}
+                      notifStatus={notifData.status}
+                    />
+                  </div>
+                ))}
+            </div>
             )}
             {activeTab === "Accepted" && (
-              <h3>Accepted</h3>
+              <div className={notifsResults.length > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
+              {notifsResults.filter((notifData) => notifData.status === "accepted").map((notifData) => (
+                <div className="col-span-1" key={notifData.id}>
+                  <Notifications
+                    notifId={notifData.id}
+                    nameUser={notifData.user.userName}
+                    nameProject={notifData.project.name}
+                    notifMessage={notifData.message}
+                    notifStatus={notifData.status}
+                  />
+                </div>
+              ))}
+          </div>
             )}
             {activeTab === "Declined" && (
-              <h3>Declined</h3>
+              <div className={notifsResults.length > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
+              {notifsResults.filter((notifData) => notifData.status === "rejected").map((notifData) => (
+                <div className="col-span-1" key={notifData.id}>
+                  <Notifications
+                    notifId={notifData.id}
+                    nameUser={notifData.user.userName}
+                    nameProject={notifData.project.name}
+                    notifMessage={notifData.message}
+                    notifStatus={notifData.status}
+                  />
+                </div>
+              ))}
+          </div>
             )}
         </section>
       </main>

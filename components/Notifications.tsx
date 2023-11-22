@@ -5,25 +5,53 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface NotificationsProps{
-  requestId:String
+  notifId:String
   nameUser:String;
   nameProject:String;
   notifMessage:String;
+  notifStatus:String;
  }
 
-function Notifications ({requestId, nameUser,nameProject,notifMessage}:NotificationsProps){
+function Notifications ({notifId, nameUser,nameProject,notifMessage, notifStatus}:NotificationsProps){
    const [accepted, setAccepted] = useState(false);
    const [declined, setDeclined] = useState(false);
 
    const handleAccept=() =>{
+    fetch(`http://localhost:3000/userInteractions/acceptCollaborationRequest/${notifId}`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      credentials: "include"
+    })
     setAccepted(true);
     setDeclined(false);
    };
 
    const handleDeclined = () => {
+    fetch(`http://localhost:3000/userInteractions/rejectCollaborationRequest/${notifId}`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      credentials: "include"
+    })
     setDeclined(true);
     setAccepted(false);
    };
+
+   useEffect(() => {
+    if (notifStatus === "accepted") {
+      setAccepted(true);
+      setDeclined(false);
+    }
+  
+    if (notifStatus === "rejected") {
+      setDeclined(true);
+      setAccepted(false);
+    }
+  
+  }, []);
 
    const [notificationDate, setNotificationDate] = useState(new Date());
 
