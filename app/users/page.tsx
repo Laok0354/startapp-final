@@ -49,7 +49,7 @@ export default function Users() {
 
 
   return (
-    <main>
+    <main className='h-screen overflow-hidden'>
           <header>
               <NavbarPrincipal onSearchResults={handleSearchResults}/>
               <SideNavbar 

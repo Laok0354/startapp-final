@@ -45,7 +45,6 @@ export default function Home () {
     setActiveTab(tab);
   }
 
-  const amountNotifications = 12
 
   return (
     <>
@@ -78,8 +77,8 @@ export default function Home () {
         </section>
         <section className="w-full h-60 bg-[#0A090B]"> 
           {activeTab === "All" && (
-              <div className={amountNotifications > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
-                {[...Array(amountNotifications)].map((_, index) => (
+              <div className={notifsResults.length > 3 ? "max-h-[500px] overflow-y-auto gap-4 px-8" : ""}>
+                {notifsResults.map((notifData) => (
                   <div className="col-span-1" key={notifData.id}>
                     <Notifications
                       requestId={notifData.id}
