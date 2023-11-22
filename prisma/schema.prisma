@@ -60,7 +60,6 @@ model RecommendedProject {
   id        Int      @id @default(autoincrement())
   projectId Int
   userId    Int
-  affinity  Float    
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

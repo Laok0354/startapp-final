@@ -16,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "pong",
+    "email": "ching",
     "password": "rey"
 }
 ###
@@ -48,6 +48,7 @@ GET http://localhost:3000/user/getAllUsers
 
 ###
 
+//get recommended projects
 GET http://localhost:3000/recommendations/getRecommended
 Content-Type: application/json
 Authorization: Bearer

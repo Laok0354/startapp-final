@@ -34,12 +34,10 @@ router.post('/recommend', async (req, res) => {
 
     const recommendedProjects = await prisma.recommendedProject.createMany({
 
-        data: req.body.projectsWithAffinities.map(({ projectId, affinity }) => ({
+        data: req.body.projectsWithAffinities.map(({ projectId }) => ({
             
             projectId,
-            affinity, 
             userId: req.body.id,
-
 
         })),
 
@@ -60,13 +58,14 @@ router.get('/getRecommended', authenticateToken, async (req, res) => {
         where: {
           userId: req.user.id, // Replace with the actual user ID
         },
-        orderBy: {
-          affinity: 'desc', // Order by affinity in descending order (higher affinity first)
+        include: {
+            project: true,
         },
     });
 
     res = res.status(200).json(recommendedProjects);
-});
+    
+}); 
 
 router.delete('/deleteAllRecommendations', authenticateToken, async (req, res) => {
     const dR = await prisma.recommendedProject.deleteMany({});
