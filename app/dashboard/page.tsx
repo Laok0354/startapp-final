@@ -37,7 +37,6 @@ function DashBoard() {
           })
           .then((data) => {
             setMyProjects(data);
-            console.log(myProjects);
           })
           .catch((error) => {
             console.error('Error fetching your projects:', error);
@@ -54,7 +53,6 @@ function DashBoard() {
             })
             .then((data) => {
               setMyLikedProjects(data);
-              console.log(myLikedProjects);
             })
             .catch((error) => {
               console.error('Error fetching liked projects:', error);
