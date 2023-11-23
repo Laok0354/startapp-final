@@ -237,6 +237,9 @@ router.get('/getMyProjects', authenticateToken, async (req, res) => {
             where:
             {
                 creatorId: req.user.id
+            },
+            include: {
+                collaborators: true
             }
         });
         res.status(200).json(projects);

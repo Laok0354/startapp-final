@@ -33,7 +33,6 @@ export default function Projects() {
         <div className={`mt-4 transition-all duration-700 ${isOpen ? "ml-52" : ""}`}>
           <ProjectsScroll 
             searchResults={searchResults}
-            amountProjects={24}
             amountColumns={3}
             className=""
           />

@@ -1,6 +1,6 @@
 "use client"
 
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import NavbarPrincipal from '@/components/Navbar-DashBoard';
 import SideNavbar from '@/components/SideBar';
 import ProjectsScroll from '@/components/projects/ProjectsScroll';
@@ -10,6 +10,8 @@ function DashBoard() {
     const [activeTab, setActiveTab] = useState('Your Projects');
     const [linePosition, setLinePosition] = useState(67);
     const [isOpen, setIsOpen] = useState(false);
+    const [myProjects, setMyProjects] = useState([]);
+    const [myLikedProjects, setMyLikedProjects] = useState([]);
 
     const handleOpenNavbar = () => {
         setIsOpen(!isOpen);
@@ -22,6 +24,42 @@ function DashBoard() {
         setLinePosition(element.offsetLeft);
       }
     }
+
+    useEffect(() => {
+        fetch("http://localhost:3000/project/getMyProjects", {
+          credentials: "include"
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setMyProjects(data);
+            console.log(myProjects);
+          })
+          .catch((error) => {
+            console.error('Error fetching your projects:', error);
+          });
+
+          fetch("http://localhost:3000/userInteractions/getLiked", {
+            credentials: "include"
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then((data) => {
+              setMyLikedProjects(data);
+              console.log(myLikedProjects);
+            })
+            .catch((error) => {
+              console.error('Error fetching liked projects:', error);
+            });
+      }, []);
 
     return (
         <main id = "__next" className='h-[full] w-full overflow-hidden'>
@@ -62,7 +100,7 @@ function DashBoard() {
                     {activeTab === 'Your Projects' && (
                         <div>
                             <ProjectsScroll
-                                amountProjects={12}
+                                searchResults={myProjects}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
@@ -71,7 +109,7 @@ function DashBoard() {
                     {activeTab === 'Liked Projects' && (
                         <div>
                             <ProjectsScroll
-                                amountProjects={12}
+                                searchResults={myLikedProjects}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />

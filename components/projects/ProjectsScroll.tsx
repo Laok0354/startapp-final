@@ -159,9 +159,13 @@ const Projects = (
 }
 
 const ProjectsScroll = ({ 
-  searchResults
+  searchResults,
+  amountColumns,
+  className
 } : { 
-  searchResults: any
+  searchResults : any 
+  amountColumns : number
+  className : string
 }) => {
   const [projectsData, setProjectsData] = useState([]);
   const [error, setError] = useState(null);

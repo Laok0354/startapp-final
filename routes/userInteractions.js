@@ -410,8 +410,12 @@ router.get('/getLiked', authenticateToken, async (req, res) => {
                 liked : true
             },
             include: {
-                project: true
+                project:{
+                        include: {
+                                collaborators: true
+                }
             }
+        }
         });
 
         if (projectLikes.length === 0) {
