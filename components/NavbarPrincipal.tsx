@@ -3,11 +3,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface NavbarPrincipalProps{
-  pag : String
+  page : String
 }
-function NavbarPrincipal ({pag} : NavbarPrincipalProps) {
+function NavbarPrincipal ({page} : NavbarPrincipalProps) {
     return (
-    <nav className="bg-black border-b-2 border-[#1C1C1C] fixed justify-evenly h-[80px] w-full flex flex-row items-center">
+    <nav className="bg-black/80 border-b-2 border-[#1C1C1C] fixed justify-evenly h-[80px] w-full flex flex-row items-center">
           <div className="flex flex-row items-center gap-[80px] mr-52">
           <Image className= 'w-14 h-14 px-20 opacity-0'
             src="/svg/menu.svg"
@@ -36,7 +36,7 @@ function NavbarPrincipal ({pag} : NavbarPrincipalProps) {
           </div>
 
           <div className="flex flex-row items-center gap-[40px] mr-10">
-            <Link className={"" + (pag == "Notifications" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/notifications">
+            <Link className={"" + (page == "Notifications" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/notifications">
               <Image className= 'w-12 h-12'
                 src="/svg/notification.svg"
                 alt=""
@@ -52,7 +52,7 @@ function NavbarPrincipal ({pag} : NavbarPrincipalProps) {
              height= {100}
             />
 
-            <Link className={"" + (pag == "Profile" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/profile">
+            <Link className={"" + (page == "Profile" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/profile">
               <Image className= 'w-10 h-10'
                src="/svg/user.svg"
                alt=""

@@ -131,7 +131,7 @@ const ProjectsScroll = ({
     let amountMembers = 9;
     return (
         <section className="overflow-hidden w-full flex justify-center">
-            <div className={amountProjects > 4 ?  `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns}`}>
+            <div className={amountProjects > 4 ?  `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns} `}>
                 {[...Array(amountProjects)].map((_, index) => (
                     <div className="col-span-1 w-fit">
                         <Project
