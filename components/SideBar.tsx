@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import NavbarPrincipal from "./NavbarPrincipal-SearchBar";
+import NavbarPrincipal from "./Navbar-SearchBar";
 
 interface SideNavbarProps {
   page: string;
@@ -16,7 +16,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({
   page,
   isOpen,
   handleOpenNavbar,
-  setActiveTab
+  setActiveTab,
 }: SideNavbarProps) => {
   return (
     <main>

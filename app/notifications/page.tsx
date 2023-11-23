@@ -88,7 +88,27 @@ export default function Home({ estate }: NProps) {
               </a>
             </li>
             <div
-              className={`absolute mt-7 h-1 bg-primaryv rounded-xl transition-transform transform ${activeTab === 'All' ? 'w-[2.5%] translate-x-[6rem]' : activeTab === 'Unread' ? 'w-[5.5%] translate-x-[10.2rem]' : activeTab === 'Accepted' ? 'w-[7%] translate-x-[16.6rem]' : activeTab === 'Declined' ? 'w-[6.5%] translate-x-[24.3rem]' : 'w-[6%]'} ${activeTab === 'All' ? 'translate-x-0' : activeTab === 'Unread' ? 'translate-x-[95px]' : activeTab === 'Declined' ? 'translate-x-[190px]' : activeTab === 'Accepted' ? 'translate-x-[285px]' : 'translate-x-0'}`}
+              className={`absolute mt-7 h-1 bg-primaryv rounded-xl transition-transform transform ${
+                activeTab === "All"
+                  ? "w-[2.5%] translate-x-[6rem]"
+                  : activeTab === "Unread"
+                  ? "w-[5.5%] translate-x-[10.2rem]"
+                  : activeTab === "Accepted"
+                  ? "w-[7%] translate-x-[16.6rem]"
+                  : activeTab === "Declined"
+                  ? "w-[6.5%] translate-x-[24.3rem]"
+                  : "w-[6%]"
+              } ${
+                activeTab === "All"
+                  ? "translate-x-0"
+                  : activeTab === "Unread"
+                  ? "translate-x-[95px]"
+                  : activeTab === "Declined"
+                  ? "translate-x-[190px]"
+                  : activeTab === "Accepted"
+                  ? "translate-x-[285px]"
+                  : "translate-x-0"
+              }`}
             />
           </ul>
         </section>
