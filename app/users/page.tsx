@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import User from '../../components/User'
 import SideNavbar from '../../components/SideBar'

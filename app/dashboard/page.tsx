@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from 'react'
-import NavbarPrincipal from '@/components/NavbarPrincipal';
+import NavbarPrincipal from '@/components/Navbar-DashBoard';
 import SideNavbar from '@/components/SideBar';
 import ProjectsScroll from '@/components/projects/ProjectsScroll';
 import Link from 'next/link'
@@ -26,7 +26,9 @@ function DashBoard() {
     return (
         <main id = "__next" className='h-[full] w-full overflow-hidden'>
             <nav>
-                <NavbarPrincipal />
+                <NavbarPrincipal 
+                    page=""
+                />
                 <SideNavbar 
                     page="Dashboard"
                     isOpen={isOpen}
@@ -62,7 +64,7 @@ function DashBoard() {
                             <ProjectsScroll
                                 amountProjects={12}
                                 amountColumns={4}
-                                className='w-fit mt-8'
+                                className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
                         </div>
                     )}
@@ -71,7 +73,7 @@ function DashBoard() {
                             <ProjectsScroll
                                 amountProjects={12}
                                 amountColumns={4}
-                                className='w-fit mt-8'
+                                className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
                         </div>
                     )}

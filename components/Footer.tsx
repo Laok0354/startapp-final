@@ -22,13 +22,7 @@ function Footer () {
          <h4 className="top-2 pt-10 pl-2">Ⓡ 2023 StarApp, Inc.</h4>
         </div>
         <div className="relative pt-48 pr-10">
-          <Link href="/">
-            <Image className= 'w-[30px] h-[30px]'
-            src="/svg/gmail.svg"
-            alt=""
-            width = {200}
-            height= {100}
-          /></Link>
+          
         </div>
         <div className="relative pt-48 pr-10">
           <Link href="https://instagram.com/startapp.oficial?igshid=MTNiYzNiMzkwZA==">

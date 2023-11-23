@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import ProjectsScroll from "../../components/projects/ProjectsScroll";
 import SuggestedUsers from "../../components/projects/SuggestedUsers";
