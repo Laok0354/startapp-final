@@ -45,7 +45,8 @@ function NavbarPrincipal ({page} : NavbarPrincipalProps) {
               />
             </Link>          
 
-          <Link href="/profile"><Image className= {"" + (page == "Profile" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")}
+            <Link className={"" + (page == "Profile" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/profile">
+            <Image className= 'w-10 h-10'
             src="/svg/user.svg"
             alt=""
             width = {200}
