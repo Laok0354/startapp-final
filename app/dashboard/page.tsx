@@ -1,7 +1,7 @@
 "use client"
 
 import {useState} from 'react'
-import NavbarPrincipal from '@/components/NavbarPrincipal';
+import NavbarPrincipal from '@/components/Navbar-DashBoard';
 import SideNavbar from '@/components/SideBar';
 import ProjectsScroll from '@/components/projects/ProjectsScroll';
 import Link from 'next/link'
