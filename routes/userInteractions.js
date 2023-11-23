@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
 const { get } = require('http');
 const { error } = require('console');
+const { parse } = require('path');
 const prisma = new PrismaClient();
 
 router.use(express.json());
@@ -16,15 +17,15 @@ router.post('/sendCollaborationRequest/:projectId', authenticateToken, async (re
     try {
 
         
-        const existingCollaborator = await prisma.collaborator.findFirst({
+        const existingCollaborator = await prisma.projectCollaborators.findFirst({
             where: {
-                projectId: projectId,
-                userId: userId
+                projectId: parseInt(req.params.projectId),
+                userId: req.user.id
             }
         });
 
         if (existingCollaborator) {
-            return res.status(400).json({ error: "User is already a collaborator of the project" });
+            return res.status(400).json({ message: "You are already a collaborator of the project" });
         }
 
 

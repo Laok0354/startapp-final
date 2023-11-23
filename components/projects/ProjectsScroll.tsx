@@ -23,17 +23,20 @@ const Projects = (
     description,
     members,
     joined,
-    stateText
+    stateText,
+    liked,
+    setLikedProjectsIds,
     } : {
     id : number,
     title : string | number,
     description : string
     members : number,
     joined : number,
-    stateText : string
+    stateText : string,
+    liked: boolean,
+    setLikedProjectsIds: React.Dispatch<React.SetStateAction<Set<number>>>,
 }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [liked, setLiked] = useState(false);
     let stateTextColor;
 
     const openModal = () => {
@@ -45,12 +48,17 @@ const Projects = (
     };
 
     const handleLike = () => {
-        if (!liked) {
-          setLiked(true);
+      setLikedProjectsIds((prevLikedProjectsIds) => {
+        const newLikedProjectsIds = new Set(prevLikedProjectsIds);
+        if (liked) {
+          newLikedProjectsIds.delete(id);
         } else {
-          setLiked(false);
+          newLikedProjectsIds.add(id);
         }
-        fetch(`http://localhost:3000/project/like/${id}`, {
+        return newLikedProjectsIds;
+      });
+
+        fetch(`http://localhost:3000/userInteractions/like/${id}`, {
           method: "POST",
           headers: {
             Accept: "application/json",
@@ -67,7 +75,6 @@ const Projects = (
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
-            console.log(response)
             return response.json();
           })
           .catch((error) => {
@@ -113,8 +120,8 @@ const Projects = (
         <section className="flex align-middle justify-center">
             <div className="py-4 px-4 bg-gray-800 w-40 h-60 rounded-xl flex flex-col justify-between border-2 border-primaryv">
                 <div>  
-                    <h1 onClick={openModal} className="text-[1rem] font-semibold font-raleway cursor-pointer">{title}</h1>
-                    <p className="text-xs text-[#8F8F8F]">{description}</p>
+                    <h1 onClick={openModal} className="text-[1rem] font-semibold font-raleway cursor-pointer overflow-hidden whitespace-nowrap overflow-ellipsis">{title}</h1>
+                    <p className="text-xs text-[#8F8F8F] overflow-hidden whitespace-nowrap overflow-ellipsis">{description}</p>
                 </div>
                 <div className="mt-2">
                     <h3 className="text-sm mb-1 font-semibold text-primaryv">Members: <span className="text-white font-normal">{members}</span></h3>
@@ -152,20 +159,35 @@ const Projects = (
 }
 
 const ProjectsScroll = ({ 
-  amountProjects,
-  amountColumns,
-  className,
   searchResults
 } : { 
-  amountProjects : number 
-  amountColumns : number
-  className : string
   searchResults: any
 }) => {
   const [projectsData, setProjectsData] = useState([]);
   const [error, setError] = useState(null);
   const [initialDataLoaded, setInitialDataLoaded] = useState(false);
+  const [likedProjects, setLikedProjects] = useState([]);
+  const [likedProjectsIds, setLikedProjectsIds] = useState(new Set());
   const stateText = ["0", "In Progress", "Finished", "Abandoned", "Paused"];
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/userInteractions/getLiked`, {
+      credentials: "include",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLikedProjects(data);
+        setLikedProjectsIds(new Set(data.map((project) => project.id)));
+      })
+      .catch((error) => {
+        console.error('Error fetching liked projects:', error);
+      });
+  }, []);
 
   useEffect(() => {
     if (!initialDataLoaded && searchResults === undefined) {
@@ -192,6 +214,7 @@ const ProjectsScroll = ({
     } else if (searchResults !== undefined) {
       setProjectsData(searchResults);
     }
+
   }, [searchResults, initialDataLoaded]);
 
   if (error) {
@@ -211,6 +234,8 @@ const ProjectsScroll = ({
                 members={0}
                 joined={0}
                 stateText={"Loading..."}
+                liked={likedProjectsIds.has(index)}
+                setLikedProjectsIds={setLikedProjectsIds}
               />
             </div>
           ))}
@@ -231,6 +256,8 @@ const ProjectsScroll = ({
               members={project.maxMembers}
               joined={project.collaborators.length}
               stateText={stateText[project.statusId]}
+              liked={likedProjectsIds.has(project.id)}
+              setLikedProjectsIds={setLikedProjectsIds}
             />
           </div>
         ))}
