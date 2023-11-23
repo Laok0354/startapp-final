@@ -11,11 +11,16 @@ export default function Home (){
     console.log('toggleNavbar called');
     setIsOpen(!isOpen);
     };
+  const [inputDisabled, setInputDisabled] = useState(true);
+
+  const toggleInput = () => {
+    setInputDisabled(!inputDisabled);
+  };
     return(
         <>
         <main className="bg-[#0A090B] h-screen w-screen overflow-y-auto">
         <section className="bg-[#0A090B] h-screen w-screen">
-        <header><NavbarPrincipal pag="Profile"/></header>
+        <header><NavbarPrincipal page="Profile"/></header>
           <button onClick={toggleNavbar}>
            <Image className= 'absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/menu.svg"
@@ -37,55 +42,78 @@ export default function Home (){
            </div>
           </section>
             <div className="relative pt-6 justify-center w-40 h-32 pl-[400px]">
-               <div className="relative flex flex-row pb-10 w-[1000px] gap-10">
-                <input className="w-[560px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+               <div className="relative flex flex-row pb-10 w-[800px] gap-10">
+                <input className="w-[560px]  bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
                 type="text"
                 placeholder="NAME"
+                disabled ={inputDisabled}
                 />
-                <button className="w-44 h-10 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
-                  <Link href="#">Edit</Link>
+                <button className={` w-44 h-10 text-black font-bold rounded-[5px] hover:bg-white/0 hover:border-2 ${
+        inputDisabled ? "bg-primaryv hover:text-primaryv hover:border-primaryv" : "bg-white hover:text-white hover:border-white "
+      }`} 
+                  onClick={toggleInput}> {inputDisabled ? 'Edit' : 'Save'}
                 </button>
               </div>
-              <div className="relative flex flex-row w-[1000px] gap-10 shadow-lg">
+              <div className="relative flex flex-row w-[790px] gap-10 shadow-lg">
                  <input className="w-[560px] bg-transparent text-white text-[20px] placeholder:text-white/70 placeholder:text-20 border-b-2 border-b-white/70"
                    type="text"
                    placeholder="PROFESSION"
+                   disabled ={inputDisabled}
                 />
-                <button className="w-44 h-10 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
-                  <Link href="#">Edit</Link>
-                </button>
                 </div>
             </div>
-                  <div className="flex flex-row w-screen pt-32 pl-44">
+                  <div className="flex flex-row w-full pt-32 pl-60">
+                    <div className="relative flex flex-row gap-40 justify-center">
                     <div>
                       <h2 className="text-white/70 pb-2">Country</h2>
                       <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
                         type="text"
                         placeholder="Region, Country"
+                        disabled ={inputDisabled}
                       />
-                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
-                       <Link href="#">Edit</Link>
-                      </button>
                     </div>
                     <div>
                       <h2 className="text-white/70 pb-2">Age</h2>
                       <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
                         type="number"
                         placeholder="Number"
+                        disabled ={inputDisabled}
                       />
-                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
-                       <Link href="#">Edit</Link>
-                      </button>
                     </div>
                     <div>
                       <h2 className="text-white/70 pb-2">Email</h2>
                       <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
                         type="email"
                         placeholder="youremail@email.com"
+                        disabled ={inputDisabled}
                       />
-                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
-                       <Link href="#">Edit</Link>
-                      </button>
+                    </div>
+                    </div>
+                    </div>
+                   <div className="relative px-48 pt-40">
+                     <div className="relative flex flex-row pb-10 w-[1000px] gap-4">
+                      <li className="text-xl text-white/70 w-40">Skills & Knowledge</li>
+                       <input className="w-[780px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                         type="text"
+                         disabled ={inputDisabled}
+                         
+                        />
+                    </div>
+                    <div className="relative flex flex-row pb-10 w-[1000px] gap-4">
+                      <li className="text-xl text-white/70 w-40">About</li>
+                       <input className="w-[790px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                         type="text"
+                         disabled ={inputDisabled}
+                         
+                        />
+                    </div>
+                    <div className="relative flex flex-row pb-10 w-[1000px] gap-4">
+                      <li className="text-xl text-white/70 w-40">Proyects</li>
+                       <input className="w-[780px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                         type="text"
+                         disabled ={inputDisabled}
+                         
+                        />
                     </div>
                   </div>
         </section>
