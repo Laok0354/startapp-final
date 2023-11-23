@@ -9,7 +9,7 @@ interface NotificationsProps{
   nameProject:String;
  }
 
-function Notifications ({nameUser,nameProject}:NotificationsProps){
+function Notifications ({nameUser, nameProject}:NotificationsProps){
    const [accepted, setAccepted] = useState(false);
    const [declined, setDeclined] = useState(false);
 

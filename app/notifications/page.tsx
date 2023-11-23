@@ -6,8 +6,10 @@ import NavbarPrincipal from "@/components/NavbarPrincipal";
 import SideNavbar from "@/components/SideNavbar";
 import Notifications from "@/components/Notifications";
 
-
-export default function Home () {
+interface NProps{
+  estate: String;
+}
+export default function Home ({estate}: NProps) {
   const [isOpen, setIsOpen] = useState(true);
   const [activeTab, setActiveTab] = useState('All');
 
@@ -24,9 +26,7 @@ export default function Home () {
 
   return (
     <>
-    <header>
-      <NavbarPrincipal/>
-    </header>
+    <header><NavbarPrincipal pag="Notifications"/></header>
       
       <main className="bg-[#0A090B] h-screen w-screen overflow-hidden">
        <button onClick={toggleNavbar}>
@@ -45,7 +45,7 @@ export default function Home () {
           </div>
           
           <ul className="flex flex-row list-none gap-[40px] text-[20px] items-center mt-16">
-            <li className="ml-[95px] px-[5px]" ><a href="#" onClick={() => handleTabClick('All')}>All</a></li>
+            <li className="ml-[95px] px-[5px]"><a href="#" onClick={() => handleTabClick('All')}>All</a></li>
             <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Unread')}>Unread</a></li>
             <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Accepted')}>Accepted</a></li>
             <li className="text-white/70 hover:text-white active:text-white/30"><a href="#" onClick={() => handleTabClick('Declined')}>Declined</a></li>

@@ -13,9 +13,9 @@ export default function Home (){
     };
     return(
         <>
-        <main className="">
+        <main className="bg-[#0A090B] h-screen w-screen overflow-y-auto">
         <section className="bg-[#0A090B] h-screen w-screen">
-        <header><NavbarPrincipal/></header>
+        <header><NavbarPrincipal pag="Profile"/></header>
           <button onClick={toggleNavbar}>
            <Image className= 'absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30'
             src="/svg/menu.svg"
@@ -36,20 +36,58 @@ export default function Home (){
             />
            </div>
           </section>
-            <div className="relative pt-6 justify-center w-40 h-20 pl-[400px]">
-              <form>
-              <input
-                className="w-96 bg-transparent text-white text-3xl placeholder:font-semibold placeholder:text-white/70"
+            <div className="relative pt-6 justify-center w-40 h-32 pl-[400px]">
+               <div className="relative flex flex-row pb-10 w-[1000px] gap-10">
+                <input className="w-[560px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
                 type="text"
-                placeholder="Name:"
-              />
-              <input
-                className="w-96 bg-transparent text-white text-2xl placeholder:font-semibold placeholder:text-white placeholder:text-20"
-                type="text"
-                placeholder="Profession:"
-              />
-              </form>
+                placeholder="NAME"
+                />
+                <button className="w-44 h-10 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
+                  <Link href="#">Edit</Link>
+                </button>
+              </div>
+              <div className="relative flex flex-row w-[1000px] gap-10 shadow-lg">
+                 <input className="w-[560px] bg-transparent text-white text-[20px] placeholder:text-white/70 placeholder:text-20 border-b-2 border-b-white/70"
+                   type="text"
+                   placeholder="PROFESSION"
+                />
+                <button className="w-44 h-10 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
+                  <Link href="#">Edit</Link>
+                </button>
+                </div>
             </div>
+                  <div className="flex flex-row w-screen pt-32 pl-44">
+                    <div>
+                      <h2 className="text-white/70 pb-2">Country</h2>
+                      <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                        type="text"
+                        placeholder="Region, Country"
+                      />
+                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
+                       <Link href="#">Edit</Link>
+                      </button>
+                    </div>
+                    <div>
+                      <h2 className="text-white/70 pb-2">Age</h2>
+                      <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                        type="number"
+                        placeholder="Number"
+                      />
+                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
+                       <Link href="#">Edit</Link>
+                      </button>
+                    </div>
+                    <div>
+                      <h2 className="text-white/70 pb-2">Email</h2>
+                      <input className="w-[200px] bg-transparent text-white text-[20px] placeholder:text-white/70 border-b-2 border-b-white/70"
+                        type="email"
+                        placeholder="youremail@email.com"
+                      />
+                      <button className="w-[200px] h-10 mt-4 bg-primaryv text-black font-bold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">
+                       <Link href="#">Edit</Link>
+                      </button>
+                    </div>
+                  </div>
         </section>
         </main>
         </>
