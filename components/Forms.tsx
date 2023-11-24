@@ -249,9 +249,6 @@ const SignUpForm = () => {
             />
           </div>
         </div>
-        <div className="mt-4">
-          <Icons />
-        </div>
         <button
           type="submit"
           className="flex items-center justify-center w-72 mt-4 py-3 bg-primaryv rounded-lg"
@@ -330,7 +327,7 @@ const LoginForm = () => {
           onChange={handleInputChange}
         />
       </div>
-      <div className="flex flex-row justify-between items-center">
+{/*       <div className="flex flex-row justify-between items-center">
         <label className="flex items-center align-middle text-sm text-gray-50 ml-10">
           <input
             type="checkbox"
@@ -341,14 +338,10 @@ const LoginForm = () => {
           />
           Remember Me
         </label>
-        {/* Forgot Password */}
         <h6 className="text-sm text-blue mr-10">
           <Link href="/forgot-password">Forgot Password?</Link>
         </h6>
-      </div>
-      <div className="mb-3 mt-6">
-        <Icons />
-      </div>
+      </div> */}
       <div className="flex justify-center items-center flex-col">
         <button
           type="submit"
