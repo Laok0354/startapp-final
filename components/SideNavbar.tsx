@@ -32,7 +32,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
               height= {100}
             />
             <button className=" text-[25px]">
-              <Link href="/users">People</Link>
+              <Link href="/users">Users</Link>
             </button>
           </div>
 
@@ -44,7 +44,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
             height= {100}
           />
           <button className=" text-[25px]">
-            <Link href="/login">Projects</Link>
+            <Link href="/projects">Projects</Link>
             </button>
           </div>
 
@@ -56,19 +56,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
             height= {100}
           />
           <button className=" text-[25px]">
-            <Link href="/login">Your Projects</Link>
-            </button>
-          </div>
-
-          <div className={"flex pb-10 pl-7 gap-4 opacity-50 hover:opacity-100 active:opacity-30 hover:text-white active:text-white/30 " + (page == "Your Teams" ? "text-white" : "text-white/70")}>
-            <Image className= 'w-8 h-8'
-            src="/svg/team.svg"
-            alt=""
-            width = {200}
-            height= {100}
-          />
-          <button className=" text-[25px]">
-            <Link href="/login">Your Teams</Link>
+            <Link href="/dashboard">Your Projects</Link>
             </button>
           </div>
 
@@ -80,7 +68,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({ isOpen, toggleNavbar, page} : S
             height= {100}
           />
           <button className=" text-[25px]">
-            <Link href="/login">Liked</Link>
+            <Link href="/dashboard">Liked</Link>
             </button>
           </div>
         </nav>

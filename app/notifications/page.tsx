@@ -10,11 +10,10 @@ interface NProps {
   estate: String;
 }
 export default function Home({ estate }: NProps) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("All");
 
   const toggleNavbar = () => {
-    console.log("toggleNavbar called");
     setIsOpen(!isOpen);
   };
 
@@ -41,9 +40,9 @@ export default function Home({ estate }: NProps) {
             height={100}
           />
         </button>
-        <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page="" />
+        <SideNavbar isOpen={isOpen} page="" toggleNavbar={toggleNavbar} />
 
-        <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
+        <section className={`w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg transition-all duration-700`}>
           <div className="w-screen flex gap-96">
             <h1 className=" ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">
               Notifications
@@ -88,13 +87,13 @@ export default function Home({ estate }: NProps) {
               </a>
             </li>
             <div
-              className={`absolute mt-7 h-1 bg-primaryv rounded-xl transition-transform transform ${
+              className={`absolute mt-7 h-1 bg-primaryv rounded-xl transition-transform transform duration-200 ${isOpen ? "bg-transparent" : ""} ${
                 activeTab === "All"
                   ? "w-[2.5%] translate-x-[6rem]"
                   : activeTab === "Unread"
-                  ? "w-[5.5%] translate-x-[10.2rem]"
+                  ? "w-[5.5%] translate-x-[10.3rem]"
                   : activeTab === "Accepted"
-                  ? "w-[7%] translate-x-[16.6rem]"
+                  ? "w-[7%] translate-x-[16.55rem]"
                   : activeTab === "Declined"
                   ? "w-[6.5%] translate-x-[24.3rem]"
                   : "w-[6%]"
@@ -112,7 +111,7 @@ export default function Home({ estate }: NProps) {
             />
           </ul>
         </section>
-        <section className="w-full h-60 bg-[#0A090B] ml-24">
+        <section className={`w-full h-60 bg-[#0A090B] ml-24 transition-all duration-700 `}>
           {activeTab === "All" && (
             <div
               className={

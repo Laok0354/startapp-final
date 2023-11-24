@@ -48,7 +48,7 @@ function Notifications ({nameUser, nameProject}:NotificationsProps){
    }
 
   return (
-    <div className="flex justify-between items-center gap-10 pl-20 pr-20 mt-8 w-[1000px] h-20 bg-black border-2 border-[#1C1C1C] shadow-lg rounded-md">
+    <div className="flex justify-between items-center gap-10 pl-20 pr-20 mt-8 w-[1000px] h-20 bg-black border-2 border-gray-700 shadow-lg rounded-md">
       <div className="flex flex-row items-center">
         <Image className= 'w-10 h-10 mr-2'
           src="/svg/sin-foto.svg"
