@@ -28,10 +28,10 @@ export default function Home({ estate }: NProps) {
   return (
     <>
       <header>
-        <NavbarPrincipal page="Notifications" />
+        <NavbarPrincipal page="Notifications"/>
       </header>
 
-      <main className="bg-[#0A090B] h-screen w-screen overflow-hidden">
+      <main className="bg-gradient-to-br from-primaryv from-50% to-primaryp h-screen w-screen overflow-hidden">
         <button onClick={toggleNavbar}>
           <Image
             className="absolute top-3 left-24 w-14 h-14 opacity-50 hover:opacity-100 active:opacity-30"
@@ -43,9 +43,9 @@ export default function Home({ estate }: NProps) {
         </button>
         <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page="" />
 
-        <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
+        <section className="w-screen bg-[#0A090B] h-80 border-b-2 border-b-white shadow-lg">
           <div className="w-screen flex gap-96">
-            <h1 className="ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">
+            <h1 className="pl-[87px] pt-32 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">
               Notifications
             </h1>
           </div>
@@ -62,7 +62,7 @@ export default function Home({ estate }: NProps) {
             </li>
             <li
               className={`hover:text-white active:text-white/30 ${
-                activeTab === "Unread" ? " text-white " : " text-white/70"
+                activeTab === "Unread" ? " text-white " : "text-white/70"
               }`}
             >
               <a href="#" onClick={() => handleTabClick("Unread")}>
@@ -112,7 +112,7 @@ export default function Home({ estate }: NProps) {
             />
           </ul>
         </section>
-        <section className="w-full h-60 bg-[#0A090B] ml-24">
+        <section className="w-full h-60 ml-24 bg-gradient-to-br from-primaryv from-50% to-primaryp">
           {activeTab === "All" && (
             <div
               className={
