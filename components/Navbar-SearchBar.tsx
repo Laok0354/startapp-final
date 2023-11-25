@@ -3,7 +3,7 @@ import Link from "next/link";
 import SearchBar from "./SearchBarProjects";
 import Image from "next/image";
 
-function NavbarPrincipal ({ onSearchResults }) {
+function NavbarPrincipal ({ onSearchResults } : {onSearchResults: any}) {
     return (
     <nav className="bg-black/80 border-b-2 border-[#1C1C1C] fixed justify-between h-[80px] w-full flex flex-row items-center">
           <div className="flex flex-row items-center gap-[80px] mr-52">

@@ -4,6 +4,13 @@ import Image from 'next/image';
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 
+interface UserData {
+  id: number;
+  email: string;
+  userName: string;
+  about: string;
+}
+
 const UserCard = ({
     userName,
     userBio,
@@ -64,7 +71,7 @@ const SuggestedUsers = () => {
           </p>
         </div>
         <div className="flex flex-col flex-wrap mb-2">
-          {usersData.slice(0, 3).map((user, index) => (
+          {usersData.slice(0, 3).map((user: UserData, index) => (
             <UserCard key={index} 
             userName={user.userName} 
             userBio={user.about}

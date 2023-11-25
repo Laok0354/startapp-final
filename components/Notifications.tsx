@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface NotificationsProps{
-  notifId:String
+  notifId:Number;
   nameUser:String;
   nameProject:String;
   notifMessage:String;

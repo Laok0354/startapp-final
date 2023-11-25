@@ -5,6 +5,20 @@ import SideNavbar from '../../components/SideBar'
 import NavbarPrincipal from '@/components/NavbarPrincipal-SearchBarUsers';
 import { useState, useEffect } from 'react';
 
+interface UserData {
+  id: number;
+  email: string;
+  userName: string;
+  about: string;
+  projects: [{
+    id: number;
+    project: {
+      name: string;
+      likes: [];
+    };
+  }];
+}
+
 export default function Users() {
   const [isOpen, setIsOpen] = useState(false);
   const [usersData, setUsersData] = useState([]);
@@ -60,7 +74,7 @@ export default function Users() {
           </header>
           <section className={`flex items-center h-screen flex-col mt-16 transition-all duration-700 w-screen ${isOpen ? "ml-24" : ""}`}>
       <article className={`flex flex-col justify-center w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${usersData.length > 8 ? "max-h-[550px] overflow-y-auto px-2" : ""}`}>
-        {usersData.map((user) => {
+        {usersData.map((user: UserData) => {
 
           if (user.projects.length > 0) {
 

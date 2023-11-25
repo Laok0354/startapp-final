@@ -34,7 +34,7 @@ const Projects = (
     joined : number,
     stateText : string,
     liked: boolean,
-    setLikedProjectsIds: React.Dispatch<React.SetStateAction<Set<number>>>,
+    setLikedProjectsIds: React.Dispatch<React.SetStateAction<Set<unknown>>>,
 }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     let stateTextColor;
@@ -186,7 +186,7 @@ const ProjectsScroll = ({
       })
       .then((data) => {
         setLikedProjects(data);
-        setLikedProjectsIds(new Set(data.map((project) => project.id)));
+        setLikedProjectsIds(new Set(data.map((project: Project) => project.id)));
       })
       .catch((error) => {
         console.error('Error fetching liked projects:', error);

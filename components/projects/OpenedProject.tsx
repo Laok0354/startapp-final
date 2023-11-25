@@ -2,7 +2,7 @@
 
 import JoinedUsers from "./JoinedUsers";
 import MessageRequest from "./MessageRequest"
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 const OpenedProject = ({
     id,
@@ -44,7 +44,7 @@ const OpenedProject = ({
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent) => {
         event.preventDefault();
         console.log(formData);
         closeModal();

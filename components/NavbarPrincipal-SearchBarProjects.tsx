@@ -3,7 +3,10 @@ import Link from "next/link";
 import SearchBar from "./SearchBarProjects";
 import Image from "next/image";
 
-function NavbarPrincipal ({ onSearchResults }) {
+interface NavbarPrincipalProps{
+  page : String
+}
+function NavbarPrincipal ({ onSearchResults } : {onSearchResults: any}, {page} : NavbarPrincipalProps) {
     return (
     <nav className="bg-black/80 border-b-2 border-[#1C1C1C] fixed justify-between h-[80px] w-full flex flex-row items-center">
           <div className="flex flex-row items-center gap-[80px] mr-52">
@@ -38,20 +41,24 @@ function NavbarPrincipal ({ onSearchResults }) {
           </div>
 
           <div className="flex flex-row items-center gap-[40px] mr-10">
-          <Link href="/notifications"><Image className= 'w-12 h-12 opacity-100 active:opacity-30'
-            src="/svg/notification.svg"
+            <Link className={"" + (page == "Notifications" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/notifications">
+              <Image className= 'w-12 h-12'
+                src="/svg/notification.svg"
+                alt=""
+                width = {200}
+                height= {100}
+              />
+            </Link> 
+
+          <Link className={"" + (page == "Profile" ? "opacity-100" : "opacity-50 hover:opacity-70 active:opacity-30")} href="/profile">
+            <Image className= 'w-10 h-10'
+            src="/svg/user.svg"
             alt=""
             width = {200}
             height= {100}
             />
           </Link>
 
-          <Image className= 'w-10 h-10 opacity-50 hover:opacity-100 active:opacity-30'
-            src="/svg/user.svg"
-            alt=""
-            width = {200}
-            height= {100}
-            />
           </div>
       </nav>
     )

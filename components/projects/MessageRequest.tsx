@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import Image from "next/image"
 
 const MessageRequest = ({
@@ -32,7 +32,7 @@ const MessageRequest = ({
         setIsInputSelected(false);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         fetch(`http://localhost:3000/userInteractions/sendCollaborationRequest/${id}`, {
             method: "POST",

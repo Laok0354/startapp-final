@@ -30,7 +30,7 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
 
         let result = await prisma.project.findMany({
             include: {
-                collaborators: true
+                collaborators: true,
             },
             where: {
                 OR: [
@@ -113,7 +113,15 @@ router.get('/searchUser/:searchString', authenticateToken, async (req, res) => {
 
         let result = await prisma.user.findMany({
             include: {
-                projects: true
+                projects: {
+                    include: {
+                        project: {
+                            include:  {
+                                likes: true
+                            }
+                        }
+                    }
+                }
             },
             where: {
                 OR: [
@@ -150,7 +158,15 @@ router.get('/searchUserUnlogged/:searchString', async (req, res) => {
 
         let result = await prisma.user.findMany({
             include: {
-                projects: true
+                projects: {
+                    include: {
+                        project: {
+                            include:  {
+                                likes: true
+                            }
+                        }
+                    }
+                }
             },
             where: {
                 OR: [

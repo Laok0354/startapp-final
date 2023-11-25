@@ -5,7 +5,7 @@ import Image from "next/image";
 import React, { useState, useEffect, use } from "react";
 import { data } from "autoprefixer";
 
-function SearchBarUsers({ className, onSearchResults }: { className: string }) {
+function SearchBarUsers({ className, onSearchResults }: { className: string, onSearchResults : any }) {
   const [isInputSelected, setIsInputSelected] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [inputValue, setInputValue] = useState('');

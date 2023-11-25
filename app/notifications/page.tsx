@@ -9,6 +9,22 @@ import Notifications from "@/components/Notifications";
 interface NProps {
   estate: String;
 }
+
+interface NotifDataProps {
+  id: number;
+  userId: number;
+  projectId: number;
+  createdAt: string;
+  status: string;
+  message: string;
+  user: {
+    userName: string;
+  };
+  project: {
+    name: string;
+  };
+}
+
 export default function Home({ estate }: NProps) {
   const [isOpen, setIsOpen] = useState(true);
   const [notifsResults, setNotifsResults] = useState([]);
@@ -138,7 +154,7 @@ export default function Home({ estate }: NProps) {
         <section className="w-full h-60 bg-[#0A090B] ml-24">
           {activeTab === "All" && (
               <div className={notifsResults.length > 3 ? "max-h-[340px] overflow-y-auto px-8" : ""}>
-                {notifsResults.map((notifData) => (
+                {notifsResults.map((notifData: NotifDataProps) => (
                   <div className="col-span-1" key={notifData.id}>
                     <Notifications
                       notifId={notifData.id}
@@ -153,7 +169,7 @@ export default function Home({ estate }: NProps) {
             )}
             {activeTab === "Unread" && (
               <div className={notifsResults.length > 3 ? "max-h-[340px] overflow-y-auto px-8" : ""}>
-                {notifsResults.filter((notifData) => notifData.status === "pending").map((notifData) => (
+                {notifsResults.filter((notifData : NotifDataProps) => notifData.status === "pending").map((notifData : NotifDataProps) => (
                   <div className="col-span-1" key={notifData.id}>
                     <Notifications
                       notifId={notifData.id}
@@ -168,7 +184,7 @@ export default function Home({ estate }: NProps) {
             )}
             {activeTab === "Accepted" && (
               <div className={notifsResults.length > 3 ? "max-h-[340px] overflow-y-auto px-8" : ""}>
-              {notifsResults.filter((notifData) => notifData.status === "accepted").map((notifData) => (
+              {notifsResults.filter((notifData : NotifDataProps) => notifData.status === "accepted").map((notifData : NotifDataProps) => (
                 <div className="col-span-1" key={notifData.id}>
                   <Notifications
                     notifId={notifData.id}
@@ -183,7 +199,7 @@ export default function Home({ estate }: NProps) {
             )}
             {activeTab === "Declined" && (
               <div className={notifsResults.length > 3 ? "max-h-[340px] overflow-y-auto px-8" : ""}>
-              {notifsResults.filter((notifData) => notifData.status === "rejected").map((notifData) => (
+              {notifsResults.filter((notifData : NotifDataProps) => notifData.status === "rejected").map((notifData : NotifDataProps) => (
                 <div className="col-span-1" key={notifData.id}>
                   <Notifications
                     notifId={notifData.id}
