@@ -82,3 +82,8 @@ Content-Type: application/json
 
 ###
 
+DELETE http://localhost:3000/userInteractions/deleteAllCollaborationRequests
+Authorization: Bearer
+Content-Type: application/json
+
+###

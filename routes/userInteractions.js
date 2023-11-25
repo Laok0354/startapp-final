@@ -445,4 +445,15 @@ router.delete('/deleteAllLikes', authenticateToken, async (req, res) => {
 
     res.status(200).send({message: "deleted all project likes"});
 });
+
+router.delete('/deleteAllCollaborationRequests', async (req, res) => {
+    try {
+        await prisma.collaborationRequest.deleteMany({});
+        res.status(200).json({ message: "All collaboration requests deleted" });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error });
+    }
+});
+
 module.exports = router;
