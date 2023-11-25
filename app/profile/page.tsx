@@ -30,9 +30,9 @@ export default function Home (){
               />
             </button>
             <SideNavbar isOpen={isOpen} toggleNavbar={toggleNavbar} page=""/>
-            <section className="w-screen h-80 border-b-2 border-b-white shadow-lg bg-black">
-              <div className="flex flex-col justify-start pt-36 pl-40 gap-4">
-               <h1 className="w-40 text-[50px] text-transparent bg-clip-text bg-gradient-to-r from-primaryv to-white to-80%">Profile</h1>
+            <section className="w-screen h-80 border-b-2 border-b-white shadow-lg bg-[#0A090B]">
+              <div className="flex flex-col justify-start pt-32 pl-40 gap-4">
+               <h1 className="w-40 -ml-20 text-[50px] text-transparent bg-clip-text bg-gradient-to-r from-primaryp to-white to-80%">Profile</h1>
                <div>
                  <Image className= 'w-40 h-40'
                   src="/svg/sin-foto.svg"
@@ -44,7 +44,7 @@ export default function Home (){
               </div>
             </section>
               <section className="flex flex-col justify-center items-center gap-10 pb-10 bg-gradient-to-br from-primaryp from-50% to-primaryv">
-                <form className="w-[780px] flex flex-col justify-center items-center gap-10 p-10 mt-20 rounded-xl bg-black shadow-2xl">
+                <form className="w-[780px] flex flex-col justify-center items-center gap-10 p-10 mt-20 rounded-xl bg-[#0A090B] shadow-2xl">
                   <div>
                     <h3 className="text-xl pb-2 font-semibold">NAME</h3>
                     <input

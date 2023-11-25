@@ -45,7 +45,7 @@ export default function Home({ estate }: NProps) {
 
         <section className="w-screen mt-[80px] h-60 border-b-2 border-b-[#1C1C1C] shadow-lg">
           <div className="w-screen flex gap-96">
-            <h1 className=" ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">
+            <h1 className="ml-[87px] mt-12 text-transparent text-[50px] font-red bg-clip-text bg-gradient-to-r from-primaryv to-white to-90% static">
               Notifications
             </h1>
           </div>
