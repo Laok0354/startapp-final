@@ -3,7 +3,8 @@
 import {useState, useEffect} from 'react'
 import NavbarPrincipal from '@/components/Navbar-DashBoard';
 import SideNavbar from '@/components/SideBar';
-import ProjectsScroll from '@/components/projects/ProjectsScroll';
+import ProjectsScrollLiked from '@/components/projects/ProjectsScroll-Liked';
+import ProjectsScrollYourProjects from '@/components/projects/ProjectsScroll-YourProjects';
 import Link from 'next/link'
 
 function DashBoard() {
@@ -97,8 +98,8 @@ function DashBoard() {
                 <section>
                     {activeTab === 'Your Projects' && (
                         <div>
-                            <ProjectsScroll
-                                searchResults={myProjects}
+                            <ProjectsScrollYourProjects
+                                amountProjects={12}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
@@ -106,8 +107,8 @@ function DashBoard() {
                     )}
                     {activeTab === 'Liked Projects' && (
                         <div>
-                            <ProjectsScroll
-                                searchResults={myLikedProjects}
+                            <ProjectsScrollLiked
+                                amountProjects={12}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
