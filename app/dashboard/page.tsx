@@ -26,40 +26,6 @@ function DashBoard() {
       }
     }
 
-    useEffect(() => {
-/*         fetch("http://localhost:3000/project/getMyProjects", {
-          credentials: "include"
-        })
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-            return response.json();
-          })
-          .then((data) => {
-            setMyProjects(data);
-          })
-          .catch((error) => {
-            console.error('Error fetching your projects:', error);
-          }); */
-
-          fetch("http://localhost:3000/userInteractions/getLiked", {
-            credentials: "include"
-          })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then((data) => {
-              setMyLikedProjects(data);
-            })
-            .catch((error) => {
-              console.error('Error fetching liked projects:', error);
-            });
-      }, []);
-
     return (
         <main id = "__next" className='h-[full] w-full overflow-hidden'>
             <nav>
