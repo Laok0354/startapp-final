@@ -46,7 +46,8 @@ const JoinedUsers = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/project/getp/${id}`)
+    fetch(`http://localhost:3000/project/getp/${id}`,{
+    credentials: "include"})
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -66,7 +67,26 @@ const JoinedUsers = ({
         setJoinedData(userCards);
       })
       .catch((error) => {
-        setError(error.message);
+        fetch(`http://localhost:3000/project/getpUnlogged/${id}`,{
+    credentials: "include"})
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const collaborators = data.project.collaborators;
+        console.log(data.project.collaborators)
+        const userCards = collaborators.map((user) => {
+          return <UserCard 
+          key={user.id}
+          username={user.user.userName}
+          userBio={user.user.about}
+          />;
+        });
+        setJoinedData(userCards);
+      })
       });
   }, []);
 

@@ -130,18 +130,9 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
     }
 })
 
-router.get('/getp/:pid', async (req, res) => {
+router.get('/getp/:pid', authenticateToken, async (req, res) => {
     try 
     {  
-        if(req.user){
-            await authenticateToken(req);
-            await prisma.visitHistory.create({
-                data: {
-                    projectId: project.id,
-                    userId: req.user.id
-                }
-            });
-        }
         const project = await prisma.Project.findUnique({
             where: {
                 id: parseInt(req.params.pid)
@@ -161,7 +152,48 @@ router.get('/getp/:pid', async (req, res) => {
         });
 
         if (!project) {
-            return res.status(404).json({message: "project not found"});; 
+            return res.status(404).send({message: "project not found"});; 
+        }
+
+       await prisma.visitHistory.create({
+            data: {
+                projectId: project.id,
+                userId: req.user.id
+            }
+        });
+
+        res.status(200).json({project});
+    } 
+    catch (error) 
+    {
+       console.log(error)
+       res.status(500).send({message: "couldnt get project"})
+    }
+})
+
+router.get('/getpUnlogged/:pid', async (req, res) => {
+    try 
+    {  
+        const project = await prisma.Project.findUnique({
+            where: {
+                id: parseInt(req.params.pid)
+            },
+            include: {
+                collaborators: {
+                    select:{
+                        user: true
+                    }
+                },
+                status: {
+                    select: {
+                        name: true
+                    }
+                }
+            }
+        });
+
+        if (!project) {
+            return res.status(404).send({message: "project not found"});; 
         }
 
         res.status(200).json({project});
@@ -169,7 +201,7 @@ router.get('/getp/:pid', async (req, res) => {
     catch (error) 
     {
        console.log(error)
-       res.status(500).json({message: "couldnt get project"})
+       res.status(500).send({message: "couldnt get project"})
     }
 })
 
