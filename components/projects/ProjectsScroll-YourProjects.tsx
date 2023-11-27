@@ -1,7 +1,7 @@
 "use client"
 
 import LikeDislikeButton from "./LikeButton"
-import OpenedProject from "./OpenedProject"
+import OpenedProject from "./OpenedProject-Collaborator"
 import constants from "./constants"
 import { useState } from "react"
 import Modal from "react-modal";
@@ -16,7 +16,7 @@ const Project = (
     joined,
     stateText
     } : {
-    title : string,
+    title : string | number,
     description : string
     members : number,
     joined : number,
@@ -111,6 +111,7 @@ const Project = (
                 members={members}
                 joined={joined}
                 closeModal={closeModal}
+                discordLink="https://discord.gg/2YbQr2j8"
            />
         </Modal>
     </article>

@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 const ScrollButton = () => {
     const handleScroll = () => {
       window.scrollTo({
-        top: window.innerHeight, // Cambia el valor según tu necesidad
-        behavior: 'smooth', // Hace que el desplazamiento sea suave
+        top: window.innerHeight,
+        behavior: 'smooth'
       });
     };
   

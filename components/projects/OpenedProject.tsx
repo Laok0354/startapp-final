@@ -81,9 +81,6 @@ const OpenedProject = ({
                         </button>
                     </form>
                 </div>
-                <div>
-                    {/* Posibilidad para poner un link de discord */}
-                </div>
             </section>
         </section>
  )}
