@@ -7,6 +7,7 @@ import MultiSelectInput from "./sign-up/MultiSelectInput";
 import Icons from "./sign-up/Icons";
 import OptionsMenu from "./projects/OptionsMenu";
 import { Project } from "./projects/Participant";
+import { Skill } from "@prisma/client";
 
 const Input = ({
   title,
@@ -238,7 +239,7 @@ const SignUpForm = () => {
             <MultiSelectInput
               isMulti={true}
               name="skillIds"
-              options={skillData.map((skill) => ({
+              options={skillData.map((skill:Skill) => ({
                 value: skill.id,
                 label: skill.name,
               }))}
