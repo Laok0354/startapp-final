@@ -81,7 +81,7 @@ function Notifications ({notifId, nameUser,nameProject,notifMessage, notifStatus
    }
 
   return (
-    <div className="flex justify-between items-center gap-10 pl-20 pr-20 mt-8 w-[1000px] h-20 bg-black border-2 border-[#1C1C1C] shadow-lg rounded-md">
+    <div className="flex justify-between items-center gap-10 pl-20 pr-20 mt-8 w-[1000px] h-20 bg-black border-2 border-gray-700 shadow-lg rounded-md">
       <div className="flex flex-row items-center">
         <Image className= 'w-10 h-10 mr-2'
           src="/svg/sin-foto.svg"
@@ -93,7 +93,7 @@ function Notifications ({notifId, nameUser,nameProject,notifMessage, notifStatus
       </div>
    {!accepted && !declined && (
      <div className="flex itemx-center gap-2">
-     <button onClick={handleAccept} className="w-[110px] h-[35px] flex justify-center items-center text-[18px] text-center text-black font-semibold rounded-[5px] bg-white hover:bg-white/0 hover:text-white hover:border-2 hover:border-white">Accept</button>
+     <button onClick={handleAccept} className="w-[110px] h-[35px] flex justify-center items-center text-[18px] text-center text-black font-semibold rounded-[5px] bg-primaryv hover:bg-white/0 hover:text-primaryv hover:border-2 hover:border-primaryv">Accept</button>
      <button onClick={handleDeclined} className="w-[110px] h-[35px] flex justify-center items-center text-[18px] text-center text-white font-semibold hover:underline">Decline</button>
     </div>
     )}

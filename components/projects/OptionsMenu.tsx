@@ -17,7 +17,6 @@ const OptionsMenu: React.FC<OptionsMenuProps> = ({
   }: OptionsMenuProps) => {
     return (
       <div className="p-4 rounded">
-        <p className="mb-2">Selecciona una opción:</p>
         <ul className='mb-44'>
           {options.map((option) => (
             <div

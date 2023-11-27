@@ -78,7 +78,7 @@ function CreateProjectModal() {
       >
         <section className="divide-y divide-primaryv">
           <div className="p-2 flex flex-row justify-between items-center">
-            <h2 className="">Select a Template</h2>
+            <h2 className="">Create a Project</h2>
             <button className=" text-white p-2" onClick={closeModal}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

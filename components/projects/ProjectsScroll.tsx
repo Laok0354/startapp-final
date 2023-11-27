@@ -28,7 +28,7 @@ const Projects = (
     setLikedProjectsIds,
     } : {
     id : number,
-    title : string | number,
+    title : string,
     description : string
     members : number,
     joined : number,

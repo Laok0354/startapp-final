@@ -9,7 +9,6 @@ interface SideNavbarProps {
   page: string;
   isOpen: boolean;
   handleOpenNavbar: () => void;
-  setActiveTab?: (tab: string) => void;
 }
 
 const SideNavbar: React.FC<SideNavbarProps> = ({
@@ -20,7 +19,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({
   return (
     <main>
       <nav
-        className={`fixed top-20 bg-black/80 h-full border-r-2 border-[#1C1C1C] drop shadow-lg block transition-all duration-700 ${
+        className={`fixed top-20 bg-black h-full border-r-2 border-[#1C1C1C] drop shadow-lg block transition-all duration-700 ${
           isOpen ? "w-[250px]" : "w-[100px]"
         }`}
       >

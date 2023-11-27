@@ -1,0 +1,128 @@
+"use client"
+
+import JoinedUsers from "./JoinedUsers";
+import MessageRequest from "./MessageRequest"
+import { useState } from "react";
+import { Input } from "../Forms";
+
+const OpenedProject = ({
+    title, 
+    description,
+    members,
+    joined,
+    closeModal,
+    discordLink
+    } : {
+    title : string,
+    description : string
+    members : number,
+    joined : number,
+    closeModal : () => void,
+    discordLink : string
+}) => {
+    const [valorTextarea, setValorTextarea] = useState('');
+    const [height, setHeight] = useState(10);
+    const [inputDisabled, setInputDisabled] = useState(true);
+    const [isInputSelected, setIsInputSelected] = useState(false);
+    const [formData, setFormData] = useState({
+        name: title || "",
+        description: description || "",
+        discordLink: discordLink || ""
+      });
+
+    const handleInputFocus = () => {
+        setIsInputSelected(true);
+    }
+
+    const handleInputBlur = () => {
+        setIsInputSelected(false);
+    }  
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setValorTextarea(event.target.value);
+        handleKeyPress(valorTextarea);
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const toggleInput = () => {
+        setInputDisabled(!inputDisabled);
+        console.log(formData)
+      };
+
+    const handleKeyPress = (valorTextarea : string) => {
+        if (valorTextarea.length > 100) {
+            setHeight(32);
+        }
+        else if (valorTextarea.length > 40) {
+            setHeight(16);
+        }
+        else{
+            setHeight(10);
+        }
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    }
+  
+    return (
+        <section className="">
+            <section className="mt-12">
+                <section className="grid grid-col-3 ">
+                    <div className="grid col-start-3 row-start-2 ">
+                        <JoinedUsers
+                            members={members}
+                            joined={joined}
+                        />
+                    </div>
+                    <div className="flex justify-center flex-col items-center col-start-1 row-start-2 ml-16">
+                        <form 
+                            action="" 
+                            className="flex flex-col justify-center items-center"
+                            onSubmit={handleSubmit}
+                        >
+                            <div className="flex flex-col justify-center items-center w-full h-fit mt-4">
+                                <Input
+                                    title=""
+                                    name="name"
+                                    placeHolder=""
+                                    className={`text-center text-3xl font-raleway font-semibold transition-color duration-200 text-white ${inputDisabled ? "bg-transparent placeholder:text-white" : ""}`}
+                                    onChange={handleChange}
+                                    titleClassName=""
+                                    value={formData.name}
+                                    disabled={inputDisabled}
+                                />
+                                <textarea
+                                    className={`${isInputSelected ? ` outline-2 outline-primaryv transition-colors duration-200` : "outline-none"} text-xl w-80 h-20 rounded text-center transition-all duration-300 px-2 font-semibold bg-gray-700 text-gray-50 placeholder:text-gray-50 outline-none ${inputDisabled ? "bg-transparent outline-none" : ""}`}
+                                    name="description"
+                                    id=""
+                                    placeholder=""
+                                    onChange={handleChange}
+                                    onFocus={handleInputFocus}
+                                    onBlur={handleInputBlur}
+                                    value={formData.description}
+                                    disabled={inputDisabled}
+                                />
+                                <Input
+                                    title=""
+                                    name="discordLink"
+                                    placeHolder=""
+                                    className={`text-center text-[0.9rem] font-raleway font-semibold transition-color duration-200 ${inputDisabled ? "bg-transparent placeholder:text-white/0" : ""}`}
+                                    onChange={handleChange}
+                                    titleClassName=""
+                                    value={formData.discordLink}
+                                    disabled={inputDisabled}
+                                />
+                            </div>
+                            <button className={`w-48 h-12 font-bold rounded-[5px] bg-primaryv text-white hover:bg-white/10 hover:border-2 shadow-xl hover:border-primaryv`} 
+                                onClick={toggleInput}>{inputDisabled ? 'Edit Project' : 'Save Changes'}
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </section>
+        </section>
+ )}
+
+export default OpenedProject;

@@ -79,9 +79,6 @@ const OpenedProject = ({
                         <h1 className="font-semibold">Join</h1>
                     </button> */}
                 </div>
-                <div>
-                    {/* Posibilidad para poner un link de discord */}
-                </div>
             </section>
         </section>
  )}

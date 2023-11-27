@@ -17,6 +17,7 @@ const Input = ({
   className,
   titleClassName,
   onChange,
+  disabled
 }: {
   title: string;
   placeHolder: string;
@@ -24,7 +25,8 @@ const Input = ({
   value: string;
   className: string;
   titleClassName: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.FormEvent) => void;
+  disabled?: boolean
 }) => {
   const [isInputSelected, setIsInputSelected] = useState(false);
 
@@ -49,6 +51,7 @@ const Input = ({
         onChange={onChange}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        disabled={disabled}
       />
     </div>
   );
@@ -203,7 +206,6 @@ const SignUpForm = () => {
         className="flex my-2 flex-col justify-center items-center mx-8"
         onSubmit={handleSubmit}
       >
-        {/* Componente Input para el username */}
         <Input
           name="userName"
           title="USERNAME"
@@ -213,7 +215,6 @@ const SignUpForm = () => {
           titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
-        {/* Componente Input para el email */}
         <Input
           name="email"
           title="EMAIL"
@@ -223,7 +224,6 @@ const SignUpForm = () => {
           titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
-        {/* Componente PasswordInput */}
         <PasswordInput
           name="password"
           value={formData.password}
@@ -496,4 +496,5 @@ const ProjectForm = ({
   );
 };
 
-export { SignUpForm, LoginForm, ProjectForm };
+
+export { SignUpForm, LoginForm, ProjectForm, Input };
