@@ -60,8 +60,8 @@ const SuggestedUsers = () => {
           setUsersData(data);
         })
         .catch((error) => {});
-    }, []); // Empty dependency array to execute the effect only once, similar to componentDidMount
-  
+    }, []);
+    
     return (
       <section className="bg-gray-800 px-10 py-3 rounded-xl justify-start mt-2 border-2 border-primaryv">
         <div className="flex flex-row items-center justify-between">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavbarPrincipal from "./Navbar-SearchBar";
@@ -12,11 +12,40 @@ interface SideNavbarProps {
   setActiveTab?: (tab: string) => void;
 }
 
+function checkUserLogin() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/auth/token', {
+      method: 'GET',
+      credentials: "include",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (response.status === 200) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching user login status:', error);
+        setIsLoggedIn(false); // Set login status to false in case of an error
+      });
+  }, []);
+
+  return isLoggedIn;
+}
+
 const SideNavbar: React.FC<SideNavbarProps> = ({
   page,
   isOpen,
-  handleOpenNavbar
-}: SideNavbarProps) => {
+  handleOpenNavbar,
+}) => {
+  const isLoggedIn = checkUserLogin();
+
   return (
     <main>
       <nav
@@ -56,7 +85,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({
             (page == "Dashboard" ? "text-white" : "text-white/70 opacity-50")
           }
         >
-          <Link href="dashboard">
+          <Link href={isLoggedIn ? "dashboard" : "login"}>
             <button className="flex flex-row items-center text-[20px]">
               <Image
                 className=""
@@ -135,7 +164,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({
               : "text-white/70 opacity-50")
           }
         >
-          <Link href="./dashboard">
+          <Link href={isLoggedIn ? "dashboard" : "login"}>
             <button className="flex flex-row items-center text-[20px]">
               <Image
                 className=""
@@ -163,7 +192,7 @@ const SideNavbar: React.FC<SideNavbarProps> = ({
             (page == "Liked" ? "text-white" : "text-white/70 opacity-50")
           }
         >
-          <Link href="/dashboard">
+          <Link href={isLoggedIn ? "dashboard" : "login"}>
             <button className="flex flex-row items-center text-[20px]">
               <Image
                 className=""

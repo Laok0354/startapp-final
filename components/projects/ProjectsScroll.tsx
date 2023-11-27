@@ -228,7 +228,7 @@ const ProjectsScroll = ({
   if (projectsData.length === 0 && searchResults === undefined && !initialDataLoaded) {
     return (
       <section className="overflow-hidden w-full flex justify-center">
-        <div className={25 > 6 ? `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns} `}>
+        <div className={`max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}`}>
           {[...Array(24)].map((_, index) => (
             <div className="col-span-1" key={index}>
               <Projects
@@ -250,7 +250,7 @@ const ProjectsScroll = ({
 
   return (
     <section className="overflow-hidden w-full flex justify-center">
-      <div className={projectsData.length > 6 ? `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns} `}>
+      <div className={`max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}`}>
         {projectsData.map((project: Project & { collaborators: ProjectCollaborators[] }) => (
           <div className="col-span-1" key={project.id}>
             <Projects

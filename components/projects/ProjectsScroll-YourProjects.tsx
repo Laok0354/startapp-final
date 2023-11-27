@@ -211,7 +211,7 @@ const ProjectsScroll = ({
 
       return (
         <section className="overflow-hidden w-full flex justify-center">
-          <div className={myProjects.length > 6 ? `max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}` : `grid grid-cols-${amountColumns} `}>
+          <div className={`max-h-[500px] overflow-y-auto grid grid-cols-${amountColumns} gap-4 px-2 ${className}`}>
             {myProjects.map((project: Project & { collaborators: ProjectCollaborators[] }) => (
               <div className="col-span-1" key={project.id}>
                 <Projects
