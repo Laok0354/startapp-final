@@ -16,7 +16,7 @@ const Project = (
     joined,
     stateText
     } : {
-    title : string | number,
+    title : string,
     description : string
     members : number,
     joined : number,
