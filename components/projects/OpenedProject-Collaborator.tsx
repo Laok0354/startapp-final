@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Input } from "../Forms";
 
 const OpenedProject = ({
+    id,
     title, 
     description,
     members,
@@ -13,6 +14,7 @@ const OpenedProject = ({
     closeModal,
     discordLink
     } : {
+    id : number
     title : string,
     description : string
     members : number,
@@ -72,6 +74,7 @@ const OpenedProject = ({
                 <section className="grid grid-col-3 ">
                     <div className="grid col-start-3 row-start-2 ">
                         <JoinedUsers
+                            id={id}
                             members={members}
                             joined={joined}
                         />

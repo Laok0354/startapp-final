@@ -27,7 +27,7 @@ function DashBoard() {
     }
 
     useEffect(() => {
-        fetch("http://localhost:3000/project/getMyProjects", {
+/*         fetch("http://localhost:3000/project/getMyProjects", {
           credentials: "include"
         })
           .then((response) => {
@@ -41,7 +41,7 @@ function DashBoard() {
           })
           .catch((error) => {
             console.error('Error fetching your projects:', error);
-          });
+          }); */
 
           fetch("http://localhost:3000/userInteractions/getLiked", {
             credentials: "include"
@@ -99,7 +99,6 @@ function DashBoard() {
                     {activeTab === 'Your Projects' && (
                         <div>
                             <ProjectsScrollYourProjects
-                                amountProjects={12}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
@@ -108,7 +107,6 @@ function DashBoard() {
                     {activeTab === 'Liked Projects' && (
                         <div>
                             <ProjectsScrollLiked
-                                amountProjects={12}
                                 amountColumns={4}
                                 className='w-fit mt-8 overflow-x-hidden grid-cols-4'
                             />
