@@ -3,10 +3,10 @@ POST http://localhost:3000/user
 Content-Type: application/json 
 
 {
-    "email": "pipi",
+    "email": "gordinho",
     "password": "rey",
-    "userName" : "pipi",
-    "about" : "im a pepe engineer",
+    "userName" : "grodinhooo",
+    "about" : "me gusta comereme unos empatyzandos",
     "skillIds" : [1, 2]
 }
 ###
@@ -16,7 +16,7 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json 
 
 {
-    "email": "ching",
+    "email": "gordinho",
     "password": "rey"
 }
 ###
@@ -48,9 +48,4 @@ GET http://localhost:3000/user/getAllUsers
 
 ###
 
-//get recommended projects
-GET http://localhost:3000/recommendations/getRecommended
-Content-Type: application/json
-Authorization: Bearer
 
-###

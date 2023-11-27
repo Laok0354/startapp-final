@@ -4,15 +4,15 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "ae ",
+    "name": "pipies",
     "description": "pollo",
-    "statusId" :3,
+    "statusId" :1,
     "maxMembers": 3
 }
 ###
 
 //get project
-GET http://localhost:3000/project/getp/10
+GET http://localhost:3000/project/getp/5
 Authorization: Bearer
 Content-Type: application/json
 
@@ -32,7 +32,7 @@ Content-Type: application/json
 ###
 
 //delete project
-DELETE http://localhost:3000/project/delete/61
+DELETE http://localhost:3000/project/delete/21
 Authorization: Bearer
 Content-Type: application/json
 
@@ -52,6 +52,13 @@ Content-Type: application/json
 GET http://localhost:3000/project/getMyProjects
 Authorization: Bearer
 Content-Type: application/json
+
+###
+
+//get recommended projects
+GET http://localhost:3000/recommendations/getRecommended
+Content-Type: application/json
+Authorization: Bearer
 
 ###
 

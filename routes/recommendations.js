@@ -54,6 +54,7 @@ router.post('/recommend', async (req, res) => {
 });
 
 router.get('/getRecommended', authenticateToken, async (req, res) => {
+    
     const recommendedProjects = await prisma.recommendedProject.findMany({
         where: {
           userId: req.user.id, // Replace with the actual user ID

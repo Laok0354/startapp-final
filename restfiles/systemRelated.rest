@@ -1,20 +1,12 @@
 //request user searchHistory
-GET http://localhost:3000/userData/searchHistory
+GET http://localhost:3000/userData/searchHistory/20
 x-api-key: REYDEREDES
-
-{
-    "userId" : "2"
-}
 
 ###
 
-GET http://localhost:3000/userData/visitHistory
+GET http://localhost:3000/userData/visitHistory/55
 x-api-key: REYDEREDES
 
-
-{
-    "userId" : "2"
-}
 
 ###
 
