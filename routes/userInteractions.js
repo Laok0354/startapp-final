@@ -2,266 +2,213 @@ require('dotenv').config();
 const authenticateToken = require('./authMiddleware');
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
-const { get } = require('http');
-const { error } = require('console');
-const { parse } = require('path');
 const prisma = new PrismaClient();
 
 router.use(express.json());
 
 router.post('/sendCollaborationRequest/:projectId', authenticateToken, async (req, res) => {
     
-    try {
-
-        
-        const existingCollaborator = await prisma.projectCollaborators.findFirst({
-            where: {
-                projectId: parseInt(req.params.projectId),
-                userId: req.user.id
-            }
-        });
-
-        if (existingCollaborator) {
-            return res.status(400).json({ message: "You are already a collaborator of the project" });
+    
+    const existingCollaborator = await prisma.projectCollaborators.findFirst({
+        where: {
+            projectId: parseInt(req.params.projectId),
+            userId: req.user.id
         }
+    });
 
-
-        await prisma.collaborationRequest.create({
-            data: {
-                userId: req.user.id,
-                projectId: parseInt(req.params.projectId),
-                message: req.body.message
-            }
-        })
-
-        res.status(200).json({message: 'Collaboration request sent'})
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
+    if (existingCollaborator) {
+        return res.status(400).json({ message: "You are already a collaborator of the project" });
     }
+
+    const requestSent = await prisma.collaborationRequest.create({
+        data: {
+            userId: req.user.id,
+            projectId: parseInt(req.params.projectId),
+            message: req.body.message
+        }
+    })
+
+    if (!requestSent) {
+        return res.status(400).json({ message: "Could not send collaboration request" });
+    }
+
+    res.status(200).json({message: 'Collaboration request sent'})
+
+    
 }) 
 
 router.get('/getOwnCollaborationRequests', authenticateToken, async (req, res) => {
-    
-    try {
 
-        //get all collaboration request sent to a project you are the creator of
+    const myCollaborationRequests = await prisma.collaborationRequest.findMany({
+        where: {
+            userId: req.user.userId
+        }
+    })
 
-        const myCollaborationRequests = await prisma.collaborationRequest.findMany({
-            where: {
-                userId: req.user.userId
-            }
-        })
-
-        res.status(200).json(myCollaborationRequests)
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
+    if (myCollaborationRequests.length === 0) {
+        return res.status(404).json({ error: "No collaboration requests found" });
     }
+
+    res.status(200).json(myCollaborationRequests)
+
 });
 
 router.get('/getOwnCollaborationRequest/:id', authenticateToken, async (req, res) => {
         
-    try {
+    const myCollaborationRequest = await prisma.collaborationRequest.findMany({
+        where: {
+            userId: req.user.userId,
 
-        //get collaboration request
-        const myCollaborationRequest = await prisma.collaborationRequest.findMany({
-            where: {
-                userId: req.user.userId,
+            id: parseInt( req.params.id)
 
-                id: parseInt( req.params.id)
+        }
+    })
 
-            }
-        })
-
-        res.status(200).json(myCollaborationRequest)
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
+    if (myCollaborationRequest.length === 0) {
+        return res.status(404).json({ error: "No collaboration requests found" });
     }
+
+    res.status(200).json(myCollaborationRequest)
+
 });
 
 router.get('/getCollaborationRequests', authenticateToken, async (req, res) => {
     
-    try
-    {
-
-        //get all collaboration requests which project Id refers to a project i created
-        const projects = await prisma.project.findMany({
-            where: {
-                creatorId: req.user.id
-            },
-            select: {
-                id: true // Select only the projectId field
-            }
-        });
-        
-        const projectIds = projects.map(projects => projects.id);
-        
-        const collaborationRequests = await prisma.collaborationRequest.findMany({
-            where: {
-                projectId: {
-                    in: projectIds
-                }
-            },
-            include: {
-
-                user: {
-                    select: {
-                        userName: true
-                    }
-                },
-                project: {
-                    select: {
-                        name: true
-                    }
-                }
-                
-            }
-        });
-
-        if (collaborationRequests.length === 0) {
-            return res.status(404).json({ error: "No collaboration requests found" });
+    const projects = await prisma.project.findMany({
+        where: {
+            creatorId: req.user.id
+        },
+        select: {
+            id: true 
         }
-
-        res.status(200).json(collaborationRequests)
-
-    }catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
+    });
     
+    const projectIds = projects.map(projects => projects.id);
+    
+    const collaborationRequests = await prisma.collaborationRequest.findMany({
+        where: {
+            projectId: {
+                in: projectIds
+            }
+        },
+        include: {
+
+            user: {
+                select: {
+                    userName: true
+                }
+            },
+            project: {
+                select: {
+                    name: true
+                }
+            }
+            
+        }
+    });
+
+    if (collaborationRequests.length === 0) {
+        return res.status(404).json({ error: "No collaboration requests found" });
     }
+
+    res.status(200).json(collaborationRequests)
 });
 
 
 
-//create a route to get only one collaboration request based on the id 
 
 router.get('/getCollaborationRequest/:id', authenticateToken, async (req, res) => {
-        
-    try {
 
-        const projects = await prisma.project.findMany({
-            where: {
-                creatorId: req.user.id
-            },
-            select: {
-                id: true // Select only the projectId field
-            }
-        });
-        
-        const projectIds = projects.map(projects => projects.id);
-        
-        const collaborationRequest = await prisma.collaborationRequest.findMany({
-            where: {
-                projectId: {
-                    in: projectIds
-                },
-
-                id: parseInt(req.params.id)
-            }
-        });
-
-        if (collaborationRequest.length === 0) {
-            return res.status(404).json({ error: "No collaboration requests found" });
+    const projects = await prisma.project.findMany({
+        where: {
+            creatorId: req.user.id
+        },
+        select: {
+            id: true 
         }
+    });
+    
+    const projectIds = projects.map(projects => projects.id);
+    
+    const collaborationRequest = await prisma.collaborationRequest.findMany({
+        where: {
+            projectId: {
+                in: projectIds
+            },
 
-        res.status(200).json(collaborationRequest)
+            id: parseInt(req.params.id)
+        }
+    });
 
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
+    if (collaborationRequest.length === 0) {
+        return res.status(404).json({ error: "No collaboration requests found" });
     }
+
+    res.status(200).json(collaborationRequest)
+
 });
 
 
 
 router.post('/acceptCollaborationRequest/:id', authenticateToken, async (req, res) => {
 
-    try {
-
-     
-        const projects = await prisma.project.findMany({
-            where: {
-                creatorId: req.user.id
+    const projects = await prisma.project.findMany({
+        where: {
+            creatorId: req.user.id
+        },
+        select: {
+            id: true 
+        }
+    });
+    
+    const projectIds = projects.map(projects => projects.id);
+    
+    const collaborationRequest = await prisma.collaborationRequest.findUnique({
+        where: {
+            projectId: {
+                in: projectIds
             },
-            select: {
-                id: true 
-            }
-        });
-        
-        const projectIds = projects.map(projects => projects.id);
-        
-        const collaborationRequest = await prisma.collaborationRequest.findUnique({
-            where: {
-                projectId: {
-                    in: projectIds
-                },
 
-                id: parseInt(req.params.id)
-            }
-        });
+            id: parseInt(req.params.id)
+        }
+    });
 
-        const userid = collaborationRequest.userId
-        const projectid = collaborationRequest.projectId
+    if (!collaborationRequest) {res.status(404).json({ error: "No collaboration requests found" });
 
-        await prisma.projectCollaborators.create({
-            data: {
-                userId: userid,
-                projectId: projectid
-            }
-        })
+    const userid = collaborationRequest.userId
+    const projectid = collaborationRequest.projectId
 
-        //update collaboration request to accepted
+    await prisma.projectCollaborators.create({
+        data: {
+            userId: userid,
+            projectId: projectid
+        }
+    })
 
-        await prisma.collaborationRequest.update({
-            where: {
-                projectId: {
-                    in: projectIds
-                },
-
-                id: parseInt(req.params.id)
+    await prisma.collaborationRequest.update({
+        where: {
+            projectId: {
+                in: projectIds
             },
-            data: {
-                status: 'accepted',
 
-                response: req.body.response
-            }
-        
-        })
+            id: parseInt(req.params.id)
+        },
+        data: {
+            status: 'accepted',
 
-        res.status(200).json({message: 'Collaboration request accepted'})
+            response: req.body.response
+        }
+    
+    })
 
-    } catch (error) {
+    res.status(200).json({message: 'Collaboration request accepted'})
 
-        console.log(error);
-        res.status(500).json({error: error})
-        
-    } 
+}})
 
-})
-
-//make a route to reject a collaboration request
 
 router.post('/rejectCollaborationRequest/:id', authenticateToken, async (req, res) => {
     
-    try {
-    
         const projects = await prisma.project.findMany({
             where: {
                 creatorId: req.user.id
@@ -273,7 +220,7 @@ router.post('/rejectCollaborationRequest/:id', authenticateToken, async (req, re
         
         const projectIds = projects.map(projects => projects.id);
 
-        await prisma.collaborationRequest.update({
+        const updatedStatus = await prisma.collaborationRequest.update({
             where: {
                 projectId: {
                     in: projectIds
@@ -289,112 +236,101 @@ router.post('/rejectCollaborationRequest/:id', authenticateToken, async (req, re
         
         })
 
-        res.status(200).json({message: 'Collaboration request rejected'})
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
-    } 
-})
-
-router.delete('/deleteCollaborationRequest/:id', authenticateToken, async (req, res) => {
-        
-    try {
-
-        const collaborationRequest = await prisma.collaborationRequest.findUnique({ 
-            where: {
-                id: parseInt(req.params.id)
-            }
-        });
-
-        if (!collaborationRequest) {
+        if (!updatedStatus) {
             return res.status(404).json({ error: "No collaboration requests found" });
         }
 
-        await prisma.collaborationRequest.delete({
-            where: {
-                id: parseInt(req.params.id),
-            }
-        })
+        res.status(200).json({message: 'Collaboration request rejected'})
 
-        if (req.user.id !== collaborationRequest.userId) {
-            return res.status(403).json({ error: "You are not allowed to delete this collaboration request" });
+})
+
+router.delete('/deleteCollaborationRequest/:id', authenticateToken, async (req, res) => {
+
+    const collaborationRequest = await prisma.collaborationRequest.findUnique({ 
+        where: {
+            id: parseInt(req.params.id)
         }
+    });
 
-  
-        res.status(200).json({message: 'Collaboration request deleted'})
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error})
-        
+    if (!collaborationRequest) {
+        return res.status(404).json({ error: "No collaboration requests found" });
     }
+
+   if (req.user.id !== collaborationRequest.userId) {
+        return res.status(403).json({ error: "You are not allowed to delete this collaboration request" });
+    }
+
+    
+    await prisma.collaborationRequest.delete({
+        where: {
+            id: parseInt(req.params.id),
+        }
+    })
+
+    res.status(200).json({message: 'Collaboration request deleted'})
+
 });
 
 
 router.post('/like/:pid', authenticateToken, async (req, res) => {
+        
+    const existingLike = await prisma.projectLike.findUnique({
+        where: {
+        userId_projectId: {
+            userId: req.user.id,
+            projectId: parseInt(req.params.pid),
+        },
+        },
+    });
     
-    try {
+    if (existingLike) {
         
-        const existingLike = await prisma.ProjectLike.findUnique({
-          where: {
-            userId_projectId: {
-              userId: req.user.id,
-              projectId: parseInt(req.params.pid),
+        const updatedLike = await prisma.ProjectLike.update({
+            where: {
+                userId_projectId: {
+                userId: req.user.id,
+                projectId: parseInt(req.params.pid),
+                },
             },
-          },
-        });
-      
-        if (existingLike) {
-          
-            const updatedLike = await prisma.ProjectLike.update({
-                where: {
-                    userId_projectId: {
-                    userId: req.user.id,
-                    projectId: parseInt(req.params.pid),
-                    },
-                },
-                data: {
-                    liked: !existingLike.liked,
-                },
-            });
-        
-            if (updatedLike !== null) {
-                res.json({ message: 'Project like updated correctly' });
-            }
-         
-        } else {
-          
-          const newLike = await prisma.ProjectLike.create({
             data: {
-            
-              liked: true,
+                liked: !existingLike.liked,
+            },
+        });
+    
+        if (updatedLike) {
+            res.json({ message: 'Project like updated correctly' });
+        }
+        else {
+            res.status(500).json({ error: "Could not update like" });
+        }
+        
+    } else {
+        
+        const newLike = await prisma.ProjectLike.create({
+        data: {
+        
+            liked: true,
 
-              project: {
+            project: {
+            connect: {
+                id: parseInt(req.params.pid),
+            },
+            },
+            user: {
                 connect: {
-                  id: parseInt(req.params.pid),
-                },
-              },
-                user: {
-                    connect: {
-                    id: req.user.id,
-                    },
+                id: req.user.id,
                 },
             },
-          });
+        },
+        });
 
-          if (newLike !== null) {
-            res.json({ message: 'Project liked successfully' });
-          }
-      
+        if (newLike !== null) {
+        res.json({ message: 'Project liked successfully' });
         }
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        else {
+            res.status(500).json({ error: "Could not like project" });
+        }
+    
     }
 
 });
@@ -402,42 +338,34 @@ router.post('/like/:pid', authenticateToken, async (req, res) => {
 
 router.get('/getLiked', authenticateToken, async (req, res) => {
         
-    try {
-
-        const projectLikes = await prisma.ProjectLike.findMany({
-            where: {
-                userId: req.user.id,
-                liked : true
-            },
-            include: {
-                project:{
-                        include: {
-                                collaborators: true
+    const projectLikes = await prisma.projectLike.findMany({
+        where: {
+            userId: req.user.id,
+            liked : true
+        },
+        include: {
+            project:{
+                include: {
+                    collaborators: true
                 }
-            }
         }
-        });
-
-        if (projectLikes.length === 0) {
-            return res.status(404).json({ error: "No projects liked" });
-        }
-
-        const projects = projectLikes.map(like => like.project);
-
-        res.status(200).json(projects);
-
-    } catch (error) {
-
-        console.log(error);
-        res.status(500).json({error: error});
-        
     }
+    });
+
+    if (projectLikes.length === 0) {
+        return res.status(404).json({ error: "No projects liked" });
+    }
+
+    const projects = projectLikes.map(like => like.project);
+
+    res.status(200).json(projects);
+
 });
 
-//delete all prject likkes 
+
 
 router.delete('/deleteAllLikes', authenticateToken, async (req, res) => {
-    const dP = await prisma.ProjectLike.deleteMany({});
+    const dP = await prisma.projectLike.deleteMany({});
 
     if(dP === null) {
         res.status(500).send({message: "couldnt delete project likes"});

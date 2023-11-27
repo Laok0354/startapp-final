@@ -9,12 +9,8 @@ const prisma = new PrismaClient();
 
 router.use(express.json());
 
-
-
 router.post('/', async (req, res) => {
     try {
-
-        //check if required fields are empty
 
         if (!req.body.email || !req.body.password || !req.body.userName || !req.body.skillIds) {
             return res.status(400).json({ error: 'One or more required fields are empty' });

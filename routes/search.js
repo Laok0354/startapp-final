@@ -8,55 +8,54 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 router.use(express.json());
 
-
-//search projects full text
-
 router.get('/searchProject/:searchString', authenticateToken, async (req, res) => {
 
-    try {
-        const searchString = req.params.searchString;
-            const user = await prisma.user.findUnique({
-                where: {
-                    email: req.user.email
-                }
-            });
+    const searchString = req.params.searchString;
 
-            await prisma.searchHistory.create({
-                data: {
-                    searchQuery: searchString,
-                    userId: user.id
-                }
-            });
-
-        let result = await prisma.project.findMany({
-            include: {
-                collaborators: true,
-            },
-            where: {
-                OR: [
-                    {
-                        name: {
-                            contains: searchString
-                        }
-                    },
-                    {
-                        description: {
-                            contains: searchString
-                        }
-                    }
-                ]
-            }
-        });
-
-        if (result.length === 0) {
-            res.status(404).json({ message: "No projects found" });
-        } else {
-            res.status(200).json(result);
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-        console.log(error);
+    if (!searchString) {
+        return res.status(400).json({ message: "Search string is required" });
     }
+
+    const user = await prisma.user.findUnique({
+        where: {
+            email: req.user.email
+        }
+    });
+
+    await prisma.searchHistory.create({
+        data: {
+            searchQuery: searchString,
+            userId: user.id
+        }
+    });
+
+    let result = await prisma.project.findMany({
+        include: {
+            collaborators: true,
+        },
+        where: {
+            OR: [
+                {
+                    name: {
+                        contains: searchString
+                    }
+                },
+                {
+                    description: {
+                        contains: searchString
+                    }
+                }
+            ]
+        }
+    });
+
+    if (result.length === 0) {
+        res.status(404).json({ message: "No projects found" });
+    } else {
+        res.status(200).json(result);
+    }
+
+   
 });
 
 router.get('/searchProjectUnlogged/:searchString', async (req, res) => {
