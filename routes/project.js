@@ -126,83 +126,6 @@ router.put('/modify/:pid', authenticateToken, async (req, res) => {
 
 })
 
-router.get('/getp/:pid', authenticateToken, async (req, res) => {
-    try 
-    {  
-        const project = await prisma.Project.findUnique({
-            where: {
-                id: parseInt(req.params.pid)
-            },
-            include: {
-                collaborators: {
-                    select:{
-                        user: true
-                    }
-                },
-                status: {
-                    select: {
-                        name: true
-                    }
-                }
-            }
-        });
-
-        if (!project) {
-            return res.status(404).send({message: "project not found"});; 
-        }
-
-       await prisma.visitHistory.create({
-            data: {
-                projectId: project.id,
-                userId: req.user.id
-            }
-        });
-
-        res.status(200).json({project});
-    } 
-    catch (error) 
-    {
-       console.log(error)
-       res.status(500).send({message: "couldnt get project"})
-    }
-})
-
-router.get('/getpUnlogged/:pid', async (req, res) => {
-    try 
-    {  
-        const project = await prisma.Project.findUnique({
-            where: {
-                id: parseInt(req.params.pid)
-            },
-            include: {
-                collaborators: {
-                    select:{
-                        user: true
-                    }
-                },
-                status: {
-                    select: {
-                        name: true
-                    }
-                }
-            }
-        });
-
-        if (!project) {
-            return res.status(404).send({message: "project not found"});; 
-        }
-
-        res.status(200).json({project});
-    } 
-    catch (error) 
-    {
-       console.log(error)
-       res.status(500).send({message: "couldnt get project"})
-    }
-
-    res.status(201).json({message: "project updated"});
-
-})
 
 router.delete('/delete/:pid', authenticateToken, async (req, res) => {
 
@@ -269,6 +192,33 @@ router.get('/getp/:pid', authenticateToken, async (req, res) => {
             userId: req.user.id
         }
     });
+
+    res.status(200).json({project});
+
+})
+
+router.get('/getpUnlogged/:pid', async (req, res) => {
+    const project = await prisma.project.findUnique({
+        where: {
+            id: parseInt(req.params.pid)
+        },
+        include: {
+            collaborators: {
+                select:{
+                    user: true
+                }
+            },
+            status: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    });
+
+    if (!project) {
+        return res.status(404).json({message: "project not found"});; 
+    }
 
     res.status(200).json({project});
 
