@@ -59,38 +59,40 @@ router.get('/searchProject/:searchString', authenticateToken, async (req, res) =
 });
 
 router.get('/searchProjectUnlogged/:searchString', async (req, res) => {
-    try {
-        const searchString = req.params.searchString;
 
-        const result = await prisma.project.findMany({
-            include: {
-                collaborators: true
-            },
-            where: {
-                OR: [
-                    {
-                        name: {
-                            contains: searchString
-                        }
-                    },
-                    {
-                        description: {
-                            contains: searchString
-                        }
-                    }
-                ]
-            }
-        });
+    const searchString = req.params.searchString;
 
-        if (result.length === 0) {
-            res.status(404).json({ message: "No projects found" });
-        } else {
-            res.status(200).json(result);
-        }
-    } catch (error) {
-        res.status(500).json({ message: "Internal server error" });
-        console.log(error);
+    if (!searchString) {
+        return res.status(400).json({ message: "Search string is required" });
     }
+
+    let result = await prisma.project.findMany({
+        include: {
+            collaborators: true,
+        },
+        where: {
+            OR: [
+                {
+                    name: {
+                        contains: searchString
+                    }
+                },
+                {
+                    description: {
+                        contains: searchString
+                    }
+                }
+            ]
+        }
+    });
+
+    if (result.length === 0) {
+        res.status(404).json({ message: "No projects found" });
+    } else {
+        res.status(200).json(result);
+    }
+
+   
 });
 
 router.get('/searchUser/:searchString', authenticateToken, async (req, res) => {
