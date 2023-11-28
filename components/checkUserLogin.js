@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"; 
 
 function checkUserLogin() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState();
   
     useEffect(() => {
       fetch('http://localhost:3000/auth/token', {

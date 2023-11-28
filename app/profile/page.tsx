@@ -42,12 +42,9 @@ export default function Home() {
 
   const [inputDisabled, setInputDisabled] = useState(true);
 
-  const isLoggedIn = checkUserLogin();
-  useEffect(() => {
-      if (isLoggedIn === false){
-          window.location.href = "/login";
-      }
-  })
+    const isLoggedIn = checkUserLogin();
+    if (isLoggedIn === false){
+    window.location.href = "/login";}
 
   useEffect(() => {
     fetch("http://localhost:3000/user",

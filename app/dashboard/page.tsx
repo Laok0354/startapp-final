@@ -28,11 +28,8 @@ function DashBoard() {
     }
 
     const isLoggedIn = checkUserLogin();
-    useEffect(() => {
-        if (isLoggedIn === false){
-            window.location.href = "/login";
-        }
-    })
+    if (isLoggedIn === false){
+    window.location.href = "/login";}
 
     return (
         <main id = "__next" className='h-[full] w-full overflow-hidden'>

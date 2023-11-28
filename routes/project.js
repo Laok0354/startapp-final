@@ -185,13 +185,15 @@ router.get('/getp/:pid', authenticateToken, async (req, res) => {
     if (!project) {
         return res.status(404).json({message: "project not found"});; 
     }
-
-    await prisma.visitHistory.create({
-        data: {
-            projectId: parseInt(req.params.pid),
-            userId: req.user.id
-        }
-    });
+    console.log(req.user.id)
+    if (req.user.id) {
+        await prisma.visitHistory.create({
+            data: {
+                projectId: parseInt(req.params.pid),
+                userId: parseInt(req.user.id)
+            }
+        });
+    }
 
     res.status(200).json({project});
 

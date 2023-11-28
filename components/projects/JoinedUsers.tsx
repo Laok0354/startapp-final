@@ -46,8 +46,11 @@ const JoinedUsers = ({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/project/getp/${id}`,{
-    credentials: "include"})
+    fetch(`http://localhost:3000/project/getp/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+    },
+      credentials: "include"})
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
