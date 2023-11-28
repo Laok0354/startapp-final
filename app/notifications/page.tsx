@@ -10,7 +10,7 @@ interface NProps {
   estate: String;
 }
 export default function Home({ estate }: NProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [activeTab, setActiveTab] = useState("All");
 
   const toggleNavbar = () => {
@@ -111,7 +111,7 @@ export default function Home({ estate }: NProps) {
             />
           </ul>
         </section>
-        <section className="w-full h-60 ml-24 bg-gradient-to-br from-primaryv from-50% to-primaryp">
+        <section className="w-full h-60 ml-24 bg-transparent">
           {activeTab === "All" && (
             <div
               className={
