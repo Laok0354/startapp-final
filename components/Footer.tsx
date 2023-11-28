@@ -19,7 +19,7 @@ function Footer () {
             width = {200}
             height= {100}
           />
-         <h4 className="top-2 pt-10 pl-2">Ⓡ 2023 StarApp, Inc.</h4>
+         <h4 className="top-2 pt-10 pl-2">Ⓡ 2023 StartApp, Inc.</h4>
         </div>
         <div className="relative pt-48 pr-10">
           

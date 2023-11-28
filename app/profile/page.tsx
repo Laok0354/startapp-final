@@ -4,17 +4,74 @@ import Link from "next/link";
 import Image from "next/image";
 import NavbarPrincipal from "@/components/NavbarPrincipal";
 import SideNavbar from "@/components/SideNavbar";
+import {User} from "@prisma/client"
+
+interface Skill {
+  name: string;
+}
+
+interface Project {
+  project: {
+  name: string;
+  };
+}
+
+interface UserProfile {
+  id: number;
+  email: string;
+  userName: string;
+  about: string;
+  skills: Skill[];
+  projects: Project[];
+}
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
     };
+
+    const [user, setUser] = useState<UserProfile>({
+      id: 0,
+      email: "",
+      userName: "",
+      about: "",
+      skills: [],
+      projects: [],
+    });
+
   const [inputDisabled, setInputDisabled] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/user",
+    {
+      credentials: "include"
+    })
+      .then((response) => response.json())
+      .then((userData: UserProfile) => {
+        setUser({
+          ...userData,
+          skills: userData.skills.map((skill) => ({ name: skill.name })) ,
+          projects: userData.projects.map((project) => ({
+            project: { name: project.project.name },
+          })),
+        });
+        console.log(userData)
+      });
+  }, []);
 
   const toggleInput = () => {
     setInputDisabled(!inputDisabled);
   };
+
+  const handleChange = (event: any) => {
+    const { name, value } = event.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value,
+    }));
+  };
+  
     return(
         <>
         <main className="bg-[#0A090B] h-screen w-screen overflow-y-auto">
@@ -49,9 +106,11 @@ export default function Home() {
                     <input
                      name="name"
                      title="name"
+                     value={user.userName}
                      className={`w-[650px] h-10 pl-2 py-6 text-xl text-white rounded-xl focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
                       inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
                      placeholder="Enter your name"
+                     onChange={handleChange}
                      disabled = {inputDisabled}
                     />
                   </div>
@@ -60,53 +119,61 @@ export default function Home() {
                    <input
                     name="email"
                     title="email"
+                    value={user.email}
                     className={`w-[650px] h-10 pl-2 py-6 text-xl text-white rounded-xl focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
                       inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
                     placeholder="Enter your email"
+                    onChange={handleChange}
                     disabled = {inputDisabled}
                    />
                   </div>
                   <div>
-                   <li className="text-xl pb-2 font-semibold">Skills & Knowledge</li>
+                   <h3 className="text-xl pb-2 font-semibold">SKILLS</h3>
                    <textarea
-                     className={`w-[650px] h-40 pl-2 py-6 text-xl rounded-xl text-white focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
+                     className={`w-[650px] h-auto pl-2 py-6 text-xl text-white rounded-xl focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
                       inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
                      placeholder="Enter your skills and knowledge"
                      name = "skills"
                      title="skills"
-                     disabled = {inputDisabled}
+                     value={user.skills.map((skill) => skill.name).join(', ')}
+                     onChange={handleChange}
+                     disabled = {true}
                    />
                   </div>
                   <div>
-                   <li className="text-xl pb-2 font-semibold">About</li>
+                   <h3 className="text-xl pb-2 font-semibold">ABOUT</h3>
                    <textarea
                      className={`w-[650px] h-40 pl-2 py-6 text-xl rounded-xl text-white focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
                       inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
                      placeholder="Important things about you"
                      name = "about"
                      title="about"
+                     value={user.about}
+                     onChange={handleChange}
                      disabled = {inputDisabled}
                    />
                   </div>
                   <div>
-                   <li className="text-xl pb-2 font-semibold">Projects</li>
-                   <textarea
-                     className={`w-[650px] h-40 pl-2 py-6 text-xl rounded-xl text-white focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
-                      inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
+                   <h3 className="text-xl pb-2 font-semibold">PROJECTS</h3>
+                    <textarea
+                      className={`w-[650px] h-40 pl-2 py-6 text-xl rounded-xl text-white focus:outline-6 focus:outline-primaryv transition-color duration-200 ${
+                        inputDisabled ? "bg-transparent placeholder:text-white/0" : "bg-[#1C1C1C] hover:bg-[#363636] placeholder:text-white/70"}`}
                      placeholder="Enter the projects you are in"
                      name = "projects"
                      title="projects"
-                     disabled = {inputDisabled}
+                     value={user.projects.map((project) => project.project.name).join(', ')}
+                     onChange={handleChange}
+                     disabled = {true}
                    />
                   </div>
                 </form>
-                <div>
+{/*                 <div>
                    <button className={`w-96 h-12 font-bold rounded-[5px] bg-white hover:text-white hover:bg-white/0 hover:border-2 shadow-xl ${
                      inputDisabled ? "text-primaryv hover:border-primaryv" : "text-primaryp hover:border-primaryp"
                      }`} 
                      onClick={toggleInput}>{inputDisabled ? 'Edit Profile' : 'Save Changes'}
                    </button>
-                  </div> 
+                  </div>  */}
               </section>
           </section>
         </main>
