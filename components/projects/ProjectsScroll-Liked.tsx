@@ -7,8 +7,6 @@ import { useState, useEffect } from "react"
 import Modal from "react-modal";
 import { Project, ProjectCollaborators } from ".prisma/client"
 
-Modal.setAppElement("#__next");
-
 const Projects = (
     {
         id,
@@ -29,6 +27,10 @@ const Projects = (
         liked: boolean,
         setLikedProjectsIds: React.Dispatch<React.SetStateAction<Set<unknown>>>,
     }) => {
+      useEffect(() => {
+        Modal.setAppElement("#__next");
+      }, []);
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
     let stateTextColor;
 

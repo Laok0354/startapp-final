@@ -4,39 +4,13 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import NavbarPrincipal from "./Navbar-SearchBar";
+import checkUserLogin from "./checkUserLogin"
 
 interface SideNavbarProps {
   page: string;
   isOpen: boolean;
   handleOpenNavbar: () => void;
   setActiveTab?: (tab: string) => void;
-}
-
-function checkUserLogin() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    fetch('http://localhost:3000/auth/token', {
-      method: 'GET',
-      credentials: "include",
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.status === 200) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching user login status:', error);
-        setIsLoggedIn(false); // Set login status to false in case of an error
-      });
-  }, []);
-
-  return isLoggedIn;
 }
 
 const SideNavbar: React.FC<SideNavbarProps> = ({

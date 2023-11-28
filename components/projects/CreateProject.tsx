@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import { ProjectForm } from "../Forms";
 import Image from "next/image";
 import { Project } from "./Participant";
 
-Modal.setAppElement("#__next");
-
 function CreateProjectModal() {
+  useEffect(() => {
+    Modal.setAppElement("#__next");
+  }, []);
+
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {

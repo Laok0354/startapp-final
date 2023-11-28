@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import NavbarPrincipal from "@/components/NavbarPrincipal";
 import SideNavbar from "@/components/SideNavbar";
-import {User} from "@prisma/client"
+import checkUserLogin from "@/components/checkUserLogin"
 
 interface Skill {
   name: string;
@@ -41,6 +41,13 @@ export default function Home() {
     });
 
   const [inputDisabled, setInputDisabled] = useState(true);
+
+  const isLoggedIn = checkUserLogin();
+  useEffect(() => {
+      if (isLoggedIn === false){
+          window.location.href = "/login";
+      }
+  })
 
   useEffect(() => {
     fetch("http://localhost:3000/user",
