@@ -4,7 +4,7 @@ Authorization: Bearer
 Content-Type: application/json
 
 {
-    "name": "pipies",
+    "name": "chicken",
     "description": "pollo",
     "statusId" :1,
     "maxMembers": 3
@@ -32,7 +32,7 @@ Content-Type: application/json
 ###
 
 //delete project
-DELETE http://localhost:3000/project/delete/21
+DELETE http://localhost:3000/project/delete/72
 Authorization: Bearer
 Content-Type: application/json
 
@@ -41,7 +41,7 @@ Content-Type: application/json
 
 //search project
 
-GET http://localhost:3000/search/searchProject/wow
+GET http://localhost:3000/search/searchProject/lemur
 Authorization: Bearer
 Content-Type: application/json
 
