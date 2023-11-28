@@ -93,7 +93,6 @@ export default function Users() {
                   userName={user.userName}
                   userUrl={`/profile/${user.id}`}
                   project={user.projects[mostLikedProjectIndex].project.name}
-                  projectUrl={`project/${user.projects[mostLikedProjectIndex].id}`}
                 />
               </div>
             );
@@ -107,7 +106,6 @@ export default function Users() {
                   userName={user.userName}
                   userUrl={`/profile/${user.id}`}
                   project="No projects"
-                  projectUrl={null}
                 />
               </div>
             );
