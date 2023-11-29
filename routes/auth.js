@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { PrismaClient } = require("@prisma/client");
@@ -63,6 +64,7 @@ router.post('/login', async (req, res) => {
 
     res.json({
       Success: "Login Success",
+      id: user.id,
       accessToken: accessToken,
       refreshToken: refreshToken,
     });
@@ -95,7 +97,12 @@ router.delete("/logout", authenticateToken, async (req, res) => {
 
 router.get("/token", authenticateToken, async (req, res) => {
  
-  const accessToken = generateAccessToken({ email: req.user.email });
+  const accessToken = generateAccessToken({
+    id: req.user.id,
+    email: req.user.email,
+    password: req.user.password,
+    about: req.user.about,
+  });
 
   if (accessToken == null) {
     return res.status(400).json({ error: "Cannot create token" });

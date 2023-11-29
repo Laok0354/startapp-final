@@ -7,8 +7,6 @@ import { useEffect, useState } from "react"
 import Modal from "react-modal";
 import { Project, ProjectCollaborators } from ".prisma/client"
 
-Modal.setAppElement("#__next");
-
 function shuffleArray(array: []) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -36,6 +34,10 @@ const Projects = (
     liked: boolean,
     setLikedProjectsIds: React.Dispatch<React.SetStateAction<Set<unknown>>>,
 }) => {
+  useEffect(() => {
+    Modal.setAppElement("#__next");
+  }, []);
+
     const [modalIsOpen, setModalIsOpen] = useState(false);
     let stateTextColor;
 

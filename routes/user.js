@@ -81,12 +81,22 @@ router.get('/', authenticateToken, async (req, res) => {
             id: true,
             email: true,
             userName: true,
+            about: true,
             skills: {
                 select: {
                     name: true
                 }
+            },
+            projects: {
+                select: {
+                    project: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
             }
-        }
+        },
     })
     res.json(userInfo)
 });

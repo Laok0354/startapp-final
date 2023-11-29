@@ -25,7 +25,7 @@ const Input = ({
   value: string;
   className: string;
   titleClassName: string;
-  onChange: (e: React.FormEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean
 }) => {
   const [isInputSelected, setIsInputSelected] = useState(false);
@@ -117,7 +117,7 @@ const NumberInput = ({
   value,
   name
 } : {
-  onChange: (e: React.FormEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: number
   name: string
 }) => { 
@@ -270,37 +270,42 @@ const LoginForm = () => {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Datos del formulario enviados:", formData);
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        mode: "cors",
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
+  
+    fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((data) => {
+            throw new Error(data.error);
+          });
+        }
+        return response.json();
+      })
+      .then((data) => {
         alert(data.Success);
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
-
+  
         document.cookie = `accessToken=${accessToken}; path=/; sameSite=lax`;
         document.cookie = `refreshToken=${refreshToken}; path=/; sameSite=lax`;
-
+  
         window.location.href = "/projects";
-      } else {
-        alert(data.error);
-      }
-    } catch (error) {}
+      })
+      .catch((error) => {
+        alert("Could not login. " + error);
+      });
   };
+  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -420,7 +425,7 @@ const ProjectForm = ({
     }
   };
 
-  const handleInputChange = (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
       if (name === "maxMembers") {

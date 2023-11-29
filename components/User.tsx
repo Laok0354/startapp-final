@@ -9,14 +9,12 @@ const User = (
         imageDir,
         userName,
         userUrl,
-        projectUrl,
         project,
     } : {
         id: number
         imageDir: string
         userName: string
         userUrl: string
-        projectUrl: string | null
         project: string
     }) => {
 
@@ -38,7 +36,7 @@ const User = (
                 <a className='hover:underline hover:text-[#BE71EB] transition-all text-sm' href={userUrl}>{userName}</a>
                 <div className='flex items-center flex-col'>   
                     <h2 className=' text-orange font-bold'>Popular Project</h2>
-                    <a className='hover:underline hover:text-[#BE71EB] transition-all text-sm' href={projectUrl}>{project}</a>
+                    <a className='transition-all text-sm'>{project}</a>
                 </div>           
             </div>
         </section>

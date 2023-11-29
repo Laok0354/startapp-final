@@ -6,6 +6,7 @@ import SideNavbar from '@/components/SideBar';
 import ProjectsScrollLiked from '@/components/projects/ProjectsScroll-Liked';
 import ProjectsScrollYourProjects from '@/components/projects/ProjectsScroll-YourProjects';
 import Link from 'next/link'
+import checkUserLogin from "@/components/checkUserLogin"
 
 function DashBoard() {
     const [activeTab, setActiveTab] = useState('Your Projects');
@@ -25,6 +26,10 @@ function DashBoard() {
         setLinePosition(element.offsetLeft);
       }
     }
+
+    const isLoggedIn = checkUserLogin();
+    if (isLoggedIn === false){
+    window.location.href = "/login";}
 
     return (
         <main id = "__next" className='h-[full] w-full overflow-hidden'>

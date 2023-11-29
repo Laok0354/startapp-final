@@ -48,7 +48,7 @@ const MessageRequest = ({
           .then((response) => {
             if (response.status === 401) {
                 window.location.href = '/login';
-                return Promise.reject('Unauthorized');
+                return Promise.reject('You must be logged in to join a project');
               }
             return response.json();
           })
@@ -56,7 +56,6 @@ const MessageRequest = ({
             alert(data.message);
           })
           .catch((error) => {
-            alert("Error sending message:" + error);
           });
       };
 

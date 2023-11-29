@@ -5,6 +5,8 @@ import Image from "next/image";
 import NavbarPrincipal from "@/components/NavbarPrincipal";
 import SideNavbar from "@/components/SideNavbar";
 import Notifications from "@/components/Notifications";
+import checkUserLogin from "@/components/checkUserLogin"
+
 
 interface NProps {
   estate: String;
@@ -33,6 +35,10 @@ export default function Home({ estate }: NProps) {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
+
+    const isLoggedIn = checkUserLogin();
+    if (isLoggedIn === false){
+    window.location.href = "/login";}
 
   useEffect(() => {
       fetch(`http://localhost:3000/userInteractions/getCollaborationRequests`, {
@@ -149,7 +155,7 @@ export default function Home({ estate }: NProps) {
             />
           </ul>
         </section>
-        <section className="w-full h-60 ml-24 bg-gradient-to-br from-primaryv from-50% to-primaryp">
+        <section className="w-full h-60 ml-24 bg-transparent">
           {activeTab === "All" && (
               <div className={notifsResults.length > 3 ? "max-h-[340px] overflow-y-auto px-8" : ""}>
                 {notifsResults.map((notifData: NotifDataProps) => (
