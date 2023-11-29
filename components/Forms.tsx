@@ -25,7 +25,7 @@ const Input = ({
   value: string;
   className: string;
   titleClassName: string;
-  onChange: (e: React.FormEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean
 }) => {
   const [isInputSelected, setIsInputSelected] = useState(false);
@@ -117,7 +117,7 @@ const NumberInput = ({
   value,
   name
 } : {
-  onChange: (e: React.FormEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value: number
   name: string
 }) => { 
@@ -425,7 +425,7 @@ const ProjectForm = ({
     }
   };
 
-  const handleInputChange = (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     
       if (name === "maxMembers") {
