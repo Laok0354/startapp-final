@@ -115,9 +115,6 @@ router.get('/getCollaborationRequests', authenticateToken, async (req, res) => {
     res.status(200).json(collaborationRequests)
 });
 
-
-
-
 router.get('/getCollaborationRequest/:id', authenticateToken, async (req, res) => {
 
     const projects = await prisma.project.findMany({
