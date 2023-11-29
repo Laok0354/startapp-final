@@ -84,11 +84,7 @@ df_final = df_final.drop(['maxMembers'], axis=1)
 df_final = df_final.drop(['collaborators'], axis=1)
 
 
-
 """ACA TENES QUE CONVERTIR TODOS LOS DATOS A VECTORES, CON EL CODIGO QUE TENES EN COLAB, PARA DESPUES PODER HACER FACTORIZACION DE MATRICES"""
-
-# Commented out IPython magic to ensure Python compatibility.
-# %pip install scikit-learn
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
@@ -221,4 +217,3 @@ if respuesta.status_code == 200:
 else:
     print(f'Error en la solicitud. Código de estado: {respuesta.status_code}')
     print(respuesta.text)
-
