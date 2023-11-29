@@ -146,7 +146,7 @@ const Projects = (
                 members={members}
                 joined={joined}
                 closeModal={closeModal}
-                discordLink="Your Discord link goes here"
+                discordLink=""
            />
         </Modal>
     </article>

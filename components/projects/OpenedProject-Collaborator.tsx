@@ -40,7 +40,7 @@ const OpenedProject = ({
         setIsInputSelected(false);
     }  
 
-    const handleChange = (event) => {
+    const handleChange = (event: any) => {
         const { name, value } = event.target;
         setValorTextarea(event.target.value);
         handleKeyPress(valorTextarea);
@@ -49,7 +49,6 @@ const OpenedProject = ({
 
     const toggleInput = () => {
         setInputDisabled(!inputDisabled);
-        console.log(formData)
       };
 
     const handleKeyPress = (valorTextarea : string) => {
@@ -64,8 +63,35 @@ const OpenedProject = ({
         }
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
+        setInputDisabled(!inputDisabled)
+        if (formData.name === "" || formData.description === "") {
+            alert("All fields must be filled.");
+        } else {
+            console.log("ID:", id, "Datos del formulario:", formData);
+            fetch(`http://localhost:3000/project/modify/${id}`, {
+                method: "PUT",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({
+                    name: formData.name,
+                    description: formData.description
+            }),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    return response.json().then((data) => {
+                      console.log(data);
+                      throw new Error(`Server error: ${data.message}`);
+                    });
+                  }
+                  return response.json();
+                })
+        }
     }
   
     return (
@@ -110,7 +136,7 @@ const OpenedProject = ({
                                 <Input
                                     title=""
                                     name="discordLink"
-                                    placeHolder=""
+                                    placeHolder="Your Discord link goes here"
                                     className={`text-center text-[0.9rem] font-raleway font-semibold transition-color duration-200 ${inputDisabled ? "bg-transparent placeholder:text-white/0" : ""}`}
                                     onChange={handleChange}
                                     titleClassName=""
@@ -118,8 +144,8 @@ const OpenedProject = ({
                                     disabled={inputDisabled}
                                 />
                             </div>
-                            <button className={`w-48 h-12 font-bold rounded-[5px] bg-primaryv text-white hover:bg-white/10 hover:border-2 shadow-xl hover:border-primaryv`} 
-                                onClick={toggleInput}>{inputDisabled ? 'Edit Project' : 'Save Changes'}
+                            <button type="button" className={`w-48 h-12 font-bold rounded-[5px] bg-primaryv text-white hover:bg-white/10 hover:border-2 shadow-xl hover:border-primaryv`} 
+                                onClick={inputDisabled ? toggleInput : handleSubmit}>{inputDisabled ? 'Edit Project' : 'Save Changes'}
                             </button>
                         </form>
                     </div>

@@ -3,7 +3,11 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { data } from "autoprefixer";
+import { UserData } from "./SuggestedUsers";
+
+interface CollaboratorsData {
+  user: UserData
+}
 
 const UserCard = ({
   username,
@@ -60,9 +64,9 @@ const JoinedUsers = ({
       .then((data) => {
         const collaborators = data.project.collaborators;
         console.log(data.project.collaborators)
-        const userCards = collaborators.map((user) => {
+        const userCards = collaborators.map((user: CollaboratorsData, index: number) => {
           return <UserCard 
-          key={user.id}
+          key={index}
           username={user.user.userName}
           userBio={user.user.about}
           />;
@@ -81,9 +85,9 @@ const JoinedUsers = ({
       .then((data) => {
         const collaborators = data.project.collaborators;
         console.log(data.project.collaborators)
-        const userCards = collaborators.map((user) => {
+        const userCards = collaborators.map((user: CollaboratorsData, index: number) => {
           return <UserCard 
-          key={user.id}
+          key={index}
           username={user.user.userName}
           userBio={user.user.about}
           />;

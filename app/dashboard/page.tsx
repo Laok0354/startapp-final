@@ -12,8 +12,6 @@ function DashBoard() {
     const [activeTab, setActiveTab] = useState('Your Projects');
     const [linePosition, setLinePosition] = useState(67);
     const [isOpen, setIsOpen] = useState(false);
-    const [myProjects, setMyProjects] = useState([]);
-    const [myLikedProjects, setMyLikedProjects] = useState([]);
 
     const handleOpenNavbar = () => {
         setIsOpen(!isOpen);

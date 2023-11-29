@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {useState, useEffect} from 'react';
 import Link from 'next/link';
 
-interface UserData {
+export interface UserData {
   id: number;
   email: string;
   userName: string;
