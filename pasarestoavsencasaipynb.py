@@ -1,9 +1,7 @@
 import subprocess
 
-# Lista de librerías que deseas instalar
 librerias = ['pandas', 'requests', 'fastapi', 'scikit-learn']
 
-# Itera sobre la lista e instala cada librería
 for libreria in librerias:
     try:
         subprocess.check_call(['pip', 'install', libreria])
