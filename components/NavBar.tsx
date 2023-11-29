@@ -14,7 +14,6 @@ function Navbar({page} : IProps) {
 
   useEffect(() => {
     const handleScroll = () => {
-      console.log(window.scrollY)
       if (window.scrollY > 100) {
         setScrolled(true);
       } else {
