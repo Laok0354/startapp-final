@@ -7,7 +7,6 @@ import MultiSelectInput from "./sign-up/MultiSelectInput";
 import Icons from "./sign-up/Icons";
 import OptionsMenu from "./projects/OptionsMenu";
 import { Project } from "./projects/Participant";
-import { Skill } from "@prisma/client";
 
 const Input = ({
   title,
@@ -51,7 +50,6 @@ const Input = ({
         onChange={onChange}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        disabled={disabled}
       />
     </div>
   );
@@ -117,7 +115,7 @@ const NumberInput = ({
   value,
   name
 } : {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: React.FormEvent) => void;
   value: number
   name: string
 }) => { 
@@ -206,6 +204,7 @@ const SignUpForm = () => {
         className="flex my-2 flex-col justify-center items-center mx-8"
         onSubmit={handleSubmit}
       >
+        {/* Componente Input para el username */}
         <Input
           name="userName"
           title="USERNAME"
@@ -215,6 +214,7 @@ const SignUpForm = () => {
           titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
+        {/* Componente Input para el email */}
         <Input
           name="email"
           title="EMAIL"
@@ -224,6 +224,7 @@ const SignUpForm = () => {
           titleClassName="text-xs font-semibold tracking-widest font-bebas mb-1"
           onChange={handleInputChange}
         />
+        {/* Componente PasswordInput */}
         <PasswordInput
           name="password"
           value={formData.password}
@@ -239,7 +240,7 @@ const SignUpForm = () => {
             <MultiSelectInput
               isMulti={true}
               name="skillIds"
-              options={skillData.map((skill:Skill) => ({
+              options={skillData.map((skill : any) => ({
                 value: skill.id,
                 label: skill.name,
               }))}
@@ -270,42 +271,37 @@ const LoginForm = () => {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Datos del formulario enviados:", formData);
-  
-    fetch("http://localhost:3000/auth/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      mode: "cors",
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((data) => {
-            throw new Error(data.error);
-          });
-        }
-        return response.json();
-      })
-      .then((data) => {
+
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
         alert(data.Success);
         const accessToken = data.accessToken;
         const refreshToken = data.refreshToken;
-  
+
         document.cookie = `accessToken=${accessToken}; path=/; sameSite=lax`;
         document.cookie = `refreshToken=${refreshToken}; path=/; sameSite=lax`;
-  
+
         window.location.href = "/projects";
-      })
-      .catch((error) => {
-        alert("Could not login. " + error);
-      });
+      } else {
+        alert(data.error);
+      }
+    } catch (error) {}
   };
-  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -425,8 +421,8 @@ const ProjectForm = ({
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleInputChange = (e: any) => {
+    const { name , value } = e.target;
     
       if (name === "maxMembers") {
       const parsedValue = parseInt(value, 10);
@@ -500,6 +496,5 @@ const ProjectForm = ({
     </section>
   );
 };
-
 
 export { SignUpForm, LoginForm, ProjectForm, Input };

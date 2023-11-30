@@ -73,7 +73,7 @@ export default function Users() {
               />
           </header>
           <section className={`flex items-center h-screen flex-col mt-16 transition-all duration-700 w-screen ${isOpen ? "ml-24" : ""}`}>
-      <article className={`flex flex-col justify-center w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${usersData.length > 8 ? "max-h-[550px] overflow-y-auto px-2" : ""}`}>
+      <article className={`flex flex-col justify-center w-4/6 divide-y-2 divide-primaryv mt-8 mb-8 ${usersData.length > 4 && usersData.length % 2 == 0 ? "max-h-[525px] overflow-y-auto px-2" : "max-h-[450px] overflow-y-auto px-2"}`}>
         {usersData.map((user: UserData) => {
 
           if (user.projects.length > 0) {

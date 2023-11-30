@@ -30,7 +30,7 @@ function DashBoard() {
     window.location.href = "/login";}
 
     return (
-        <main id = "__next" className='h-[full] w-full overflow-hidden'>
+        <main id = "__next" className='h-fit w-full overflow-y-hidden'>
             <nav>
                 <NavbarPrincipal 
                     page=""
@@ -42,7 +42,7 @@ function DashBoard() {
                     setActiveTab={setActiveTab}
                 />  
             </nav>
-              <section className=''>
+              <section className='overflow-hidden'>
                 <section className="flex flex-col justify-center w-full">
                     <div className='flex justify-center align-middle items-center mt-[5.5rem] mr-6'>
                         <ul className='flex flex-row justify-around align-middle items-center w-4/12 relative'>
@@ -69,7 +69,7 @@ function DashBoard() {
                         <div>
                             <ProjectsScrollYourProjects
                                 amountColumns={4}
-                                className='w-fit mt-8 overflow-x-hidden grid-cols-4'
+                                className='w-fit mt-4 overflow-x-hidden grid-cols-4'
                             />
                         </div>
                     )}
@@ -77,7 +77,7 @@ function DashBoard() {
                         <div>
                             <ProjectsScrollLiked
                                 amountColumns={4}
-                                className='w-fit mt-8 overflow-x-hidden grid-cols-4'
+                                className='w-fit mt-4 overflow-x-hidden grid-cols-4'
                             />
                         </div>
                     )}
