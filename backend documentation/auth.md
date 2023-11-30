@@ -1,79 +1,81 @@
-# Authentication API Documentation
+# Documentación de Rutas de la API
 
-This API provides authentication and authorization functionality using JWT tokens and bcrypt for password hashing.
+Este documento proporciona una descripción general de las rutas en el script de la API proporcionado. La API está construida utilizando Express.js y utiliza Prisma para las interacciones con la base de datos.
 
-## Routes
+## Rutas
 
-### 1. Logout
+### 1. POST /login
 
-- **Method:** DELETE
-- **Path:** `/logout`
-- **Middleware:** `authenticateToken`
-- **Description:** Logs out the user by deleting the refresh token from the database and clearing cookies.
-- **Response:**
-  - 200 OK: User logged out
-  - 400 Bad Request: Cannot find token
-  - 500 Internal Server Error: Server error
+- **Descripción:** Maneja la autenticación del usuario.
+- **Solicitud:**
+  - Requiere campos `email` y `password` en el cuerpo de la solicitud.
+- **Respuesta:**
+  - Inicio de sesión exitoso:
+    - Estado: 200
+    - Cookies establecidas para `refreshToken` y `accessToken`.
+    - Respuesta JSON con `accessToken` y `refreshToken`.
+  - Inicio de sesión no exitoso:
+    - Estado: 400
+    - Respuesta JSON con un mensaje de error.
 
-### 2. Get Access Token
+### 2. DELETE /logout
 
-- **Method:** GET
-- **Path:** `/token`
-- **Middleware:** `authenticateToken`
-- **Description:** Generates a new access token and sends it in a cookie.
-- **Response:**
-  - 200 OK: Returns the new access token
-  - 500 Internal Server Error: Server error
+- **Descripción:** Maneja el cierre de sesión del usuario eliminando tokens de actualización.
+- **Middleware:** `authenticateToken` - verifica la presencia y validez del token de acceso.
+- **Respuesta:**
+  - Cierre de sesión exitoso:
+    - Estado: 200
+    - Cookies eliminadas para `refreshToken` y `accessToken`.
+    - Respuesta JSON con un mensaje de cierre de sesión.
+  - Cierre de sesión no exitoso:
+    - Estado: 400
+    - Respuesta JSON con un mensaje de error.
 
-### 3. Login
+### 3. GET /token
 
-- **Method:** POST
-- **Path:** `/login`
-- **Description:** Authenticates the user and generates access and refresh tokens.
-- **Request Body:**
-  - email: User's email
-  - password: User's password
-- **Response:**
-  - 200 OK: Login success, returns access and refresh tokens
-  - 400 Bad Request: One or more required fields are empty or cannot find user
-  - 500 Internal Server Error: Server error
+- **Descripción:** Refresca el token de acceso.
+- **Middleware:** `authenticateToken` - verifica la presencia y validez del token de acceso.
+- **Respuesta:**
+  - Actualización exitosa del token:
+    - Estado: 200
+    - Nuevo `accessToken` establecido como cookie.
+    - Respuesta JSON con el nuevo `accessToken`.
+  - Actualización no exitosa del token:
+    - Estado: 400
+    - Respuesta JSON con un mensaje de error.
 
-### 4. Check Authorization
+### 4. GET /check
 
-- **Method:** GET
-- **Path:** `/check`
-- **Middleware:** `authenticateToken`
-- **Description:** Checks if the user is authorized by validating the access token.
-- **Response:**
-  - 200 OK: Authorized
-  - 401 Unauthorized: Unauthorized
-  - 500 Internal Server Error: Server error
+- **Descripción:** Verifica si el usuario está autorizado.
+- **Middleware:** `authenticateToken` - verifica la presencia y validez del token de acceso.
+- **Respuesta:**
+  - Autorizado:
+    - Estado: 200
+    - Cuerpo de respuesta: "authorized"
+  - No autorizado:
+    - Estado: 401
+    - Cuerpo de respuesta: "unauthorized"
 
-## Helper Function
+## Función Auxiliar
 
-### generateAccessToken
+### `generateAccessToken(user)`
 
-- **Description:** Generates a new access token for the user.
-- **Parameters:**
-  - user: User object
-- **Returns:** JWT access token
+- **Descripción:** Genera un token de acceso utilizando JWT.
+- **Parámetros:** 
+  - `user`: Objeto de usuario que contiene al menos la propiedad `email`.
+- **Devuelve:**
+  - Token de acceso codificado en JWT.
+  - Devuelve `null` si la propiedad `email` está ausente en el objeto de usuario.
 
-## Dependencies
+## Dependencias
 
-- **dotenv:** Loads environment variables from a .env file.
-- **express:** Web application framework for Node.js.
-- **bcrypt:** Library for hashing passwords.
-- **jsonwebtoken:** JSON Web Token implementation.
-- **@prisma/client:** Prisma client for database operations.
-- **authMiddleware:** Middleware for authenticating JWT tokens.
+- `express`: Marco web para Node.js.
+- `bcrypt`: Biblioteca de cifrado de contraseñas.
+- `jsonwebtoken`: Implementación de JSON Web Token.
+- `@prisma/client`: Cliente Prisma para interacciones con la base de datos.
 
-## Environment Variables
+## Variables de Entorno
 
-- **ACCESS_TOKEN_SECRET:** Secret key for signing access tokens.
-- **REFRESH_TOKEN_SECRET:** Secret key for signing refresh tokens.
+- `ACCESS_TOKEN_SECRET`: Clave secreta para firmar tokens de acceso.
+- `REFRESH_TOKEN_SECRET`: Clave secreta para firmar tokens de actualización.
 
-## Usage
-
-1. Install dependencies: `npm install`
-2. Set environment variables in a `.env` file.
-3. Run the server: `node your_server_file.js`

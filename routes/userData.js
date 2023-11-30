@@ -40,6 +40,34 @@ router.get ('/searchHistory/:uId', async (req, res) => {
     
 });
 
+router.get ('/userSearchHistory', async (req, res) => {
+
+    const apiKey = req.headers['x-api-key'];
+
+    if (apiKey !== API_KEY) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    const searchHistory = await prisma.searchHistory.findMany({
+        where: {
+            userId: req.body.id
+        }
+    })
+
+    if (!searchHistory) {
+        return res.status(404).json({message: "search history not found"});; 
+    }
+
+    let searchQuerys = '';
+
+    searchHistory.forEach((search) => {
+        searchQuerys += search.searchQuery + ' ';
+    })
+
+    res.status(200).json(searchQuerys)
+    
+});
+
 router.get ('/visitHistory/:uId', async(req, res) => {
             
     const apiKey = req.headers['x-api-key'];
@@ -93,33 +121,7 @@ router.get('/getAllProjects', async (req, res) => {
 
 });
 
-router.get ('/userSearchHistory', async (req, res) => {
 
-    const apiKey = req.headers['x-api-key'];
-
-    if (apiKey !== API_KEY) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    const searchHistory = await prisma.searchHistory.findMany({
-        where: {
-            userId: req.body.id
-        }
-    })
-
-    if (!searchHistory) {
-        return res.status(404).json({message: "search history not found"});; 
-    }
-
-    let searchQuerys = '';
-
-    searchHistory.forEach((search) => {
-        searchQuerys += search.searchQuery + ' ';
-    })
-
-    res.status(200).json(searchQuerys)
-    
-});
 
 module.exports = router;
 
